@@ -1,0 +1,81 @@
+body{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.Correo{
+    font-size: medium;
+    border-radius: 15px;
+    height: 28px;
+}
+.Correo:hover{
+    border-color: #32CD32;
+}
+.icon_Mail{
+    font-size: x-large;
+    /*position:absolute;*/
+}
+.password{
+    font-size: medium;
+    border-radius: 15px;
+    height: 28px;
+}
+.password:hover{
+    border-color: #32CD32;
+}
+.icon_password{
+    font-size: x-large;
+    /*position:absolute;*/
+}
+.error{
+    color: red;
+}
+.Registro{
+    font-size: small;
+}
+.registro{
+    color: blue;
+    cursor: pointer;
+}
+.b_login{
+    width: 180px;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: medium;
+    background-color: #00BFFF;
+}
+.b_login:hover{
+    background-color: 	#32CD32;
+}
+.b_tipo_login{
+    display: flex;
+    justify-content: center;
+}
+.b_google{
+    display: inline-block;
+    margin: 0px 15px;
+    width: 75px;
+    height: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.b_google:hover{
+    background-color: white;
+    color: #4285F4;
+}
+.b_faccebook{
+    display: inline-block;
+    margin: 0px 15px;
+    width: 75px;
+    height: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.b_faccebook:hover{
+    background-color: #4267B2;
+    color: white;
+}
