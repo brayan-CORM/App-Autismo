@@ -4,6 +4,10 @@ const bodyParser = require("body-parser"); //es para leer el cuerpo de la solici
 const db = require("./db");
 const User = require("./model/users");
 const users = require("./model/users");
+const bcrypt = require("bcrypt");   //modulo de incriptacion para textos
+const jwt = require("jsonwebtoken");
+
+const jwtkey = "ao4m$o919des2e1";
 
 const app = express();
 app.use(express.json({limit: '50mb'}));
@@ -19,20 +23,43 @@ app.all('*', function (req, res, next) {    //req=request, res=response
     next();
 });
 
-app.post("/api/login", function(req, res){
-    let user_correcto = "brayan";
-    let user_resivido  = req.body.username;
+app.post("/api/login", async function(req, res){
+    let mail_resivido  = req.body._mail;
     
-    let password_correcto = "hola123";
-    let password_resivido = req.body.password;
+    let password_resivido = req.body._password;
 
-    if (password_resivido === password_correcto && user_resivido === user_correcto){
-        res.send({success:true ,msg:"Acceso permitido"});
-    }
-    else{
-        res.send({success:false ,msg:"Usuario o contraseña incorrecto"});
+    try {
+        const usuario_encontrado = await User.findOne({mail:mail_resivido});
+        if(!usuario_encontrado){
+            return res.status(401).json({
+                msg:"Usuario no encontrado"
+            });
+        }
+        else{
+            const match = await bcrypt.compare(password_resivido,usuario_encontrado.password);
+            if(!match){
+                return res.status(401).json({
+                    msg:"Usuario no coincide"
+                });
+            }
+            else{
+                const payload = {
+                    id:usuario_encontrado._id,
+                    name:usuario_encontrado.username
+                }
+                const token = jwt.sign(payload, jwtkey, {expiresIn:60});
+                return res.status(200).json({
+                    msg:"Login exitoso",
+                    token:token
+                });
+            }
+        }
+    }   
+    catch(error){
+        console.log(error);
     }
 });
+
 //users
 const createUser = async(req,res)=>{
     const {
@@ -40,7 +67,6 @@ const createUser = async(req,res)=>{
         _role,
         _mail,
         _password,
-        _confirmPassword,
     }= req.body;
     try {
         const mailexists = await User.exists({mail:_mail});
@@ -50,12 +76,12 @@ const createUser = async(req,res)=>{
             });
         }
         else{
+            const password_cifrado = await bcrypt.hash(_password,10);
             const newUser = new User({
                 username: _username,
                 role: _role,
                 mail: _mail,
-                password: _password,
-                confirmPassword: _confirmPassword,
+                password: password_cifrado,
             });
             const createUser = await newUser.save();//para guardar
             return res.status(201).json({
@@ -111,7 +137,7 @@ app.delete("/api/deleteuser/:id", async(req,res)=>{
     }
 });
 //Actualizar usuario
-app.put("/api/updateuser/:id", async(req,res)=>{
+app.put("/api/updateuser", async(req,res)=>{
     const {
         _id,
         _username,
@@ -123,11 +149,11 @@ app.put("/api/updateuser/:id", async(req,res)=>{
     try{
         return User.updateOne({_id:_id},{
             $set:{
-                _username: _username,
-                _role: _role,
-                _mail: _mail,
-                _password: _password,
-                _confirmPassword: _confirmPassword
+                username: _username,
+                role: _role,
+                mail: _mail,
+                password: _password,
+                confirmPassword: _confirmPassword
             },
         })
         .then(resultado => {

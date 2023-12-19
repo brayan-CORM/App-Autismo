@@ -16,10 +16,6 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:[true,"La contraseña es obligatoria"],
-    },
-    confirmPassword:{
-        type:String,
-        required:[true,"La contraseña no coincide"]
     }
 });
 
