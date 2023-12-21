@@ -16,7 +16,8 @@ body{
 }
 .icon_Mail{
     font-size: x-large;
-    /*position:absolute;*/
+    vertical-align: middle;
+    margin-top: -4px;
 }
 .password{
     font-size: medium;
@@ -28,7 +29,8 @@ body{
 }
 .icon_password{
     font-size: x-large;
-    /*position:absolute;*/
+    vertical-align: middle;
+    margin-top: -4px;
 }
 .error{
     color: red;
@@ -65,7 +67,29 @@ body{
 }
 .b_google:hover{
     background-color: white;
-    color: #4285F4;
+    .G{
+        color: #4285f4;
+    }
+    .O{
+        color: #ea4335;
+    }
+    .o{
+        color: #fbbc05;
+    }
+    .g{
+        color: #4285f4;
+    }
+    .l{
+        color: #34a853;
+    }
+    .e{
+        color: #ea4335;
+    }
+}
+.l_google{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -8px;
 }
 .b_faccebook{
     display: inline-block;

@@ -11,18 +11,18 @@ import { RiLockPasswordFill } from "react-icons/ri";
 function App() {
   //todo lo que va afuera es la logica, no se ve en la app
   //variables:
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [_mail, setUsername] = React.useState("");
+  const [_password, setPassword] = React.useState("");
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
 
-  //funcion:
+  //funcion login:
   const funcion_login = async(event)=>{
     event.preventDefault(); //evita errores
     try{
       const response = await axios.post('http://localhost:3001/api/login',{
-        username,
-        password
+        _mail,
+        _password
       })
       if(response.data.success){
         console.log(response.data);
@@ -38,7 +38,7 @@ function App() {
       setError ("Correo o contraseña incorrecta");
     }
   }
-
+  
   function go_to_register(){
     navigate("/Register");
   }
@@ -59,7 +59,7 @@ function App() {
           <input className='Correo'
           id='user'
           type='text'
-          value={username}
+          value={_mail}
           onChange={(event)=>setUsername(event.target.value)}
           placeholder='Correo'
           />
@@ -70,7 +70,7 @@ function App() {
           <input className='password'
           id='Password'
           type='password'
-          value={password}
+          value={_password}
           onChange={(event)=>setPassword(event.target.value)}
           placeholder='Contraseña'
           />
@@ -90,8 +90,17 @@ function App() {
           <br/>
           
           <div className='b_tipo_login'>
-            <button className='b_google' type='submit'>Google</button>
-
+            <button className='b_google' type='submit'>
+              <div className='l_google'>
+                <p className='G'>G
+                <span className='O'>o</span>
+                <span className='o'>o</span>
+                <span className='g'>g</span>
+                <span className='l'>l</span>
+                <span className='e'>e</span>
+                </p>
+              </div>
+            </button>
             <button className='b_faccebook' type='submit'>Facebook</button>
           </div>
 

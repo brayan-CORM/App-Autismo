@@ -3,6 +3,7 @@ import './style_register.css';
 import axios from "axios";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 //icons
 import { IoIosMail } from "react-icons/io";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -112,7 +113,7 @@ function Register(){
             type="password"
             value={ConfirmPassword}
             onChange={(event) => setConfirmar_contraseña(event.target.value)}
-            placeholder="Contraseña"
+            placeholder="Confirmar contraseña"
             />
             <br/>
             <br/>

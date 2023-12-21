@@ -22,7 +22,7 @@ app.all('*', function (req, res, next) {    //req=request, res=response
     res.header('Access-Control-Allow-Headers', 'Origin', 'X-Api-Key', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization');
     next();
 });
-
+//login
 app.post("/api/login", async function(req, res){
     let mail_resivido  = req.body._mail;
     
@@ -31,7 +31,7 @@ app.post("/api/login", async function(req, res){
     try {
         const usuario_encontrado = await User.findOne({mail:mail_resivido});
         if(!usuario_encontrado){
-            return res.status(401).json({
+            return res.status(404).json({
                 msg:"Usuario no encontrado"
             });
         }
@@ -50,7 +50,8 @@ app.post("/api/login", async function(req, res){
                 const token = jwt.sign(payload, jwtkey, {expiresIn:60});
                 return res.status(200).json({
                     msg:"Login exitoso",
-                    token:token
+                    token:token,
+                    success:true
                 });
             }
         }
@@ -60,7 +61,7 @@ app.post("/api/login", async function(req, res){
     }
 });
 
-//users
+//registro
 const createUser = async(req,res)=>{
     const {
         _username,
@@ -98,7 +99,7 @@ const createUser = async(req,res)=>{
 app.post("/api/register", function(req,res){
     createUser(req,res);    
 });
-
+//Encontrar usuarios
 app.get("/api/traerusers", async(req,res)=>{    //async es para que esepre a que lleguen los datos y siempre debe de tener un awair
     try{
         const traer_users = await User.find();

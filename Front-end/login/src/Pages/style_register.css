@@ -17,6 +17,8 @@ body{
 }
 .icon_name{
     font-size: 25px;
+    vertical-align: middle;
+    margin-top: -4px;
 }
 .ComboBox{
     font-size: medium;
@@ -27,6 +29,8 @@ body{
 }
 .icon_role{
     font-size: 25px;
+    vertical-align: middle;
+    margin-top: -4px;
 }
 .regis_mail{
     font-size: medium;
