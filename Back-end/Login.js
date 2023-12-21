@@ -64,30 +64,31 @@ app.post("/api/login", async function(req, res){
 //registro
 const createUser = async(req,res)=>{
     const {
-        _username,
-        _role,
-        _mail,
-        _password,
+        regName,
+        regRole,
+        regMail,
+        regPassword,
     }= req.body;
     try {
-        const mailexists = await User.exists({mail:_mail});
+        const mailexists = await User.exists({mail:regMail});
         if(mailexists){
             return res.status(400).json({
                 msg:"El correo ya existe"
             });
         }
         else{
-            const password_cifrado = await bcrypt.hash(_password,10);
+            const password_cifrado = await bcrypt.hash(regPassword,10);
             const newUser = new User({
-                username: _username,
-                role: _role,
-                mail: _mail,
+                username: regName,
+                role: regRole,
+                mail: regMail,
                 password: password_cifrado,
             });
             const createUser = await newUser.save();//para guardar
             return res.status(201).json({
                 msg:"Usuario creado",
                 user: createUser._id,
+                success: true
             });
         }
     }

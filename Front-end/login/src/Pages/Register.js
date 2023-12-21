@@ -14,6 +14,7 @@ import { PiScrollFill } from "react-icons/pi";
 function Register(){
  
     const [regName, setRegistrar_nombre] = React.useState("");
+    const [regRole, setRegistrar_role] = React.useState("");
     const [regMail, setRegistrar_correo] = React.useState("");
     const [regPassword, setRegistrar_contraseña] = React.useState("");
     const [ConfirmPassword, setConfirmar_contraseña] = React.useState("");
@@ -25,6 +26,7 @@ function Register(){
         try{
           const response = await axios.post('http://localhost:3001/api/register',{
             regName,
+            regRole,
             regMail,
             regPassword,
             ConfirmPassword
@@ -71,10 +73,12 @@ function Register(){
             <label for="inputRole">Rol</label>
             <br/>
             <PiScrollFill className="icon_role"/>
-            <select className="ComboBox">
-              <option value={"value_1"}>Select...</option>
-              <option value={"value_2"}>Administrador</option>
-              <option value={"value_3"}>Usuario</option>
+            <select className="ComboBox" 
+            onChange={(event) => setRegistrar_role(event.target.value)}
+            >
+              <option value={regRole}>Select...</option>
+              <option value={regRole}>Administrador</option>
+              <option value={regRole}>Usuario</option>
             </select>
             <br/>
             <br/>
