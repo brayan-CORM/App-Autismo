@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from "./App";
-import Home from "./Pages/home";
-import Register from "./Pages/register";
-import RecoverPassword from "./Pages/recoverpassword";
+import Home from "./pages/home";
+import Register from "./pages/register";
+import RecoverPassword from "./pages/recoverpassword";
 
 const AppRouter = ()=>{
     return(

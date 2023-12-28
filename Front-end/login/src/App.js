@@ -31,7 +31,7 @@ function App() {
       }
       else{
         console.log(response.data);
-        alert("Correo o contraseña incorrecta");
+        return(alert("Correo o contraseña incorrecta"))
       }
     }
     catch (error){
@@ -84,6 +84,8 @@ function App() {
             <p><a onClick={go_to_recoverpassword}>¿Olvidaste tu contraseña?</a>
             </p>
           </div>
+          
+          {error && <p className='error'>{error}</p>}
           <br/>
 
           <button className='b_login' type='submit'>Iniciar sesión</button>

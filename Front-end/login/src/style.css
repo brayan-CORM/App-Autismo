@@ -10,6 +10,7 @@ body{
     font-size: medium;
     border-radius: 15px;
     height: 28px;
+    border-color: #7e7e7e;
 }
 .Correo:hover{
     border-color: #32CD32;
@@ -18,11 +19,13 @@ body{
     font-size: x-large;
     vertical-align: middle;
     margin-top: -4px;
+    color:#5d5d5d;
 }
 .password{
     font-size: medium;
     border-radius: 15px;
     height: 28px;
+    border-color: #7e7e7e;
 }
 .password:hover{
     border-color: #32CD32;
@@ -31,9 +34,17 @@ body{
     font-size: x-large;
     vertical-align: middle;
     margin-top: -4px;
+    color: #5d5d5d;
 }
 .error{
     color: red;
+    font-size:medium;
+    .Correo{
+        border-color: red;
+    }
+    .password{
+        border-color: red;
+    }
 }
 .olive_contraseña{
     font-size: small;
@@ -108,50 +119,59 @@ body{
     color: blue;
     cursor: pointer;
 }
+
 /*style register*/
 .icon_user{
     font-size: 100px;
+    color: #5d5d5d;
 }
 .regis_name{
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
+    border-color:  #5d5d5d;
 }
 .icon_name{
     font-size: 25px;
     vertical-align: middle;
     margin-top: -4px;
+    color: #5d5d5d;
 }
 .ComboBox{
     font-size: medium;
     border-radius: 15px;
+    border-width: 2px;
     height: 35px;
-    width: 250px;
-    border-color: black;
+    width: 261px;
+    border-color:  #5d5d5d;
 }
 .icon_role{
     font-size: 25px;
     vertical-align: middle;
     margin-top: -4px;
+    color: #5d5d5d;
 }
 .regis_mail{
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
+    border-color:  #5d5d5d;
 }
 .regis_password{
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
+    border-color:  #5d5d5d;
 }
 .confi_password{
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
+    border-color:  #5d5d5d;
 }
 .b_reg_login{
     width: 180px;
