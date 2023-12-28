@@ -43,7 +43,7 @@ function Register(){
           })
           if(response.data.success){
             console.log(response.data);
-            navigate("/Home");
+            navigate("/home");
           }
           else{
             console.log(response.data);

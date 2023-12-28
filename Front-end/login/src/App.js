@@ -26,7 +26,7 @@ function App() {
       })
       if(response.data.success){
         console.log(response.data);
-        navigate("/Home");
+        navigate("/home");
         //alert("Login exitoso");
       }
       else{
@@ -38,9 +38,13 @@ function App() {
       setError ("Correo o contraseña incorrecta");
     }
   }
+
+  function go_to_recoverpassword(){
+    navigate("/recoverpassword");
+  }
   
   function go_to_register(){
-    navigate("/Register");
+    navigate("/register");
   }
 
   return (  //todo lo que este dentro del return se pinta en la pantalla app
@@ -77,7 +81,7 @@ function App() {
           <br/>
 
           <div className='olive_contraseña'>
-            <p><a>¿Olvidaste tu contraseña?</a>
+            <p><a onClick={go_to_recoverpassword}>¿Olvidaste tu contraseña?</a>
             </p>
           </div>
           <br/>
