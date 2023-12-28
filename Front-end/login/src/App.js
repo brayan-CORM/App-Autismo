@@ -76,14 +76,11 @@ function App() {
           />
           <br/>
 
-          <div className='Registro'>
-          <p>¿No tienes cuenta?
-            <u>
-            <a className='registro' onClick={go_to_register}> Registrate</a>
-            </u>
+          <div className='olive_contraseña'>
+            <p><a>¿Olvidaste tu contraseña?</a>
             </p>
-          <br/>
           </div>
+          <br/>
 
           <button className='b_login' type='submit'>Iniciar sesión</button>
           <br/>
@@ -105,7 +102,16 @@ function App() {
           </div>
 
           <br/>
+
+          <div className='Registro'>
+          <p>¿No tienes cuenta?
+            <u>
+            <a className='registro' onClick={go_to_register}> Registrate</a>
+            </u>
+            </p>
           <br/>
+          </div>
+
         </form>
       </div>
     </body>
