@@ -3,7 +3,6 @@ const cors = require ("cors"); //son para las reglas de los servidores
 const bodyParser = require("body-parser"); //es para leer el cuerpo de la solicitud
 const db = require("./db");
 const User = require("./model/users");
-const users = require("./model/users");
 const bcrypt = require("bcrypt");   //modulo de incriptacion para textos
 const jwt = require("jsonwebtoken");
 
@@ -100,74 +99,7 @@ const createUser = async(req,res)=>{
 app.post("/api/register", function(req,res){
     createUser(req,res);    
 });
-//Encontrar usuarios
-app.get("/api/traerusers", async(req,res)=>{    //async es para que esepre a que lleguen los datos y siempre debe de tener un awair
-    try{
-        const traer_users = await User.find();
-        res.send(traer_users);
-    }
-    catch(error){
-        console.log(error);
-    }
-});
-//Encontrar un solo usuario
-app.get("/api/oneuser/:mail", async(req,res)=>{
-    try{
-        const _mail = req.params.mail;
-        const oneuser = await User.findOne({mail:_mail});
-        res.status(200).json({
-            msg:"Usuario encontrado",
-            resultado: oneuser
-        });
-    }
-    catch(error){
-        console.log(error);
-    }
-});
-//Borrar usuario
-app.delete("/api/deleteuser/:id", async(req,res)=>{
-    try {
-        const _id = req.params.id; //el.id es de la url de la linea 99
-        const deleteuser = await User.findOneAndDelete({_id:_id});
-        res.status(200).json({
-            msg:"Usuario borrado",
-            resultado: deleteuser
-        });
-    }
-    catch (error) {
-        console.log(error);
-    }
-});
-//Actualizar usuario
-app.put("/api/updateuser", async(req,res)=>{
-    const {
-        _id,
-        _username,
-        _role,
-        _mail,
-        _password,
-        _confirmPassword,
-    }= req.body;
-    try{
-        return User.updateOne({_id:_id},{
-            $set:{
-                username: _username,
-                role: _role,
-                mail: _mail,
-                password: _password,
-                confirmPassword: _confirmPassword
-            },
-        })
-        .then(resultado => {
-            res.status(200).json({
-                msg:"Usuario actualizado"
-            });
-        });
-    }
-    catch(error){
-        console.log(error);
-    }
-});
+
 
 db.connect();
 

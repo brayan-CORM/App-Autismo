@@ -21,17 +21,11 @@ function Register(){
     const [error, setError] = React.useState("");
     const navigate = useNavigate();
 
-
     const handleChange = (event) => {
       setregRole(event.target.value)
     }
 
-
-
     const funcion_register = async(event)=>{
-      console.log("regRole", regRole)
-      console.log("regName", regName)
-
         event.preventDefault(); //evita errores
         try{
           const response = await axios.post('http://localhost:3001/api/register',{
@@ -43,11 +37,12 @@ function Register(){
           })
           if(response.data.success){
             console.log(response.data);
-            navigate("/home");
+            navigate("/");
+            alert("Registro exitoso");
           }
           else{
             console.log(response.data);
-            alert("Registro fallido");
+            return(alert("Registro fallido"));
           }
         }  
         catch (error){
@@ -130,8 +125,9 @@ function Register(){
             />
             <br/>
             <br/>
+            {error && <p className='error'>{error}</p>}
             <br/>
-
+            
             <button className='b_reg_login' type='submit'>Crear cuenta</button>
         </form>
 

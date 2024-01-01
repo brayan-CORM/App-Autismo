@@ -10,9 +10,9 @@ const AppRouter = ()=>{
         <Router>
             <Routes>
                 <Route path="/" element={<App />}/>
-                <Route path="/Home" element={<Home/>}/> 
-                <Route path="/Register" element={<Register/>}/>
-                <Route path="/RecoverPassword" element={<RecoverPassword/>}/>
+                <Route path="/home" element={<Home/>}/> 
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/recover-password" element={<RecoverPassword/>}/>
             </Routes>
         </Router>
     );

@@ -31,7 +31,7 @@ function App() {
       }
       else{
         console.log(response.data);
-        return(alert("Correo o contraseña incorrecta"))
+        return(alert("Correo o contraseña incorrecta"));
       }
     }
     catch (error){
