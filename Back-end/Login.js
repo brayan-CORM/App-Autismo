@@ -61,7 +61,12 @@ app.post("/api/login", async function(req, res){
 });
 
 //registro
-const createUser = async(req,res)=>{
+//const createUser = async(req,res)=>{
+    
+//}
+
+app.post("/api/register", async function(req,res){
+    //createUser(req,res);    
     const {
         regName,
         regRole,
@@ -94,10 +99,6 @@ const createUser = async(req,res)=>{
     catch(error){
         console.log(error);
     }
-}
-
-app.post("/api/register", function(req,res){
-    createUser(req,res);    
 });
 
 

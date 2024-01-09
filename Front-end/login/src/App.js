@@ -40,7 +40,7 @@ function App() {
   }
 
   function go_to_recoverpassword(){
-    navigate("/recoverpassword");
+    navigate("/recover-password");
   }
   
   function go_to_register(){

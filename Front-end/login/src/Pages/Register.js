@@ -52,9 +52,14 @@ function Register(){
 
     return(
         <body>
-            <div className="Registro">
-                <h2>Registro</h2>
-        </div>
+          <div className="Register">
+            <h2>Registro</h2>
+            <hr width="80%"></hr>
+          </div>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
 
         <form onSubmit={funcion_register}>
             <FaUserCircle className="icon_user"/>

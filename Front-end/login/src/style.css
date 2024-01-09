@@ -121,6 +121,10 @@ body{
 }
 
 /*style register*/
+.Register{
+    vertical-align: middle;
+    margin-top: -100px;
+}
 .icon_user{
     font-size: 100px;
     color: #5d5d5d;
@@ -184,3 +188,8 @@ body{
 .b_reg_login:hover{
     background-color: #32CD32;
 }
+
+/*style Recover password*/
+
+
+/*style Home*/
