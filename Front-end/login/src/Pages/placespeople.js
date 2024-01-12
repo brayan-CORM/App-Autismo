@@ -1,9 +1,9 @@
 import React from "react";
 
-function RecoverPassword(){
+function PlacesPeople (){
     return(
-        <div className="RecoverPassword">
-            <h2>Recover Password</h2> 
+        <div className="PlacesPeople">
+            <h2>Places and people</h2> 
             <hr width="80%"></hr>
             <br/>
             <br/>
@@ -13,6 +13,6 @@ function RecoverPassword(){
             <p>contenido</p>
         </div>
     )
-}
+} 
 
-export default RecoverPassword;
+export default PlacesPeople;

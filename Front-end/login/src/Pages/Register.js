@@ -10,6 +10,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { FaUserCircle } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { PiScrollFill } from "react-icons/pi";
+import { FaAngleLeft } from "react-icons/fa";
 
 function Register(){
  
@@ -53,9 +54,11 @@ function Register(){
     return(
         <body>
           <div className="Register">
+            <FaAngleLeft className="icon_back"
+            onClick={()=>navigate('/')}/>
             <h2>Registro</h2>
-            <hr width="80%"></hr>
           </div>
+          <hr width="80%"></hr>
           <br/>
           <br/>
           <br/>

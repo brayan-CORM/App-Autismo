@@ -1,9 +1,10 @@
 import React from "react";
 
-function RecoverPassword(){
+function Actions(){
+    
     return(
-        <div className="RecoverPassword">
-            <h2>Recover Password</h2> 
+        <div className="actions">
+            <h2>Actions</h2> 
             <hr width="80%"></hr>
             <br/>
             <br/>
@@ -15,4 +16,4 @@ function RecoverPassword(){
     )
 }
 
-export default RecoverPassword;
+export default Actions;

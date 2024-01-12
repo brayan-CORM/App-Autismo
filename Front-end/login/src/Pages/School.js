@@ -1,9 +1,9 @@
 import React from "react";
 
-function RecoverPassword(){
+function School(){
     return(
-        <div className="RecoverPassword">
-            <h2>Recover Password</h2> 
+        <div className="school">
+            <h2>School</h2> 
             <hr width="80%"></hr>
             <br/>
             <br/>
@@ -15,4 +15,4 @@ function RecoverPassword(){
     )
 }
 
-export default RecoverPassword;
+export default School;

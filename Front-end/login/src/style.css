@@ -122,8 +122,17 @@ body{
 
 /*style register*/
 .Register{
-    vertical-align: middle;
+    display: flex;
+    justify-content: center;
     margin-top: -100px;
+    margin-right: 310px;
+}
+.icon_back{
+    font-size: 25px;
+    vertical-align: middle;
+    margin-top: 20px;
+    margin-right: 280px;
+    cursor: pointer;
 }
 .icon_user{
     font-size: 100px;
@@ -193,3 +202,61 @@ body{
 
 
 /*style Home*/
+.category{
+    margin-right: 510px;
+    font-size: large;
+}
+.icon_perfil{
+    font-size:larger;
+    vertical-align: middle;
+    margin-top: -30px;
+    margin-right: -280px;
+    cursor: pointer;
+}
+#icon_perfil{
+    font-size:larger;
+    vertical-align: middle;
+    margin-top: -35px;
+    margin-right: -280px;
+    cursor: pointer;
+    color: #00BFFF;
+}
+#icon_perfil:hover{
+    color: #32CD32;
+}
+.perfil_text{
+    font-size:small;
+    vertical-align: middle;
+    margin-top: -15px;
+    margin-right: -280px;
+    cursor: pointer;
+}
+.pic-category-row1{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+.lugares-y-personas{
+    vertical-align: middle;
+    margin-top: -4px;
+}
+.pic-category-row2{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+.pic-category-row3{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+.contorno{
+    width: 130px;
+    height: 140px;
+    border: 2px solid #c5c6d0;
+    border-radius: 5px;
+    cursor: pointer;
+}
