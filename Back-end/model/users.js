@@ -1,21 +1,26 @@
 const mongoose = require("mongoose");
+
 const userSchema = new mongoose.Schema({
-    username:{
-        type:String,
-        required:[true,"El nombre de usuario es obligatorio"],
+    fullName: {
+        type: String,
+        required: [true, "El nombre completo es obligatorio"],
     },
-    role:{
-        type:String,
-        enum:["admin","user"],
-        default:"user",
+    username: {
+        type: String,
+        required: [true, "El nombre de usuario es obligatorio"],
     },
-    mail:{
-        type:String,
-        required:[true,"El mail es obligatorio"],
+    role: {
+        type: String,
+        enum: ["admin", "user"],
+        default: "user",
     },
-    password:{
-        type:String,
-        required:[true,"La contraseña es obligatoria"],
+    mail: {
+        type: String,
+        required: [true, "El mail es obligatorio"],
+    },
+    password: {
+        type: String,
+        required: [true, "La contraseña es obligatoria"],
     }
 });
 

@@ -68,7 +68,7 @@ function Home(){
                 </div>
                 <div className="contorno" onClick={goto_school}>
                     <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Escuela.svg" width="100" height="100"/>
-                    <p>Esceula</p>
+                    <p>Escuela</p>
                 </div>
                 <div className="contorno" onClick={goto_bathroom}>
                     <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Higiene.svg" width="100" height="100"/>
