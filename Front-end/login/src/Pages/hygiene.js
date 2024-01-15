@@ -1,9 +1,9 @@
 import React from "react";
 
-function PlacesPeople (){
+function Hygiene(){
     return(
-        <div className="PlacesPeople">
-            <h2>Places and people</h2> 
+        <div className="bathroom">
+            <h2>Higiene</h2> 
             <hr width="80%"></hr>
             <br/>
             <br/>
@@ -13,6 +13,6 @@ function PlacesPeople (){
             <p>contenido</p>
         </div>
     )
-} 
+}
 
-export default PlacesPeople;
+export default Hygiene;

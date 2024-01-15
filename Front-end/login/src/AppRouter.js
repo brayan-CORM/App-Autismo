@@ -4,13 +4,11 @@ import App from "./App";
 import Home from "./pages/home";
 import Register from "./pages/register";
 import RecoverPassword from "./pages/recoverpassword";
-import PlacesPeople from "./pages/placespeople"; //tenemos error
 import Actions from "./pages/actions";
 import Food from "./pages/food";
-import Animals from "./pages/animals";
-import School from "./pages/School";
-import Bathroom from "./pages/bathroom";
-import House from "./pages/house";
+import Feelings from "./pages/feelings";
+import Hygiene from "./pages/hygiene";
+import People from "./pages/people";
 
 const AppRouter = ()=>{
     return(
@@ -20,13 +18,11 @@ const AppRouter = ()=>{
                 <Route path="/home" element={<Home/>}/> 
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/recover-password" element={<RecoverPassword/>}/>
-                <Route peth="/places-people" element={<PlacesPeople/>}/>
                 <Route path="/actions" element={<Actions/>}/>
                 <Route path="/food" element={<Food/>}/>
-                <Route path="/animals" element={<Animals/>}/>
-                <Route path="/school" element={<School/>}/>
-                <Route path="/bathroom" element={<Bathroom/>}/>
-                <Route path="/house" element={<House/>}/>
+                <Route path="/feelings" element={<Feelings/>}/>
+                <Route path="/hygiene" element={<Hygiene/>}/>
+                <Route path="/people" element={<People/>}/>
             </Routes>
         </Router>
     );

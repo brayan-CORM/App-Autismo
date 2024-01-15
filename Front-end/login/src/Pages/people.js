@@ -7,8 +7,8 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import { HiSpeakerWave } from "react-icons/hi2";
 import { FaAngleLeft } from "react-icons/fa";
 
-function Actions(){
-    
+function People(){
+
     const navigate = useNavigate();
 
     return(
@@ -46,42 +46,48 @@ function Actions(){
                 <div className="icon_back_comunicador">
                     <FaAngleLeft className="icon_back_action"
                     onClick={()=>navigate('/home')}/>
-                    <p className="category"><b>Acciones</b></p>
+                    <p className="category"><b>Personas</b></p>
                 </div>
                 <br/>
 
                 <div className="pic-category-row1">
                 <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/comer.svg" width="100" height="100"/>
-                    <p>Comer</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg" width="100" height="100"
+                    className="bajar_pic"/>
+                    <p>Yo</p>
                 </div>
                 <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/ir al baño.svg" width="100" height="100"/>
-                    <p>Ir al baño</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" width="100" height="100"
+                    className="bajar_pic"/>
+                    <p>Mamá</p>
                 </div>
                 <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/bañar.svg" width="100" height="100"/>
-                    <p>Bañar</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg" width="100" height="100"
+                    className="bajar_pic"/>
+                    <p>Papá</p>
                 </div>
             </div>
             <br/>
             <br/>
             <div className="pic-category-row2">
             <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/jugar.svg" width="100" height="100"/>
-                    <p>Animales</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/compañeros.svg" width="100" height="100"
+                    className="bajar_pic"/>
+                    <p>Compañeros</p>
                 </div>
                 <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/lavarse las manos.svg" width="100" height="100"/>
-                    <p>Esceula</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/terapeuta.svg" width="100" height="100"
+                    className="bajar_pic"/>
+                    <p>Terapeuta</p>
                 </div>
                 <div className="contorno">
                     
                 </div>
             </div>
-            </div>  
+
+            </div>
         </body>
     )
 }
 
-export default Actions;
+export default People;

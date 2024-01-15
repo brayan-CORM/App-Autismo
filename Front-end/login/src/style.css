@@ -57,7 +57,7 @@ body{
     border-radius: 20px;
     cursor: pointer;
     font-size: medium;
-    background-color: #00BFFF;
+    background-color: #0088ff;
 }
 .b_login:hover{
     background-color: 	#32CD32;
@@ -192,7 +192,7 @@ body{
     border-radius: 20px;
     cursor: pointer;
     font-size: medium;
-    background-color: #00BFFF;
+    background-color: #0088ff;
 }
 .b_reg_login:hover{
     background-color: #32CD32;
@@ -210,7 +210,7 @@ body{
     font-size:larger;
     vertical-align: middle;
     margin-top: -30px;
-    margin-right: -280px;
+    margin-right: -320px;
     cursor: pointer;
 }
 #icon_perfil{
@@ -219,10 +219,62 @@ body{
     margin-top: -35px;
     margin-right: -280px;
     cursor: pointer;
-    color: #00BFFF;
 }
-#icon_perfil:hover{
+.contenedor-comunicador{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 90px;
+    width: 80%;
+    height: 180px;
+    border: 2px solid #c5c6d0;
+    border-radius: 5px;
+}
+.contorno1{
+    width: 130px;
+    height: 150px;
+    border: 2px solid #c5c6d0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 10px;
+    background-color:#D9DADB;
+}
+.contorno2{
+    width: 130px;
+    height: 150px;
+    border: 2px solid #c5c6d0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 10px;
+    background-color: #D9DADB;
+}
+.contorno3{
+    width: 130px;
+    height: 150px;
+    border: 2px solid #c5c6d0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 0px;
+    margin-top: 10px;
+    background-color: #D9DADB;
+}
+.icon_speaker{
+    font-size: 45px;
+    cursor: pointer;
+    margin-right: -110px;
+    margin-top: 30px;
+    color: #0088ff;
+}
+.icon_speaker:hover{
     color: #32CD32;
+}
+.icon_delete{
+    font-size: 45px;
+    cursor: pointer;
+    margin-right: 40px;
+    margin-top: 110px;
+    color: red;
 }
 .perfil_text{
     font-size:small;
@@ -255,8 +307,47 @@ body{
 }
 .contorno{
     width: 130px;
-    height: 140px;
+    height: 150px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/*Comunicador*/
+/*Acciones*/
+.icon_back_comunicador{
+    display: flex;
+    justify-content: center;
+    margin-left: -25px;
+}
+.icon_back_action{
+    font-size: 25px;
+    vertical-align: middle;
+    margin-top: 15px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+/*Alimentos*/
+.pic_agua{
+    margin-top: 10px;
+}
+.pic_carne{
+    margin-top: 10px;
+}
+.pic_leche{
+    margin-top: 10px;
+}
+.pic_sopa{
+    margin-top: 10px;
+}
+.pic_verduras{
+    margin-top: 10px;
+}
+/*feeling*/
+#icon_back_feeling{
+    margin-left: 100px;
+}
+/*people*/
+.bajar_pic{
+    margin-top: 10px;
 }

@@ -7,8 +7,8 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import { HiSpeakerWave } from "react-icons/hi2";
 import { FaAngleLeft } from "react-icons/fa";
 
-function Actions(){
-    
+function Animals(){
+
     const navigate = useNavigate();
 
     return(
@@ -44,44 +44,46 @@ function Actions(){
                 <br/>
                 <hr width="80%"></hr>
                 <div className="icon_back_comunicador">
-                    <FaAngleLeft className="icon_back_action"
+                    <FaAngleLeft className="icon_back_action" 
+                    id="icon_back_feeling"
                     onClick={()=>navigate('/home')}/>
-                    <p className="category"><b>Acciones</b></p>
+                    <p className="category"><b>Deseos y sentimientos</b></p>
                 </div>
                 <br/>
 
                 <div className="pic-category-row1">
                 <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/comer.svg" width="100" height="100"/>
-                    <p>Comer</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/estoy bien.svg" width="100" height="100"/>
+                    <p>Estoy bien</p>
                 </div>
                 <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/ir al baño.svg" width="100" height="100"/>
-                    <p>Ir al baño</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/necesito ayuda.svg" width="100" height="100"/>
+                    <p>Necesito ayuda</p>
                 </div>
                 <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/bañar.svg" width="100" height="100"/>
-                    <p>Bañar</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/no.svg" width="100" height="100"/>
+                    <p>No</p>
                 </div>
             </div>
             <br/>
             <br/>
             <div className="pic-category-row2">
             <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/jugar.svg" width="100" height="100"/>
-                    <p>Animales</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/quiero.svg" width="100" height="100"/>
+                    <p>Quiero</p>
                 </div>
                 <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/lavarse las manos.svg" width="100" height="100"/>
-                    <p>Esceula</p>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/si.svg" width="100" height="100"/>
+                    <p>Si</p>
                 </div>
                 <div className="contorno">
                     
                 </div>
             </div>
-            </div>  
+
+            </div>
         </body>
     )
 }
 
-export default Actions;
+export default Animals;
