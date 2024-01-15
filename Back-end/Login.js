@@ -44,7 +44,7 @@ app.post("/api/login", async function(req, res){
             else{
                 const payload = {
                     id:usuario_encontrado._id,
-                    name:usuario_encontrado.username
+                    name:usuario_encontrado.fullName
                 }
                 const token = jwt.sign(payload, jwtkey, {expiresIn:60});
                 return res.status(200).json({
@@ -68,7 +68,8 @@ app.post("/api/login", async function(req, res){
 app.post("/api/register", async function(req,res){
     //createUser(req,res);    
     const {
-        regName,
+        regFullName,
+        regUsername,
         regRole,
         regMail,
         regPassword,
@@ -83,7 +84,8 @@ app.post("/api/register", async function(req,res){
         else{
             const password_cifrado = await bcrypt.hash(regPassword,10);
             const newUser = new User({
-                username: regName,
+                fullName: regFullName,
+                username: regUsername,
                 role: regRole,
                 mail: regMail,
                 password: password_cifrado,
