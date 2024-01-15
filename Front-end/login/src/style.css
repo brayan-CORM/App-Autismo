@@ -151,6 +151,13 @@ body{
     margin-top: -4px;
     color: #5d5d5d;
 }
+.regis_username{
+    font-size: medium;
+    border-radius: 15px;
+    height: 28px;
+    width: 250px;
+    border-color:  #5d5d5d;
+}
 .ComboBox{
     font-size: medium;
     border-radius: 15px;
