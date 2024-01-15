@@ -22,41 +22,47 @@ app.all('*', function (req, res, next) {    //req=request, res=response
     next();
 });
 //login
-app.post("/api/login", async function(req, res){
-    let mail_resivido  = req.body._mail;
-    
-    let password_resivido = req.body._password;
+app.post("/api/login", async function(req, res) {
+    let identifier = req.body._identifier; // Puede ser el username o el mail
+    let password_received = req.body._password;
 
     try {
-        const usuario_encontrado = await User.findOne({mail:mail_resivido});
-        if(!usuario_encontrado){
+        const usuario_encontrado = await User.findOne({
+            $or: [{ username: identifier }, { mail: identifier }],
+        });
+
+        if (!usuario_encontrado) {
             return res.status(404).json({
-                msg:"Usuario no encontrado"
+                msg: "Usuario no encontrado",
             });
-        }
-        else{
-            const match = await bcrypt.compare(password_resivido,usuario_encontrado.password);
-            if(!match){
+        } else {
+            const match = await bcrypt.compare(
+                password_received,
+                usuario_encontrado.password
+            );
+
+            if (!match) {
                 return res.status(401).json({
-                    msg:"Usuario no coincide"
+                    msg: "Usuario y contraseña no coinciden",
                 });
-            }
-            else{
+            } else {
                 const payload = {
-                    id:usuario_encontrado._id,
-                    name:usuario_encontrado.fullName
-                }
-                const token = jwt.sign(payload, jwtkey, {expiresIn:60});
+                    id: usuario_encontrado._id,
+                    name: usuario_encontrado.fullName,
+                };
+                const token = jwt.sign(payload, jwtkey, { expiresIn: 60 });
                 return res.status(200).json({
-                    msg:"Login exitoso",
-                    token:token,
-                    success:true
+                    msg: "Login exitoso",
+                    token: token,
+                    success: true,
                 });
             }
         }
-    }   
-    catch(error){
+    } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            msg: "Error interno del servidor",
+        });
     }
 });
 
