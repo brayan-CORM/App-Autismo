@@ -34,11 +34,15 @@ function Actions(){
                     <div className="contorno3">
                         
                     </div>
-                    <div className="icon_speaker">
-                        <HiSpeakerWave />
-                    </div>
-                    <div className="icon_delete">
-                        <FaDeleteLeft />
+                    <div className="icons_contenedor">    
+                            <div className="icon_speaker">
+                                <HiSpeakerWave />
+                            </div>
+                            <br/>
+                            <br/>
+                            <div className="icon_delete">
+                                <FaDeleteLeft />
+                            </div>
                     </div>
                 </div>
                 <br/>
@@ -46,7 +50,7 @@ function Actions(){
                 <div className="icon_back_comunicador">
                     <FaAngleLeft className="icon_back_action"
                     onClick={()=>navigate('/home')}/>
-                    <p className="category"><b>Acciones</b></p>
+                    <p><b>Acciones</b></p>
                 </div>
                 <br/>
 

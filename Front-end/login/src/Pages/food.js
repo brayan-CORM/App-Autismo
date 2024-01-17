@@ -34,19 +34,23 @@ function Food(){
                 <div className="contorno3">
                     
                 </div>
-                <div className="icon_speaker">
-                    <HiSpeakerWave />
-                </div>
-                <div className="icon_delete">
-                    <FaDeleteLeft />
-                </div>
+                <div className="icons_contenedor">    
+                            <div className="icon_speaker">
+                                <HiSpeakerWave />
+                            </div>
+                            <br/>
+                            <br/>
+                            <div className="icon_delete">
+                                <FaDeleteLeft />
+                            </div>
+                        </div>
             </div>
             <br/>
             <hr width="80%"></hr>
             <div className="icon_back_comunicador">
                 <FaAngleLeft className="icon_back_action"
                 onClick={()=>navigate('/home')}/>
-                <p className="category"><b>Alimentos</b></p>
+                <p><b>Alimentos</b></p>
             </div>
             <br/>
 

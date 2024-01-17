@@ -34,20 +34,23 @@ function Animals(){
                     <div className="contorno3">
                         
                     </div>
-                    <div className="icon_speaker">
-                        <HiSpeakerWave />
-                    </div>
-                    <div className="icon_delete">
-                        <FaDeleteLeft />
+                    <div className="icons_contenedor">     
+                        <div className="icon_speaker">
+                            <HiSpeakerWave />
+                        </div>
+                        <br/>
+                        <br/>
+                        <div className="icon_delete">
+                            <FaDeleteLeft />
+                        </div>
                     </div>
                 </div>
                 <br/>
                 <hr width="80%"></hr>
                 <div className="icon_back_comunicador">
                     <FaAngleLeft className="icon_back_action" 
-                    id="icon_back_feeling"
                     onClick={()=>navigate('/home')}/>
-                    <p className="category"><b>Deseos y sentimientos</b></p>
+                    <p><b>Deseos y sentimientos</b></p>
                 </div>
                 <br/>
 

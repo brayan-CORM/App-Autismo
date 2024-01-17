@@ -38,22 +38,27 @@ function Home(){
                 </div>
                 <hr width="80%"></hr>
                 <br/>
+                <div className="cont">
+                    <div className="contenedor-comunicador">
+                        <div className="contorno1">
 
-                <div className="contenedor-comunicador">
-                    <div className="contorno1">
-
-                    </div>
-                    <div className="contorno2">
-                        
-                    </div>
-                    <div className="contorno3">
-                        
-                    </div>
-                    <div className="icon_speaker">
-                        <HiSpeakerWave />
-                    </div>
-                    <div className="icon_delete">
-                        <FaDeleteLeft />
+                        </div>
+                        <div className="contorno2">
+                            
+                        </div>
+                        <div className="contorno3">
+                            
+                        </div>
+                        <div className="icons_contenedor">    
+                            <div className="icon_speaker">
+                                <HiSpeakerWave />
+                            </div>
+                            <br/>
+                            <br/>
+                            <div className="icon_delete">
+                                <FaDeleteLeft />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <br/>
@@ -79,7 +84,7 @@ function Home(){
             <br/>
             <div className="pic-category-row2">
             <div className="contorno" onClick={goto_feelings}>
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/.svg" width="100" height="100"/>
+                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/Sentimientos.svg" width="100" height="100"/>
                     <p className="lugares-y-personas">Deseos y sentimientos</p>
                 </div>
                 <div className="contorno" onClick={goto_Hygiene}>
@@ -87,8 +92,7 @@ function Home(){
                     <p>Higiene</p>
                 </div>
                 <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/.svg" width="100" height="100"/>
-                    <p></p>
+                    
                 </div>
             </div>
             <br/>

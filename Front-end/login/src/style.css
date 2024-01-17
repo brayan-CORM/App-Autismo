@@ -210,7 +210,9 @@ body{
 
 /*style Home*/
 .category{
-    margin-right: 510px;
+    display: flex;
+    justify-content: start;
+    margin-left: 200px;
     font-size: large;
 }
 .icon_perfil{
@@ -229,12 +231,7 @@ body{
 }
 .contenedor-comunicador{
     display: flex;
-    justify-content: space-between;
-    margin-left: 90px;
-    width: 80%;
-    height: 180px;
-    border: 2px solid #c5c6d0;
-    border-radius: 5px;
+    justify-content: space-around;
 }
 .contorno1{
     width: 130px;
@@ -267,21 +264,17 @@ body{
     background-color: #D9DADB;
 }
 .icon_speaker{
-    font-size: 45px;
-    cursor: pointer;
-    margin-right: -110px;
-    margin-top: 30px;
+    font-size:50px;
     color: #0088ff;
+    cursor: pointer;
 }
 .icon_speaker:hover{
     color: #32CD32;
 }
 .icon_delete{
-    font-size: 45px;
-    cursor: pointer;
-    margin-right: 40px;
-    margin-top: 110px;
+    font-size:45px;
     color: red;
+    cursor: pointer;
 }
 .perfil_text{
     font-size:small;
@@ -292,9 +285,7 @@ body{
 }
 .pic-category-row1{
     display: flex;
-    justify-content: space-between;
-    margin-left: 150px;
-    margin-right: 150px;
+    justify-content: space-around;
 }
 .lugares-y-personas{
     vertical-align: middle;
@@ -302,15 +293,11 @@ body{
 }
 .pic-category-row2{
     display: flex;
-    justify-content: space-between;
-    margin-left: 150px;
-    margin-right: 150px;
+    justify-content: space-around;
 }
 .pic-category-row3{
     display: flex;
-    justify-content: space-between;
-    margin-left: 150px;
-    margin-right: 150px;
+    justify-content: space-around;
 }
 .contorno{
     width: 130px;
@@ -324,14 +311,11 @@ body{
 /*Acciones*/
 .icon_back_comunicador{
     display: flex;
-    justify-content: center;
-    margin-left: -25px;
+    justify-content: start;
 }
 .icon_back_action{
     font-size: 25px;
-    vertical-align: middle;
     margin-top: 15px;
-    margin-right: 20px;
     cursor: pointer;
 }
 /*Alimentos*/
@@ -351,8 +335,8 @@ body{
     margin-top: 10px;
 }
 /*feeling*/
-#icon_back_feeling{
-    margin-left: 100px;
+.icon_back_action{
+    margin-top: 10px;
 }
 /*people*/
 .bajar_pic{
