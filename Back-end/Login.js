@@ -20,7 +20,6 @@ const jwtkey = "ao4m$o919des2e1";
 const app = express();
 app.use(express.json({limit: '50mb'}));
 app.use(express.static(`${__dirname}/public`));
-
  
 //app.set('jwtkey', process.env.JWT_KEY);
 app.use(cors());
@@ -139,8 +138,7 @@ app.post("/api/reset-password", async function (req, res) {
                 msg: "Usuario no encontrado",
             });
         
-        }
-        else {
+        } else {
             const resetLink = `http://www.google.com/`;
         const mailOptions = {
             from: 'villevalleemm@gmail.com',
@@ -155,7 +153,7 @@ app.post("/api/reset-password", async function (req, res) {
                 return res.status(500).json({
                     msg: "Error al enviar el correo electrónico",
                 });
-            } else {
+            } else { // Enviar un correo electrónico al usuario con el enlace de restablecimiento
                 console.log('Correo electrónico enviado: ' + info.response);
                 return res.status(200).json({
                     msg: "Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña",
@@ -167,12 +165,10 @@ app.post("/api/reset-password", async function (req, res) {
         // Generar y almacenar un token de restablecimiento de contraseña en la base de datos
         //const resetToken = jwt.sign({ userId: usuario_encontrado._id }, jwtkey, { expiresIn: '1h' });
         //usuario_encontrado.resetToken = resetToken;
-        //await usuario_encontrado.save(); no se que hace
-
-        // Enviar un correo electrónico al usuario con el enlace de restablecimiento
-        
+        //await usuario_encontrado.save(); no se que hice
 
         
+            
     } catch (error) {
         console.log(error);
         return res.status(500).json({
