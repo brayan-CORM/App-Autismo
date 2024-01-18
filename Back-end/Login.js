@@ -125,9 +125,9 @@ app.post("/api/register", async function(req, res) {
 
 //reset-password
 app.post("/api/reset-password", async function (req, res) {
-    try {
-        const identifier = req.body._identifier; // Puede ser el username o el mail
+    let identifier = req.body._identifier; // Puede ser el username o el mail
 
+    try {
         // Lógica para buscar el usuario por username o mail
         const usuario_encontrado = await User.findOne({
             $or: [{ username: identifier }, { mail: identifier }],
@@ -141,7 +141,7 @@ app.post("/api/reset-password", async function (req, res) {
         } else {
             const resetLink = `http://www.google.com/`;
         const mailOptions = {
-            from: 'villevalleemm@gmail.com',
+            from: 'KeetNah',
             to: usuario_encontrado.mail,
             subject: 'Recuperación de Contraseña',
             text: `Haga clic en el siguiente enlace para restablecer su contraseña: ${resetLink}`,

@@ -125,13 +125,11 @@ body{
     display: flex;
     justify-content: center;
     margin-top: -100px;
-    margin-right: 310px;
 }
 .icon_back{
     font-size: 25px;
     vertical-align: middle;
     margin-top: 20px;
-    margin-right: 280px;
     cursor: pointer;
 }
 .icon_user{
@@ -206,8 +204,38 @@ body{
 }
 
 /*style Recover password*/
-
-
+.RecoverPassword{
+    display: flex;
+    justify-content: center;
+    margin-top: -100px;
+}
+.Parrafo{
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+}
+.parrafo{
+    text-align: left;
+}
+.recuperar{
+    display: flex;
+    justify-content: center;
+}
+.recover_mail{
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    border-radius: 15px;
+    height: 28px;
+    width: 250px;
+    border-color:  #5d5d5d;
+}
+.icon_Mail_2{
+    font-size: x-large;
+    vertical-align: middle;
+    margin-top: 4px;
+    color:#5d5d5d;
+}
 /*style Home*/
 .category{
     display: flex;
