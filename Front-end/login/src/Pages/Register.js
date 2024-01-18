@@ -3,7 +3,6 @@ import "../style.css";
 import axios from "axios";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithPopup, auth, provider } from '../appAuth';
 
 //icons
 import { IoIosMail } from "react-icons/io";
@@ -51,27 +50,6 @@ function Register(){
           setError("Registro fallido");
       }
     }
-
-    const loginWithGoogle = async () => {
-        try {
-          const result = await signInWithPopup(auth, provider);
-          const googleToken = result.credential.idToken;
-    
-          const response = await axios.post('http://localhost:3001/api/login-google', {
-            _googleIdToken: googleToken,
-          });
-    
-          if (response.data.success) {
-            console.log(response.data);
-            navigate('/home');
-          } else {
-            console.log(response.data);
-            alert('Error al iniciar sesión con Google');
-          }
-        } catch (error) {
-          setError('Error al iniciar sesión con Google');
-        }
-      };
 
     return (
       <body>
@@ -175,17 +153,7 @@ function Register(){
               <br/>
   
               <button className='b_reg_login' type='submit'>Crear cuenta</button>
-              <button className='b_google' type='button' onClick={loginWithGoogle}>
-                <div className='l_google'>
-                    <p className='G'>G
-                    <span className='O'>o</span>
-                    <span className='o'>o</span>
-                    <span className='g'>g</span>
-                    <span className='l'>l</span>
-                    <span className='e'>e</span>
-                    </p>
-                </div>
-                </button>
+              
           </form>
       </body>
   );
