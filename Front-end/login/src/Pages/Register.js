@@ -153,6 +153,7 @@ function Register(){
               <br/>
   
               <button className='b_reg_login' type='submit'>Crear cuenta</button>
+              
           </form>
       </body>
   );
