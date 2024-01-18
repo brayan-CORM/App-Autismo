@@ -1,9 +1,10 @@
-const express = require ("express"); //sirve para utilizar un puerto para las aplicaciones
-const cors = require ("cors"); //son para las reglas de los servidores
-const bodyParser = require("body-parser"); //es para leer el cuerpo de la solicitud
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const db = require("./db");
 const User = require("./model/users");
-const bcrypt = require("bcrypt");   //modulo de incriptacion para textos
+const bcrypt = require("bcrypt");
+const { auth, googleProvider } = require('./db');
 const jwt = require("jsonwebtoken");
 const nodemailer = require('nodemailer');
 
@@ -30,6 +31,7 @@ app.all('*', function (req, res, next) {    //req=request, res=response
     res.header('Access-Control-Allow-Headers', 'Origin', 'X-Api-Key', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization');
     next();
 });
+
 //login
 app.post("/api/login", async function(req, res) {
     let identifier = req.body._identifier; // Puede ser el username o el mail
@@ -50,11 +52,8 @@ app.post("/api/login", async function(req, res) {
                 usuario_encontrado.password
             );
 
-            if (!match) {
-                return res.status(401).json({
-                    msg: "Usuario y contraseña no coinciden",
-                });
-            } else {
+            if (match) {
+                // Si la autenticación con correo y contraseña tiene éxito
                 const payload = {
                     id: usuario_encontrado._id,
                     name: usuario_encontrado.fullName,
@@ -65,12 +64,47 @@ app.post("/api/login", async function(req, res) {
                     token: token,
                     success: true,
                 });
+            } else {
+                // Si la contraseña no coincide
+                return res.status(401).json({
+                    msg: "Contraseña incorrecta",
+                    success: false,
+                });
             }
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return res.status(500).json({
-            msg: "Error interno del servidor",
+            msg: "Error en el inicio de sesión",
+        });
+    }
+});
+
+// Inicio de sesión con Google
+app.post("/api/login-google", async function(req, res) {
+    const googleIdToken = req.body._googleIdToken;
+
+    try {
+        const googleUserCredential = await auth.signInWithCredential(googleProvider.credential(googleIdToken));
+        const user = googleUserCredential.user;
+
+        // Aquí puedes realizar acciones adicionales con el usuario, como almacenar en una base de datos
+        const payload = {
+            id: user.uid,
+            name: user.displayName,
+        };
+        const token = jwt.sign(payload, jwtkey, { expiresIn: 60 });
+
+        return res.status(200).json({
+            msg: "Login exitoso con Google",
+            token: token,
+            success: true,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            msg: "Error en el inicio de sesión con Google",
+            success: false,
         });
     }
 });
@@ -118,6 +152,34 @@ app.post("/api/register", async function(req, res) {
         console.error(error);
         return res.status(500).json({
             msg: "Error interno del servidor",
+            success: false
+        });
+    }
+});
+
+app.post("/api/register-google", async function(req, res) {
+    const googleIdToken = req.body._googleIdToken;
+
+    try {
+        const googleUserCredential = await auth.signInWithCredential(googleProvider.credential(googleIdToken));
+        const user = googleUserCredential.user;
+
+        // Aquí puedes realizar acciones adicionales con el usuario, como almacenar en una base de datos
+        const payload = {
+            id: user.uid,
+            name: user.displayName,
+        };
+        const token = jwt.sign(payload, jwtkey, { expiresIn: 60 });
+
+        return res.status(201).json({
+            msg: "Usuario creado con Google",
+            token: token,
+            success: true
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            msg: "Error en el registro con Google",
             success: false
         });
     }

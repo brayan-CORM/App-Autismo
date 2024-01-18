@@ -1,26 +1,41 @@
 import React from 'react';
 import './style.css';
-import axios from "axios";
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 //icons
 import { IoIosMail } from "react-icons/io";
 import { RiLockPasswordFill } from "react-icons/ri";
 
+// Configuración de Firebase
+const firebaseConfig = {
+  apiKey: 'AIzaSyC9HKu9IOojoQJ1njDkM6fH798NduMY60s',
+  authDomain: 'app-autismo-a1024.firebaseapp.com',
+  projectId: 'app-autismo-a1024',
+  storageBucket: 'app-autismo-a1024.appspot.com',
+  messagingSenderId: '717885363832',
+  appId: '1:717885363832:web:76991326ba2f60e953bf8d',
+  measurementId: 'G-K64NT3743B',
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const provider = new GoogleAuthProvider();
+
 function App() {
-  //todo lo que va afuera es la logica, no se ve en la app
-  //variables:
-  const [_identifier, setIdentifier] = React.useState(""); // Cambié el nombre de la variable para reflejar que puede ser el username o el mail
-  const [_password, setPassword] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [_identifier, setIdentifier] = React.useState('');
+  const [_password, setPassword] = React.useState('');
+  const [error, setError] = React.useState('');
   const navigate = useNavigate();
 
-  const funcion_login = async(event) => {
+  const funcion_login = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post('http://localhost:3001/api/login', {
-        _identifier, // Usamos la variable que puede ser el username o el mail
+        _identifier,
         _password
       });
 
@@ -36,6 +51,27 @@ function App() {
     }
   }
 
+  const loginWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const googleToken = result.credential.idToken;
+
+      const response = await axios.post('http://localhost:3001/api/login-google', {
+        _googleIdToken: googleToken,
+      });
+
+      if (response.data.success) {
+        console.log(response.data);
+        navigate('/home');
+      } else {
+        console.log(response.data);
+        alert('Error al iniciar sesión con Google');
+      }
+    } catch (error) {
+      setError('Error al iniciar sesión con Google');
+    }
+  };
+
   function go_to_recoverpassword() {
     navigate("/recover-password");
   }
@@ -48,25 +84,25 @@ function App() {
     <body>
       <div className='login'>
         <img src='../Logo.png' width="150" height="150" />
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        
+        <br />
+        <br />
+        <br />
+        <br />
+
         <form onSubmit={funcion_login}>
-          <br/>
-          <IoIosMail className='icon_Mail'/>
+          <br />
+          <IoIosMail className='icon_Mail' />
           <input className='Correo'
             id='user'
             type='text'
             value={_identifier}
             onChange={(event) => setIdentifier(event.target.value)}
-            placeholder='Correo o Usuario' // Cambié el texto para reflejar que puede ser correo o usuario
+            placeholder='Correo o Usuario'
           />
-          <br/>
-          <br/>
+          <br />
+          <br />
 
-          <RiLockPasswordFill className='icon_password'/>
+          <RiLockPasswordFill className='icon_password' />
           <input className='password'
             id='Password'
             type='password'
@@ -74,21 +110,21 @@ function App() {
             onChange={(event) => setPassword(event.target.value)}
             placeholder='Contraseña'
           />
-          <br/>
+          <br />
 
           <div className='olive_contraseña'>
             <p><a onClick={go_to_recoverpassword}>¿Olvidaste tu contraseña?</a></p>
           </div>
-          
+
           {error && <p className='error'>{error}</p>}
-          <br/>
+          <br />
 
           <button className='b_login' type='submit'>Iniciar sesión</button>
-          <br/>
-          <br/>
-          
+          <br />
+          <br />
+
           <div className='b_tipo_login'>
-            <button className='b_google' type='submit'>
+            <button className='b_google' type='button' onClick={loginWithGoogle}>
               <div className='l_google'>
                 <p className='G'>G
                   <span className='O'>o</span>
@@ -102,7 +138,7 @@ function App() {
             <button className='b_faccebook' type='submit'>Facebook</button>
           </div>
 
-          <br/>
+          <br />
 
           <div className='Registro'>
             <p>¿No tienes cuenta?
@@ -110,7 +146,7 @@ function App() {
                 <a className='registro' onClick={go_to_register}> Regístrate</a>
               </u>
             </p>
-            <br/>
+            <br />
           </div>
         </form>
       </div>
