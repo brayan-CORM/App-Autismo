@@ -55,6 +55,34 @@ function App() {
       setError('Error al iniciar sesión con Google');
     }
   };
+//login con facebook (falta agregar la seguridad https para que funcione el login con facebook)
+  const facebookLogin = () => {
+    if(!window.FB) return;
+    //hacer login
+    window.FB.getLoginStatus(response =>{
+      if (response.status === "connected"){
+        //leer los datos del usuario 
+        facebookLoginHandler(response);
+      }
+      else{
+        // intentar iniciar sesion
+        window.FB.login(facebookLoginHandler, {scope:'public_profile,email'});
+      }
+    });
+  };
+
+  const facebookLoginHandler = (response) => {
+    console.log(response);
+
+    if(response.status === "connected"){
+      //leer datos del iusuario
+      window.FB.api('/me?fields=id,name,email,picture', userData =>{
+        console.log(userData);
+
+        //almacenar la sesion del usuario en nuestra app
+      });
+    }
+  };
 
   function go_to_recoverpassword() {
     navigate("/recover-password");
@@ -62,7 +90,7 @@ function App() {
 
   function go_to_register() {
     navigate("/register");
-  }
+  } 
 
   return (
     <body>
@@ -119,7 +147,10 @@ function App() {
                 </p>
               </div>
             </button>
-            <button className='b_faccebook' type='submit'>Facebook</button>
+            <button className='b_faccebook'
+            type='submit'
+            onClick={facebookLogin}
+            >Facebook</button>
           </div>
 
           <br />
