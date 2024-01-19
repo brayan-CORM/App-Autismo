@@ -46,6 +46,7 @@ function App() {
 
       if (response.data.success) {
         console.log(response.data);
+        alert('Sesión iniciada con exito');
         navigate('/home');
       } else {
         console.log(response.data);
@@ -136,9 +137,10 @@ function App() {
           <br />
 
           <div className='b_tipo_login'>
-            <button className='b_google' type='button' onClick={loginWithGoogle}>
+            <button className='b_google' type='button' 
+            onClick={loginWithGoogle}>
               <div className='l_google'>
-                <p className='G'>G
+              <p className='G'>G
                   <span className='O'>o</span>
                   <span className='o'>o</span>
                   <span className='g'>g</span>
@@ -150,7 +152,7 @@ function App() {
             <button className='b_faccebook'
             type='submit'
             onClick={facebookLogin}
-            >Facebook</button>
+            >facebook</button>
           </div>
 
           <br />
@@ -158,7 +160,7 @@ function App() {
           <div className='Registro'>
             <p>¿No tienes cuenta?
               <u>
-                <a className='registro' onClick={go_to_register}> Regístrate</a>
+                <a id='registro' onClick={go_to_register}> Regístrate</a>
               </u>
             </p>
             <br />

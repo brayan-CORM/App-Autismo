@@ -69,7 +69,7 @@ body{
 .b_google{
     display: inline-block;
     margin: 0px 15px;
-    width: 75px;
+    width: 90px;
     height: 30px;
     border-radius: 15px;
     cursor: pointer;
@@ -98,12 +98,11 @@ body{
 .l_google{
     display: inline-block;
     vertical-align: middle;
-    margin-top: -8px;
 }
 .b_faccebook{
     display: inline-block;
     margin: 0px 15px;
-    width: 75px;
+    width: 90px;
     height: 30px;
     border-radius: 15px;
     cursor: pointer;
@@ -115,7 +114,7 @@ body{
 .Registro{
     font-size: small;
 }
-.registro{
+#registro{
     color: blue;
     cursor: pointer;
 }
@@ -129,7 +128,7 @@ body{
 .icon_back{
     font-size: 25px;
     vertical-align: middle;
-    margin-top: 20px;
+    margin-top: 8px;
     cursor: pointer;
 }
 .icon_user{
@@ -160,7 +159,7 @@ body{
     font-size: medium;
     border-radius: 15px;
     border-width: 2px;
-    height: 35px;
+    height: 28px;
     width: 261px;
     border-color:  #5d5d5d;
 }
@@ -233,7 +232,7 @@ body{
 .icon_Mail_2{
     font-size: x-large;
     vertical-align: middle;
-    margin-top: 4px;
+    margin-top: 2px;
     color:#5d5d5d;
 }
 /*style Home*/
@@ -304,6 +303,9 @@ body{
     color: red;
     cursor: pointer;
 }
+.icon_delete:hover{
+    color: darkred;
+}
 .perfil_text{
     font-size:small;
     vertical-align: middle;
@@ -340,10 +342,11 @@ body{
 .icon_back_comunicador{
     display: flex;
     justify-content: start;
+
 }
-.icon_back_action{
-    font-size: 25px;
-    margin-top: 15px;
+#icon_back_action{
+    font-size: 20px;
+   margin-top: 2px;
     cursor: pointer;
 }
 /*Alimentos*/

@@ -60,15 +60,13 @@ function Register(){
           <hr width="80%"></hr>
           <br/>
           <br/>
-          <br/>
-          <br/>
   
           <form onSubmit={funcion_register}>
               <FaUserCircle className="icon_user"/>
               <br/>
               <br/>
               <br/>
-  
+                
               <label htmlFor="inputNombre">Nombre completo</label>
               <br/>
               <FaUser className="icon_name"/>
@@ -80,7 +78,6 @@ function Register(){
                   onChange={(event) => setRegistrarNombre(event.target.value)}
                   placeholder="Nombre completo"
               />
-              <br/>
               <br/>
   
               <label htmlFor="inputUsername">Nombre de usuario</label>
@@ -95,8 +92,7 @@ function Register(){
                   placeholder="Nombre de usuario"
               />
               <br/>
-              <br/>
-  
+            
               <label htmlFor="inputRole">Rol</label>
               <br/>
               <PiScrollFill className="icon_role"/>
@@ -105,7 +101,6 @@ function Register(){
                   <option value='admin'>Administrador</option>
                   <option value='user'>Usuario</option>
               </select>
-              <br/>
               <br/>
   
               <label htmlFor="inputCorreo">Correo</label>
@@ -120,7 +115,6 @@ function Register(){
                   placeholder="Correo"
               />
               <br/>
-              <br/>
   
               <label htmlFor="inputPassword">Contraseña</label>
               <br/>
@@ -133,7 +127,6 @@ function Register(){
                   onChange={(event) => setRegistrarContraseña(event.target.value)}
                   placeholder="Contraseña"
               />
-              <br/>
               <br/>
   
               <label htmlFor="inputConPassword">Confirmar contraseña</label>

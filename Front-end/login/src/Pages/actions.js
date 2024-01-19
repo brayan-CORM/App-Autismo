@@ -48,7 +48,7 @@ function Actions(){
                 <br/>
                 <hr width="80%"></hr>
                 <div className="icon_back_comunicador">
-                    <FaAngleLeft className="icon_back_action"
+                    <FaAngleLeft id="icon_back_action"
                     onClick={()=>navigate('/home')}/>
                     <p><b>Acciones</b></p>
                 </div>
