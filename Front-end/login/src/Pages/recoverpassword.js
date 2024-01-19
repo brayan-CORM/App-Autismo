@@ -16,7 +16,7 @@ function RecoverPassword(){
         event.preventDefault();
         try{
             const response = await axios.post('http://localhost:3001/api/reset-password',{
-                identifier: identifier
+                _identifier: identifier
             });
             if (response.data.success) {
                 console.log(response.data);
@@ -47,7 +47,7 @@ function RecoverPassword(){
 
             <form onSubmit={funcion_recover}>
                 <div className="Parrafo">
-                    <p className="parrafo">Ingrese el correo electronico utilizado<br/>
+                    <p className="parrafo">Ingrese el correo electronico o usuario utilizado<br/>
                     en la parte de registro:</p>
                 </div>
                 <br/>
@@ -59,7 +59,7 @@ function RecoverPassword(){
                     type="Mail"
                     value={identifier}
                     onChange={(event) => setIdentifier(event.target.value)}
-                    placeholder="Correo electrónico"
+                    placeholder="Correo o usuario"
                 />
             </div>
             <br/>

@@ -77,7 +77,7 @@ function Actions(){
                 </div>
                 <div className="contorno">
                     <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/lavarse las manos.svg" width="100" height="100"/>
-                    <p>Esceula</p>
+                    <p>Escuela</p>
                 </div>
                 <div className="contorno">
                     
