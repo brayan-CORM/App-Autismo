@@ -1,3 +1,4 @@
+//AuthController.js
 const express = require('express');
 const AuthService = require('../services/AuthService');
 const router = express.Router();
@@ -29,7 +30,8 @@ router.post('/reset-password', async (req, res) => {
 });
 
 router.post('/reset-password/:token', async (req, res) => {
-  const result = await AuthService.resetPasswordWithToken(req.params.token, req.body.newPassword);
+  const { newPassword, confirmPassword } = req.body;
+  const result = await AuthService.resetPasswordWithToken(req.params.token, newPassword, confirmPassword);
   res.status(result.success ? 200 : 401).json(result);
 });
 

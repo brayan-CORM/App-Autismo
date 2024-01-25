@@ -1,3 +1,4 @@
+//AuthService.js
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
@@ -111,41 +112,50 @@ const resetPassword = async (_identifier) => {
 
     if (!usuario_encontrado) {
       return { msg: 'Usuario no encontrado', success: false };
-    } else {
-      const resetLink = 'http://www.google.com/';
-      const mailOptions = {
-        from: 'villevalleemm@gmail.com',
-        to: usuario_encontrado.mail,
-        subject: 'Recuperación de Contraseña',
-        text: `Haga clic en el siguiente enlace para restablecer su contraseña: ${resetLink}`,
-      };
-
-      // Utiliza una promesa para manejar la respuesta
-      return new Promise((resolve, reject) => {
-        transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log(error);
-            reject({ msg: 'Error al enviar el correo electrónico', success: false });
-          } else {
-            console.log('Correo electrónico enviado: ' + info.response);
-            resolve({ msg: 'Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña', success: true });
-          }
-        });
-      });
     }
-  } catch (error) {
+
+    const resetToken = jwt.sign({ id: usuario_encontrado._id }, jwtkey, { expiresIn: '5m' });
+    usuario_encontrado.resetToken = resetToken;
+    await usuario_encontrado.save();
+
+    const resetLink = `http://www.google.com/`; //redireccion provisional 
+    const mailOptions = {
+      from: 'villevalleemm@gmail.com',
+      to: usuario_encontrado.mail,
+      subject: 'Recuperación de Contraseña',
+      text: `Haga clic en el siguiente enlace para restablecer su contraseña: ${resetLink}`,
+    };
+
+    return new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          reject({ msg: 'Error al enviar el correo electrónico', success: false });
+        } else {
+          console.log('Correo electrónico enviado: ' + info.response);
+          resolve({ msg: 'Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña', resetToken, success: true });
+        }
+      });
+    });
+  }
+  catch (error) {
     console.log(error);
     return { msg: 'Error interno del servidor', success: false };
   }
 };
 
-const resetPasswordWithToken = async (_token, _newPassword) => {
+const resetPasswordWithToken = async (_resetToken, _newPassword, _confirmPassword) => {
   try {
-    const decodedToken = jwt.verify(_token, jwtkey);
+    console.log('Token recibido:', _resetToken);
+    const decodedToken = jwt.verify(_resetToken, jwtkey);
     const usuario_encontrado = await User.findById(decodedToken.id);
 
     if (!usuario_encontrado) {
       return { msg: 'Usuario no encontrado', success: false };
+    }
+
+    if (_newPassword !== _confirmPassword) {
+      return { msg: 'Las contraseñas no coinciden', success: false };
     }
 
     const hashedPassword = await bcrypt.hash(_newPassword, 10);
