@@ -31,7 +31,9 @@ function RecoverPassword(){
             setError("Error de recuperación");
         }
     }
-
+    function go_to_resetpassword() {
+        navigate("/reset-password");
+      }
     return(
         <body>
             <div className="RecoverPassword">
@@ -66,9 +68,9 @@ function RecoverPassword(){
             <br/>
             <br/>
             {error && <p className='error'>{error}</p>}
-            <div>
-                <button className='b_reg_login' type='submit'>Recuperar cuenta</button>
-            </div>
+            <button className='b_login' type='submit' onClick={go_to_resetpassword}>Reiniciar contraseña</button>
+            <br />
+            <br />
             </form>
         </body>
     )

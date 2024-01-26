@@ -9,6 +9,7 @@ import Food from "./Pages/food";
 import Feelings from "./Pages/feelings";
 import Hygiene from "./Pages/hygiene";
 import People from "./Pages/people";
+import ResetPassword from "./Pages/resetpassword";
 
 const AppRouter = ()=>{
     return(
@@ -23,6 +24,7 @@ const AppRouter = ()=>{
                 <Route path="/feelings" element={<Feelings/>}/>
                 <Route path="/hygiene" element={<Hygiene/>}/>
                 <Route path="/people" element={<People/>}/>
+                <Route path="/reset-password" element={<ResetPassword/>}/>
             </Routes>
         </Router>
     );
