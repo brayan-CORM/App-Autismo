@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import Draggable from 'react-draggable'; // The default
+import {DraggableCore} from 'react-draggable'; // <DraggableCore>
+import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
 
 //icons
 import { FaRegUserCircle } from "react-icons/fa";
@@ -55,35 +58,45 @@ function People(){
                 <br/>
 
                 <div className="pic-category-row1">
-                <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg" width="100" height="100"
-                    className="bajar_pic"/>
-                    <p>Yo</p>
-                </div>
-                <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" width="100" height="100"
-                    className="bajar_pic"/>
-                    <p>Mamá</p>
-                </div>
-                <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg" width="100" height="100"
-                    className="bajar_pic"/>
-                    <p>Papá</p>
-                </div>
+                    <Draggable>    
+                        <div className="contorno">
+                            <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg" width="100" height="100"
+                            className="bajar_pic"/>
+                            <p>Yo</p>
+                        </div>
+                    </Draggable>
+                    <Draggable>    
+                        <div className="contorno">
+                            <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" width="100" height="100"
+                            className="bajar_pic"/>
+                            <p>Mamá</p>
+                        </div>
+                    </Draggable>
+                    <Draggable>    
+                        <div className="contorno">
+                            <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg" width="100" height="100"
+                            className="bajar_pic"/>
+                            <p>Papá</p>
+                        </div>
+                    </Draggable>
             </div>
             <br/>
             <br/>
             <div className="pic-category-row2">
-            <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/compañeros.svg" width="100" height="100"
-                    className="bajar_pic"/>
-                    <p>Compañeros</p>
-                </div>
-                <div className="contorno">
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/terapeuta.svg" width="100" height="100"
-                    className="bajar_pic"/>
-                    <p>Terapeuta</p>
-                </div>
+                <Draggable>    
+                    <div className="contorno">
+                        <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/compañeros.svg" width="100" height="100"
+                        className="bajar_pic"/>
+                        <p>Compañeros</p>
+                    </div>
+                </Draggable>
+                <Draggable>    
+                    <div className="contorno">
+                        <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/terapeuta.svg" width="100" height="100"
+                        className="bajar_pic"/>
+                        <p>Terapeuta</p>
+                    </div>
+                </Draggable>
                 <div className="contorno">
                     
                 </div>
