@@ -1,7 +1,5 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import Draggable from 'react-draggable'; // The default
-import {DraggableCore} from 'react-draggable'; // <DraggableCore>
 import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
 
 //icons
