@@ -94,7 +94,6 @@ function App() {
   } 
 
   return (
-    <body>
       <div className='login'>
         <img src='../Logo.png' width="150" height="150" />
         <br />
@@ -167,7 +166,6 @@ function App() {
           </div>
         </form>
       </div>
-    </body>
   );
 }
 

@@ -36,7 +36,7 @@ function ResetPassword() {
     }
 
     return(
-        <body>
+        <>
             <div className="RecoverPassword">
                 <FaAngleLeft className="icon_back" 
                 onClick={() => navigate('/')}/>
@@ -87,7 +87,7 @@ function ResetPassword() {
                 <button className='b_reg_login' type='submit'>Cambiar contraseña</button>
             </div>
             </form>
-        </body>
+    </>
     )
 }
 

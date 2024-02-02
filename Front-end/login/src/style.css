@@ -5,7 +5,6 @@ body{
     justify-content: center;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #84b6f4;
 }
 .Correo{
     font-size: medium;
@@ -240,7 +239,6 @@ body{
 .category{
     display: flex;
     justify-content: start;
-    margin-left: 200px;
     font-size: large;
 }
 .icon_perfil{
@@ -266,7 +264,6 @@ body{
     height: 150px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
-    cursor: pointer;
     margin-left: 20px;
     margin-top: 10px;
     background-color:#D9DADB;
@@ -276,20 +273,32 @@ body{
     height: 150px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
-    cursor: pointer;
     margin-left: 20px;
     margin-top: 10px;
-    background-color: #D9DADB;
+    background-color:#D9DADB;
 }
 .contorno3{
     width: 130px;
     height: 150px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
-    cursor: pointer;
-    margin-right: 0px;
+    margin-left: 20px;
     margin-top: 10px;
-    background-color: #D9DADB;
+    background-color:#D9DADB;
+}
+.Row{
+    display: flex;
+    justify-content: space-around;
+}
+.Empty-item{
+    width: 120px;
+    height: 145px;
+    border: 2px solid #c5c6d0;
+    border-radius: 5px;
+    background-color:#D9DADB;
+}
+.icons_contenedor{
+    margin-top: -25px;
 }
 .icon_speaker{
     font-size:50px;
@@ -331,8 +340,8 @@ body{
     justify-content: space-around;
 }
 .contorno{
-    width: 130px;
-    height: 150px;
+    width: 120px;
+    height: 145px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
     cursor: pointer;
@@ -373,4 +382,11 @@ body{
 /*people*/
 .bajar_pic{
     margin-top: 10px;
+}
+/*Hygiene*/
+.cepillo{
+    margin-top: -7px;
+}
+.pasta{
+    margin-top: -7px;
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -27,8 +27,30 @@ function Home() {
         navigate('/people');
     }
 
-    return (
-        <body>
+    const [selectedNames, setSelectedNames] = useState([{}, {}, {}]);
+    
+    const handleNameClick = (name) => {
+        setSelectedNames((prevSelectedNames) => {
+          //console.log('name', name)
+          const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
+          //console.log('firstEmptyIndex', firstEmptyIndex)
+    
+          if (firstEmptyIndex !== -1) {
+            //console.log('name', name)
+            // Update the array with the clicked name
+            const updatedNames = [...prevSelectedNames];
+            //console.log('updatedNames', updatedNames)
+            updatedNames[firstEmptyIndex] = name;
+            //console.log('updatedNames', updatedNames)
+            return updatedNames;
+        }
+          return prevSelectedNames; // Return original array if no empty space is found
+        });
+      };
+
+
+    return(
+        <>
             <div className="Home">
                 <div className="comunicador">
                     <h2>Comunicador</h2>
@@ -38,19 +60,16 @@ function Home() {
                     </div>
                 </div>
                 <hr width="80%"></hr>
-                <br />
-                <div className="cont">
-                    <div className="contenedor-comunicador">
-                        <div className="contorno1">
+                <br/>
 
-                        </div>
-                        <div className="contorno2">
-
-                        </div>
-                        <div className="contorno3">
-
-                        </div>
-                        <div className="icons_contenedor">
+                <div className="Container">
+                    <div className="Row">
+                        {selectedNames.map((person, index) =>(
+                            <div key={index} className="Empty-item">
+                                {person?.img}
+                            </div>
+                        ))}
+                        <div className="icons_contenedor">    
                             <div className="icon_speaker">
                                 <HiSpeakerWave />
                             </div>
@@ -59,10 +78,11 @@ function Home() {
                             <div className="icon_delete">
                                 <FaDeleteLeft />
                             </div>
-                        </div>
+                    </div>
                     </div>
                 </div>
-                <br />
+
+                <br/>
                 <hr width="80%"></hr>
                 <p className="category"><b>Categorías</b></p>
                 <br />
@@ -96,11 +116,8 @@ function Home() {
 
                     </div>
                 </div>
-                <br />
-                <br />
-
             </div>
-        </body>
+        </>
     );
 
 }

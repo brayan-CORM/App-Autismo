@@ -52,7 +52,7 @@ function Register(){
     }
 
     return (
-      <body>
+    <>
           <div className="Register">
               <FaAngleLeft className="icon_back" onClick={() => navigate('/')}/>
               <h2>Registro</h2>
@@ -148,7 +148,7 @@ function Register(){
               <button className='b_reg_login' type='submit'>Crear cuenta</button>
               
           </form>
-      </body>
+    </>
   );
 }
 
