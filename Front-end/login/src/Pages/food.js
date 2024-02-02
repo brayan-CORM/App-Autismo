@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
+
 
 //icons
 import { FaRegUserCircle } from "react-icons/fa";
@@ -82,8 +84,8 @@ function Food(){
                 <p><b>Categorías</b></p>
             </div>
             <br/>
-
             <div className="pic-category-row1">
+<<<<<<< HEAD
                     {people.map((person,index) => (
                         <div
                         key={index}
@@ -109,6 +111,51 @@ function Food(){
                         </div>
                     ))}
                 </div>
+=======
+                <Draggable>
+                    <div className="contorno">
+                        <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/agua.svg" width="100" height="100"
+                        className="pic_agua"/>
+                        <p>Agua</p>
+                    </div>
+                </Draggable>
+                <Draggable>
+                    <div className="contorno">
+                        <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/carne.svg" width="100" height="100"
+                        className="pic_carne"/>
+                        <p>Carne</p>
+                    </div>
+                </Draggable>
+                <Draggable>
+                    <div className="contorno">
+                        <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/leche.svg" width="100" height="100"
+                        className="pic_leche"/>
+                        <p>Leche</p>
+                    </div>
+                </Draggable>
+            </div>
+            <br/>
+            <br/>
+            <div className="pic-category-row2">
+                <Draggable>
+                    <div className="contorno">
+                        <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/sopa.svg" width="100" height="100"
+                        className="pic_sopa"/>
+                        <p>Sopa</p>
+                    </div>
+                </Draggable>
+                <Draggable>
+                    <div className="contorno">
+                        <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/verduras.svg" width="100" height="100"
+                        className="pic_verduras"/>
+                        <p>Verduras</p>
+                    </div>
+                </Draggable>
+                <div className="contorno">
+                    
+                </div>
+            </div>
+>>>>>>> 5432fc81316adfb895389733b6229dec9b469271
 
         </div>
     </body>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
 
 //icons
 import { FaRegUserCircle } from "react-icons/fa";

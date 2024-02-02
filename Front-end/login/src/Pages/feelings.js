@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
-
+import Draggable, { DraggableCore } from 'react-draggable'; // Both at the same time
 //icons
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { HiSpeakerWave } from "react-icons/hi2";
 import { FaAngleLeft } from "react-icons/fa";
 
-function Animals(){
+function Animals() {
 
     const navigate = useNavigate();
     const [people, setNames] = useState([
@@ -41,18 +41,18 @@ function Animals(){
         });
       };
 
-    return(
+    return (
         <body>
             <div className="Home">
                 <div className="comunicador">
                     <h2>Deseos y sentimientos</h2>
                     <div className="icon_perfil">
-                        <FaRegUserCircle id="icon_perfil"/>
+                        <FaRegUserCircle id="icon_perfil" />
                         <p className="perfil_text">Perfil</p>
                     </div>
                 </div>
                 <hr width="80%"></hr>
-                <br/>
+                <br />
 
                 <div className="Container">
                     <div className="Row">
@@ -71,6 +71,7 @@ function Animals(){
                                 <FaDeleteLeft />
                             </div>
                     </div>
+<<<<<<< HEAD
                     </div>
                 </div>
 
@@ -80,10 +81,36 @@ function Animals(){
                     <FaAngleLeft id="icon_back_action" 
                     onClick={()=>navigate('/home')}/>
                     <p><b>Categorías</b></p>
+=======
+                    <div className="contorno2">
+
+                    </div>
+                    <div className="contorno3">
+
+                    </div>
+                    <div className="icons_contenedor">
+                        <div className="icon_speaker">
+                            <HiSpeakerWave />
+                        </div>
+                        <br />
+                        <br />
+                        <div className="icon_delete">
+                            <FaDeleteLeft />
+                        </div>
+                    </div>
                 </div>
-                <br/>
+                <br />
+                <hr width="80%"></hr>
+                <div className="icon_back_comunicador">
+                    <FaAngleLeft id="icon_back_action"
+                        onClick={() => navigate('/home')} />
+                    <p><b>Deseos y sentimientos</b></p>
+>>>>>>> 5432fc81316adfb895389733b6229dec9b469271
+                </div>
+                <br />
 
                 <div className="pic-category-row1">
+<<<<<<< HEAD
                     {people.map((person,index) => (
                         <div
                         key={index}
@@ -108,6 +135,41 @@ function Animals(){
                             {person.name}
                         </div>
                     ))}
+=======
+                    <Draggable>
+                        <div className="contorno">
+                            <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/estoy bien.svg" width="100" height="100" />
+                            <p>Estoy bien</p>
+                        </div>
+                    </Draggable>
+                    <Draggable>
+                        <div className="contorno">
+                            <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/necesito ayuda.svg" width="100" height="100" />
+                            <p>Necesito ayuda</p>
+                        </div>
+                    </Draggable>
+                    <Draggable>
+                        <div className="contorno">
+                            <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/no.svg" width="100" height="100" />
+                            <p>No</p>
+                        </div>
+                    </Draggable>
+                </div>
+                <br />
+                <br />
+                <div className="pic-category-row2">
+                    <div className="contorno">
+                        <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/quiero.svg" width="100" height="100" />
+                        <p>Quiero</p>
+                    </div>
+                    <div className="contorno">
+                        <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/si.svg" width="100" height="100" />
+                        <p>Si</p>
+                    </div>
+                    <div className="contorno">
+
+                    </div>
+>>>>>>> 5432fc81316adfb895389733b6229dec9b469271
                 </div>
 
             </div>
