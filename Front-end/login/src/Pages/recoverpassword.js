@@ -34,7 +34,7 @@ function RecoverPassword(){
     }
 
     return(
-        <body>
+        <>
             <div className="RecoverPassword">
                 <FaAngleLeft className="icon_back" 
                 onClick={() => navigate('/')}/>
@@ -71,7 +71,7 @@ function RecoverPassword(){
                 <button className='b_reg_login' type='submit'>Recuperar cuenta</button>
             </div>
             </form>
-        </body>
+        </>
     )
 }
 

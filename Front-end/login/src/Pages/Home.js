@@ -27,7 +27,6 @@ function Home() {
         navigate('/people');
     }
 
-<<<<<<< HEAD
     const [selectedNames, setSelectedNames] = useState([{}, {}, {}]);
     
     const handleNameClick = (name) => {
@@ -51,10 +50,7 @@ function Home() {
 
 
     return(
-=======
-    return (
->>>>>>> 5432fc81316adfb895389733b6229dec9b469271
-        <body>
+        <>
             <div className="Home">
                 <div className="comunicador">
                     <h2>Comunicador</h2>
@@ -64,7 +60,6 @@ function Home() {
                     </div>
                 </div>
                 <hr width="80%"></hr>
-<<<<<<< HEAD
                 <br/>
 
                 <div className="Container">
@@ -75,21 +70,6 @@ function Home() {
                             </div>
                         ))}
                         <div className="icons_contenedor">    
-=======
-                <br />
-                <div className="cont">
-                    <div className="contenedor-comunicador">
-                        <div className="contorno1">
-
-                        </div>
-                        <div className="contorno2">
-
-                        </div>
-                        <div className="contorno3">
-
-                        </div>
-                        <div className="icons_contenedor">
->>>>>>> 5432fc81316adfb895389733b6229dec9b469271
                             <div className="icon_speaker">
                                 <HiSpeakerWave />
                             </div>
@@ -101,12 +81,8 @@ function Home() {
                     </div>
                     </div>
                 </div>
-<<<<<<< HEAD
 
                 <br/>
-=======
-                <br />
->>>>>>> 5432fc81316adfb895389733b6229dec9b469271
                 <hr width="80%"></hr>
                 <p className="category"><b>Categorías</b></p>
                 <br />
@@ -140,36 +116,8 @@ function Home() {
 
                     </div>
                 </div>
-<<<<<<< HEAD
-                <div className="contorno" onClick={goto_food}>
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Alimentos.svg" width="100" height="100"/>
-                    <p>Alimentos</p>
-                </div>
             </div>
-            <br/>
-            <br/>
-            <div className="pic-category-row2">
-            <div className="contorno" onClick={goto_feelings}>
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001\Categorías/Deseos y sentimientos.svg" width="100" height="100"/>
-                    <p className="lugares-y-personas">Deseos y sentimientos</p>
-                </div>
-                <div className="contorno" onClick={goto_Hygiene}>
-                    <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Higiene.svg" width="100" height="100"/>
-                    <p>Higiene</p>
-                </div>
-                <div className="contorno">
-                    
-                </div>
-            </div>
-            <br/>
-            <br/>
-=======
-                <br />
-                <br />
->>>>>>> 5432fc81316adfb895389733b6229dec9b469271
-
-            </div>
-        </body>
+        </>
     );
 
 }

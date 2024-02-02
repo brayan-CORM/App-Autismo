@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
 
 //icons
 import { FaRegUserCircle } from "react-icons/fa";
@@ -50,7 +49,6 @@ function People(){
     
 
     return(
-        <body>
             <div className="Home">
                 <div className="comunicador">
                     <h2>Personas</h2>
@@ -119,7 +117,6 @@ function People(){
                 </div>
             
             </div>
-        </body>
     )
 }
 

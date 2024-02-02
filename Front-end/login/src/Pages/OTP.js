@@ -40,7 +40,7 @@ export default function () {
     return;
   }
     return(
-        <body>
+      <>
             <div className="RecoverPassword">
                 <FaAngleLeft className="icon_back" 
                 onClick={() => navigate('/')}/>
@@ -149,7 +149,7 @@ export default function () {
                     </a>
                   </div>
             </form>
-        </body>
+    </>        
     )
 }
 
