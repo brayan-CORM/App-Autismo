@@ -114,11 +114,9 @@ const resetPassword = async (_identifier) => {
       return { msg: 'Usuario no encontrado', success: false };
     }
 
-    const resetToken = jwt.sign({ id: usuario_encontrado._id }, jwtkey, { expiresIn: '5m' });
-    usuario_encontrado.resetToken = resetToken;
-    await usuario_encontrado.save();
-
-    const resetLink = `http://www.google.com/`; //redireccion provisional 
+    const resetId = usuario_encontrado._id.toString();
+    const resetLink = `http://localhost:3000/reset-password/${resetId}`; //redireccion provisional 
+    
     const mailOptions = {
       from: 'villevalleemm@gmail.com',
       to: usuario_encontrado.mail,
@@ -144,11 +142,10 @@ const resetPassword = async (_identifier) => {
   }
 };
 
-const resetPasswordWithToken = async (_resetToken, _newPassword, _confirmPassword) => {
+const resetPasswordWithToken = async (_resetId, _newPassword, _confirmPassword) => {
   try {
-    console.log('Token recibido:', _resetToken);
-    const decodedToken = jwt.verify(_resetToken, jwtkey);
-    const usuario_encontrado = await User.findById(decodedToken.id);
+    console.log('ID recibido:', _resetId);
+    const usuario_encontrado = await User.findById(_resetId);
 
     if (!usuario_encontrado) {
       return { msg: 'Usuario no encontrado', success: false };
@@ -160,17 +157,16 @@ const resetPasswordWithToken = async (_resetToken, _newPassword, _confirmPasswor
 
     const hashedPassword = await bcrypt.hash(_newPassword, 10);
     usuario_encontrado.password = hashedPassword;
+    // Puedes limpiar el campo de resetToken o hacer cualquier otra tarea necesaria aquí
     usuario_encontrado.resetToken = undefined;
+
     await usuario_encontrado.save();
 
     return { msg: 'Contraseña restablecida exitosamente', success: true };
   } catch (error) {
     console.log(error);
-    if (error.name === 'TokenExpiredError') {
-      return { msg: 'El token ha expirado', success: false };
-    } else {
-      return { msg: 'Token no válido', success: false };
-    }
+    // Manejar errores según sea necesario
+    return { msg: 'Error en el restablecimiento de contraseña', success: false };
   }
 };
 

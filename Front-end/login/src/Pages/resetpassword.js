@@ -1,13 +1,13 @@
 import React from "react";
 import axios from "axios";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 //icons
 import { FaAngleLeft } from "react-icons/fa";
 
-function ResetPassword(){
-
+function ResetPassword() {
+    const { resetId } = useParams();
     const [_newPassword, setNewpassword] = React.useState("");
     const [_confirmPassword, setconfirmPassword] = React.useState("");
     const [error, setError] = React.useState("");
@@ -16,9 +16,9 @@ function ResetPassword(){
     const funcion_recover = async (event) =>{
         event.preventDefault();
         try{
-            const response = await axios.post('http://localhost:3001/api/reset-password',{
-                _newPassword: _newPassword,
-                _confirmPassword:  _confirmPassword
+            const response = await axios.post(`http://localhost:3001/api/reset-password/${resetId}`,{
+                newPassword: _newPassword,
+                confirmPassword: _confirmPassword
 
             });
             if (response.data.success) {
@@ -54,7 +54,7 @@ function ResetPassword(){
                 </p>
             </div>
             <br/>
-            <label htmlFor="inputConPassword">Contraseña</label>
+            <label htmlFor="inputConPassword">Nueva Contraseña</label>
             <br/>
             <RiLockPasswordFill className='icon_password'/>
             <input
@@ -68,7 +68,7 @@ function ResetPassword(){
             <br/>
             <br/>
             <br/>
-            <label htmlFor="inputConPassword">Confirmar contraseña</label>
+            <label htmlFor="inputConPassword">Confirme Nueva Contraseña</label>
             <br/>
             <RiLockPasswordFill className='icon_password'/>
             <input

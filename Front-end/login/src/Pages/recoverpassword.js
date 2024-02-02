@@ -18,22 +18,21 @@ function RecoverPassword(){
             const response = await axios.post('http://localhost:3001/api/reset-password',{
                 _identifier: identifier
             });
+            console.log(response.data);
             if (response.data.success) {
                 console.log(response.data);
                 navigate("/");
-                alert("Recuperación exitosa");
+                alert("Se ha enviado un correo con un link para restablecer la contraseña. Por favor, revise su bandeja de entrada o carpeta de spam.");
             } else {
                 console.log(response.data);
-                alert("Recuperación fallida");
+                alert("No se encontró un usuario con el correo o nombre de usuario proporcionado. Verifica la información e inténtalo nuevamente.");
             }
         }
         catch (error){
-            setError("Error de recuperación");
+            setError("Error al enviar la solicitud de recuperación. Por favor, inténtalo nuevamente más tarde.");
         }
     }
-    function go_to_resetpassword() {
-        navigate("/reset-password");
-      }
+
     return(
         <body>
             <div className="RecoverPassword">
@@ -58,7 +57,7 @@ function RecoverPassword(){
                 <IoIosMail className='icon_Mail_2'/>
                 <input
                     className="recover_mail"
-                    type="Mail"
+                    type="text"
                     value={identifier}
                     onChange={(event) => setIdentifier(event.target.value)}
                     placeholder="Correo o usuario"
@@ -68,9 +67,9 @@ function RecoverPassword(){
             <br/>
             <br/>
             {error && <p className='error'>{error}</p>}
-            <button className='b_login' type='submit' onClick={go_to_resetpassword}>Reiniciar contraseña</button>
-            <br />
-            <br />
+            <div>
+                <button className='b_reg_login' type='submit'>Recuperar cuenta</button>
+            </div>
             </form>
         </body>
     )

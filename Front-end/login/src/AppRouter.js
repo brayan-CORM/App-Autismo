@@ -24,7 +24,7 @@ const AppRouter = ()=>{
                 <Route path="/feelings" element={<Feelings/>}/>
                 <Route path="/hygiene" element={<Hygiene/>}/>
                 <Route path="/people" element={<People/>}/>
-                <Route path="/reset-password" element={<ResetPassword/>}/>
+                <Route path="/reset-password/:resetId" element={<ResetPassword/>}/>
             </Routes>
         </Router>
     );
