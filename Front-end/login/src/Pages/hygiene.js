@@ -1,15 +1,14 @@
 import React,{useState} from "react";
 import { useNavigate } from 'react-router-dom';
-
-//icons
-import { FaRegUserCircle } from "react-icons/fa";
-import { FaDeleteLeft } from "react-icons/fa6";
-import { HiSpeakerWave } from "react-icons/hi2";
+import Comunicador from "./Comunicador";
 import { FaAngleLeft } from "react-icons/fa";
+import { useAppContext } from "../AppContext";
 
 function Hygiene(){
 
     const navigate = useNavigate();
+    const { selectedNames, updateSelectedNames } = useAppContext();
+
     const [people, setNames] = useState([
         { name: "Baño",img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/baño.svg"},
         { name: "Cepillo de dientes", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/cepillo de dientes.svg" },
@@ -20,65 +19,32 @@ function Hygiene(){
         { name: "Jabon", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/jabon liquido.svg" },
         { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/mas.svg" },
       ]);
-    const [selectedNames, setSelectedNames] = useState([{}, {}, {}]);
     
-    const handleNameClick = (name) => {
-        setSelectedNames((prevSelectedNames) => {
-          //console.log('name', name)
+    
+      const handleNameClick = (person) => {
+        updateSelectedNames((prevSelectedNames) => {
           const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
-          //console.log('firstEmptyIndex', firstEmptyIndex)
     
           if (firstEmptyIndex !== -1) {
-            //console.log('name', name)
-            // Update the array with the clicked name
             const updatedNames = [...prevSelectedNames];
-            //console.log('updatedNames', updatedNames)
-            updatedNames[firstEmptyIndex] = name;
-            //console.log('updatedNames', updatedNames)
+            updatedNames[firstEmptyIndex] = person;
             return updatedNames;
-        }
-          return prevSelectedNames; // Return original array if no empty space is found
+          }
+    
+          return prevSelectedNames;
         });
       };
 
     return(
         <div className="Home">
-            <div className="comunicador">
-                <h2>Comunicador</h2>
-                <div className="icon_perfil">
-                    <FaRegUserCircle id="icon_perfil"/>
-                    <p className="perfil_text">Perfil</p>
-                </div>
-            </div>
-            <hr width="80%"></hr>
-            <br/>
-
-            <div className="Container">
-                    <div className="Row">
-                        {selectedNames.map((person, index) =>(
-                            <div key={index} className="Empty-item">
-                                {person?.img}
-                            </div>
-                        ))}
-                        <div className="icons_contenedor">    
-                            <div className="icon_speaker">
-                                <HiSpeakerWave />
-                            </div>
-                            <br/>
-                            <br/>
-                            <div className="icon_delete">
-                                <FaDeleteLeft />
-                            </div>
-                    </div>
-                    </div>
-                </div>
+            <Comunicador selectedNames={selectedNames} />
 
             <br/>
             <hr width="80%"></hr>
             <div className="icon_back_comunicador">
                 <FaAngleLeft id="icon_back_action"
                 onClick={()=>navigate('/home')}/>
-                <p><b>Alimentos</b></p>
+                <p><b>Categorías</b></p>
             </div>
             <br/>
 
