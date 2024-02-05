@@ -20,7 +20,18 @@ function Comunicador({ selectedNames }) {
         <div className="Row">
           {selectedNames.map((person, index) => (
             <div key={index} className="Empty-item">
-              {person?.img}
+              {person?.img && (
+                <>
+                  <img
+                    src={person.img}
+                    alt={person.name}
+                    width="100"
+                    height="100"
+                    style={{ width: "100", height: "100" }}
+                  />
+                  <p>{person.name}</p>
+                </>
+              )}
             </div>
           ))}
           <div className="icons_contenedor">
