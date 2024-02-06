@@ -19,17 +19,21 @@ function Comunicador({ selectedNames }) {
     });
   };
 
-  const handleSpeakerClick = () => {
+  speechSynthesis.onvoiceschanged = () => {
+    // No hagas nada aquí, solo define el evento
+};
+
+const handleSpeakerClick = () => {
     // Crear una cadena con todos los nombres de las imágenes separados por un espacio
     const namesToSpeak = selectedNames.map((person) => person?.name).filter(Boolean).join(' ');
     
     if (!namesToSpeak) return; // No hay nombres para leer
     
     // Obtener todas las voces disponibles
-    const voices = speechSynthesis.getVoices();
+    const voices = window.speechSynthesis.getVoices();
     
-    // Seleccionar la voz que deseas utilizar (por ejemplo, la primera voz disponible)
-    const selectedVoice = voices[3]; // Cambia el índice según la voz que desees
+    // Seleccionar la voz que deseas utilizar (por ejemplo, la cuarta voz disponible)
+    const selectedVoice = voices[1]; // Cambia el índice según la voz que desees
     
     // Crear un nuevo objeto de mensaje de voz
     const utterance = new SpeechSynthesisUtterance(namesToSpeak);
@@ -43,7 +47,6 @@ function Comunicador({ selectedNames }) {
     // Hablar los nombres en voz alta
     speechSynthesis.speak(utterance);
   };
-
 
   return (
     <div>
