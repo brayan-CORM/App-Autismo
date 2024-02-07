@@ -346,6 +346,9 @@ body{
     border-radius: 5px;
     cursor: pointer;
 }
+.contorno:hover{
+    box-shadow: 3px 2px 10px 5px #c5c6d0;
+}
 
 /*Comunicador*/
 /*Acciones*/
