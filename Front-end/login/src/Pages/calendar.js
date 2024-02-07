@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import Calendar from 'react-calendar'
 
 //icons
 import { TiHome } from "react-icons/ti";
@@ -24,7 +23,6 @@ function Calendar() {
             <hr/>
             <br/>
 
-            <Calendar />
         </>
     );
 }
