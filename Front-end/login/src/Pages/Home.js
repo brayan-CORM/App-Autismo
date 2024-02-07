@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Comunicador from "./Comunicador";
 import { useAppContext } from "../AppContext";
+import Actionbar from "./actionbar";
 
 function Home() {
   const navigate = useNavigate();
@@ -23,18 +24,13 @@ function Home() {
     navigate('/people');
   }
 
-  const handleNameClick = (name) => {
-    // No necesitas mantener el estado local en este componente
-    // El estado global se encarga de eso
-  };
-
   return (
     <>
       <div className="Home">
         <Comunicador selectedNames={selectedNames} />
-
+        
         <br/>
-        <hr width="80%"></hr>
+        <hr></hr>
         <p className="category"><b>Categorías</b></p>
         <br />
 
@@ -67,6 +63,12 @@ function Home() {
 
           </div>
         </div>
+      </div>
+      <br/>
+
+      <div>    
+        <hr/>
+        <Actionbar />
       </div>
     </>
   );

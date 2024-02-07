@@ -390,3 +390,45 @@ body{
 .pasta{
     margin-top: -7px;
 }
+/*style de la barra de acciones*/
+.menu_acciones{
+    display: flex;
+    justify-content: space-around;
+    font-size:xx-large;
+    color:gray;
+}
+.icon_chat{
+    cursor: pointer;
+}
+.icon_chat:hover{
+    color: #32CD32;
+}
+.icon_home{
+    cursor: pointer;
+    font-size:xx-large;
+}
+.icon_home:hover{
+    color: #32CD32;
+}
+#home_icon{
+    color: #0088ff;
+}
+.icon_calendar{
+    cursor: pointer;
+}
+.icon_calendar:hover{
+    color: #32CD32;
+}
+
+/*Style de pagina calendar*/
+.calendar{
+    display: flex;
+    justify-content: space-around;
+}
+.icon_menu{
+    font-size:xx-large;
+    cursor:pointer;
+}
+.icon_menu:hover{
+    color: #32CD32;
+}

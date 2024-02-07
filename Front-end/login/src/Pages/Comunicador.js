@@ -54,7 +54,7 @@ function Comunicador({ selectedNames }) {
           <p className="perfil_text">Perfil</p>
         </div>
       </div>
-      <hr width="80%"></hr>
+      <hr></hr>
       <br />
 
       <div className="Container">

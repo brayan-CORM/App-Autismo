@@ -1,15 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from "./App";
-import Home from "./Pages/Home";
-import Register from "./Pages/Register";
-import RecoverPassword from "./Pages/recoverpassword";
-import Actions from "./Pages/actions";
-import Food from "./Pages/food";
-import Feelings from "./Pages/feelings";
-import Hygiene from "./Pages/hygiene";
-import People from "./Pages/people";
-import ResetPassword from "./Pages/resetpassword";
+import Home from "./pages/home";
+import Register from "./pages/register";
+import RecoverPassword from "./pages/recoverpassword";
+import Actions from "./pages/actions";
+import Food from "./pages/food";
+import Feelings from "./pages/feelings";
+import Hygiene from "./pages/hygiene";
+import People from "./pages/people";
+import ResetPassword from "./pages/resetpassword";
+import Calendar from "./pages/calendar";
 
 const AppRouter = ()=>{
     return(
@@ -25,6 +26,7 @@ const AppRouter = ()=>{
                 <Route path="/hygiene" element={<Hygiene/>}/>
                 <Route path="/people" element={<People/>}/>
                 <Route path="/reset-password/:resetId" element={<ResetPassword/>}/>
+                <Route path="/calendar" element={<Calendar/>}/>
             </Routes>
         </Router>
     );

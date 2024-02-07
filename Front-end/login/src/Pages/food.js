@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Comunicador from "./Comunicador";
 import { FaAngleLeft } from "react-icons/fa";
 import { useAppContext } from "../AppContext";
+import Actionbar from "./actionbar";
 
 function Food() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ function Food() {
       <Comunicador selectedNames={selectedNames} />
 
       <br />
-      <hr width="80%"></hr>
+      <hr></hr>
       <div className="icon_back_comunicador">
         <FaAngleLeft id="icon_back_action" onClick={() => navigate('/home')} />
         <p><b>Categorías</b></p>
@@ -70,6 +71,12 @@ function Food() {
             {person.name}
           </div>
         ))}
+      </div>
+
+      <br/>
+      <div>    
+        <hr/>
+        <Actionbar />
       </div>
     </div>
   );
