@@ -9,41 +9,50 @@ function Comunicador({ selectedNames }) {
 
   const handleDeleteClick = () => {
     updateSelectedNames((prevSelectedNames) => {
-      // Eliminar los tres últimos elementos de la lista
-      const updatedNames = prevSelectedNames.slice(0, -3);
-      
-      // Agregar tres nuevos elementos vacíos al principio de la lista
-      const newSelectedNames = [{}, {}, {}, ...updatedNames];
+      // Encontrar el último elemento con información para eliminar
+      let indexToDelete = prevSelectedNames.length - 1;
+      while (indexToDelete >= 0 && !prevSelectedNames[indexToDelete].img) {
+        indexToDelete--;
+      }
+  
+      // Si no hay elementos con información, no hacer nada
+      if (indexToDelete === -1) return prevSelectedNames;
+  
+      // Eliminar el elemento con información
+      const updatedNames = prevSelectedNames.filter((_, index) => index !== indexToDelete);
+  
+      // Agregar un nuevo elemento vacío al final de la lista
+      const newSelectedNames = [...updatedNames, {}];
       
       return newSelectedNames;
     });
   };
 
-  const handleSpeakerClick = () => {
-    // Crear una cadena con todos los nombres de las imágenes separados por un espacio
-    const namesToSpeak = selectedNames.map((person) => person?.name).filter(Boolean).join(' ');
-    
-    if (!namesToSpeak) return; // No hay nombres para leer
-    
-    // Obtener todas las voces disponibles
-    const voices = speechSynthesis.getVoices();
-    
-    // Seleccionar la voz que deseas utilizar (por ejemplo, la primera voz disponible)
-    const selectedVoice = voices[3]; // Cambia el índice según la voz que desees
-    
-    // Crear un nuevo objeto de mensaje de voz
-    const utterance = new SpeechSynthesisUtterance(namesToSpeak);
-    
-    // Asignar la voz seleccionada al objeto de mensaje de voz
-    utterance.voice = selectedVoice;
-    
-    // Ajustar la velocidad de habla (opcional)
-    utterance.rate = 0.6; // Valor menor que 1.0 para hablar más despacio
-    
-    // Hablar los nombres en voz alta
-    speechSynthesis.speak(utterance);
-  };
+  speechSynthesis.onvoiceschanged = () => {
+    // No hagas nada aquí, solo define el evento
+};
 
+const handleSpeakerClick = () => {
+  const namesToSpeak = selectedNames.map((person) => person?.name).filter(Boolean).join(' ');
+  
+  if (!namesToSpeak) return;
+  
+  const voices = window.speechSynthesis.getVoices();
+  
+  const selectedVoice = voices[0];
+  
+  const utterance = new SpeechSynthesisUtterance(namesToSpeak);
+  
+  utterance.voice = selectedVoice;
+  
+  // Ajustes para la voz seleccionada
+  utterance.rate = 0.6; // Velocidad moderada
+  utterance.pitch = 1.2; // Tono normal
+  utterance.volume = 1; // Volumen completo
+  utterance.lang = 'es-ES'; // Idioma
+  
+  speechSynthesis.speak(utterance);
+};
 
   return (
     <div>
@@ -80,7 +89,7 @@ function Comunicador({ selectedNames }) {
             <div key={index} className="Empty-item"></div>
           ))}
           <div className="icons_contenedor">
-            <div className="icon_speaker" onClick={() => handleSpeakerClick(selectedNames[selectedNames.length - 1]?.name)}>
+          <div className="icon_speaker" onClick={() => {const lastName = selectedNames.find(person => person.img)?.name;if (lastName) {handleSpeakerClick(lastName);}}}>
               <HiSpeakerWave />
             </div>
             <br />
