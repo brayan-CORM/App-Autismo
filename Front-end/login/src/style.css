@@ -246,7 +246,7 @@ body{
     font-size:larger;
     vertical-align: middle;
     margin-top: -30px;
-    margin-right: -320px;
+    margin-right: -80px; /* Ajusta el margen derecho para mover el ícono hacia la izquierda */
     cursor: pointer;
 }
 #icon_perfil{
