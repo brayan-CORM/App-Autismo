@@ -91,7 +91,7 @@ function App({ handleLogin }) {
 
   return (
     <div className='login'>
-      <img src='../Logo.png' width="150" height="150" />
+      <img src='../logo.svg' width="150" height="150" />
       <br />
       <br />
       <br />
