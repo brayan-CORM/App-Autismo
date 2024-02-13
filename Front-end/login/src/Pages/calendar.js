@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import Calenda from  '../components/calenda';
 
 //icons
 import { TiHome } from "react-icons/ti";
@@ -23,9 +24,9 @@ function Calendar() {
             <hr/>
             <br/>
 
-
+            <Calenda />
         </>
     );
 }
-
+ 
 export default Calendar;

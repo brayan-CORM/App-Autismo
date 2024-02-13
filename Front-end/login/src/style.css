@@ -417,6 +417,7 @@ body{
 }
 #home_icon{
     color: #0088ff;
+    font-size:xx-large;
 }
 .icon_calendar{
     cursor: pointer;
@@ -432,6 +433,7 @@ body{
 }
 .icon_menu{
     font-size:xx-large;
+    margin-top: 5px;
     cursor:pointer;
 }
 .icon_menu:hover{

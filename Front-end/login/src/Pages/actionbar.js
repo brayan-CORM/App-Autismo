@@ -17,7 +17,7 @@ function Actionbar() {
     return(
         <div className="menu_acciones">
           <IoIosChatboxes className="icon_chat"/>
-          <TiHome className="icon_home" onClick={()=>navigate('/home')}/>
+          <TiHome className="icon_home" id="home_icon" onClick={()=>navigate('/home')}/>
           <FaCalendarAlt className="icon_calendar" onClick={goto_calendar}/>
       </div>
     );
