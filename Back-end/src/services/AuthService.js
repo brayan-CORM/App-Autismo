@@ -1,4 +1,4 @@
-//AuthService.js
+// AuthService.js
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
@@ -14,6 +14,9 @@ const transporter = nodemailer.createTransport({
 });
 
 const jwtkey = 'ao4m$o919des2e1';
+
+// Objeto para almacenar los tokens de sesión activos
+const activeSessions = {};
 
 const login = async ({ _identifier, _password }) => {
   try {
@@ -31,7 +34,9 @@ const login = async ({ _identifier, _password }) => {
           id: usuario_encontrado._id,
           name: usuario_encontrado.fullName,
         };
-        const token = jwt.sign(payload, jwtkey, { expiresIn: '1h' });
+        const token = jwt.sign(payload, jwtkey);
+        // Asociar el token con la sesión del usuario
+        activeSessions[token] = usuario_encontrado._id;
         return { msg: 'Login exitoso', token, success: true };
       } else {
         return { msg: 'Contraseña incorrecta', success: false };
@@ -40,6 +45,29 @@ const login = async ({ _identifier, _password }) => {
   } catch (error) {
     console.error(error);
     return { msg: 'Error en el inicio de sesión', success: false };
+  }
+};
+
+const logout = async (token) => {
+  try {
+    // Verificar si se proporcionó un token
+    if (!token) {
+      return { success: false, message: 'No token provided' };
+    }
+
+    // Filtrar los tokens de sesión para eliminar el token actual
+    const newActiveSessions = Object.fromEntries(
+      Object.entries(activeSessions).filter(([key, value]) => key !== token)
+    );
+
+    // Actualizar el objeto de sesiones activas
+    activeSessions = newActiveSessions;
+
+    // Retorna una respuesta exitosa
+    return { success: true, message: 'Logout successful' };
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: 'Error during logout' };
   }
 };
 
@@ -52,7 +80,10 @@ const loginWithGoogle = async (_googleIdToken) => {
       id: user.uid,
       name: user.displayName,
     };
-    const token = jwt.sign(payload, jwtkey, { expiresIn: '1h' });
+    const token = jwt.sign(payload, jwtkey);
+
+    // Asociar el token con la sesión del usuario
+    activeSessions[token] = user.uid;
 
     return { msg: 'Login exitoso con Google', token, success: true };
   } catch (error) {
@@ -95,7 +126,10 @@ const registerWithGoogle = async (_googleIdToken) => {
       id: user.uid,
       name: user.displayName,
     };
-    const token = jwt.sign(payload, jwtkey, { expiresIn: '1h' });
+    const token = jwt.sign(payload, jwtkey);
+
+    // Asociar el token con la sesión del usuario
+    activeSessions[token] = user.uid;
 
     return { msg: 'Usuario creado con Google', token, success: true };
   } catch (error) {
@@ -124,16 +158,14 @@ const resetPassword = async (_identifier) => {
       text: `Haga clic en el siguiente enlace para restablecer su contraseña: ${resetLink}`,
     };
 
-    return new Promise((resolve, reject) => {
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-          reject({ msg: 'Error al enviar el correo electrónico', success: false });
-        } else {
-          console.log('Correo electrónico enviado: ' + info.response);
-          resolve({ msg: 'Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña', resetToken, success: true });
-        }
-      });
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        return { msg: 'Error al enviar el correo electrónico', success: false };
+      } else {
+        console.log('Correo electrónico enviado: ' + info.response);
+        return { msg: 'Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña', success: true }; // O ajusta según sea necesario
+      }
     });
   }
   catch (error) {
@@ -172,6 +204,7 @@ const resetPasswordWithToken = async (_resetId, _newPassword, _confirmPassword) 
 
 module.exports = {
   login,
+  logout,
   loginWithGoogle,
   register,
   registerWithGoogle,

@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import Comunicador from "./Comunicador";
 import { useAppContext } from "../AppContext";
-import Actionbar from "./actionbar";
+import Comunicador from "../components/Comunicador";
+import Actionbar from "../components/actionbar";
 
 function Home() {
   const navigate = useNavigate();

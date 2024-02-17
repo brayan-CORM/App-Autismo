@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import Comunicador from "./Comunicador";
+import Comunicador from "../components/Comunicador";
 import { FaAngleLeft } from "react-icons/fa";
 import { useAppContext } from "../AppContext";
-import Actionbar from "./actionbar";
+import Actionbar from "../components/actionbar";
 
 function Feelings() {
   const navigate = useNavigate();

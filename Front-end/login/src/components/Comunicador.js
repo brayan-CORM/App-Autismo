@@ -1,11 +1,43 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { HiSpeakerWave } from "react-icons/hi2";
 import { useAppContext } from "../AppContext";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
 
 function Comunicador({ selectedNames }) {
   const { updateSelectedNames } = useAppContext();
+  const [showProfileOptions, setShowProfileOptions] = useState(false);
+  const navigate = useNavigate(); // Usa useNavigate en lugar de useHistory
+
+  const toggleProfileOptions = () => {
+    setShowProfileOptions(!showProfileOptions);
+  };
+
+  const handleLogout = async () => {
+    try {
+      const sessionToken = localStorage.getItem("sessionToken"); // Obtener el token de sesión del almacenamiento local
+      if (!sessionToken) {
+        console.error("Token de sesión no encontrado en el almacenamiento local");
+        return;
+      }
+
+      await axios.post("http://localhost:3001/api/logout", {
+        token: sessionToken
+      });
+
+      // Redirige al usuario a la página principal después de cerrar sesión
+      navigate("/"); // Cambia "/" por la ruta de tu página principal
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
+
+  if (!selectedNames) {
+    // Si selectedNames es undefined, retorna un mensaje o un indicador de carga
+    return <p>Cargando...</p>;
+  }
 
   const handleDeleteClick = () => {
     updateSelectedNames((prevSelectedNames) => {
@@ -58,9 +90,15 @@ const handleSpeakerClick = () => {
     <div>
       <div className="comunicador">
         <h2>Comunicador</h2>
-        <div className="icon_perfil">
+        <div className="icon_perfil" onClick={toggleProfileOptions}>
           <FaRegUserCircle id="icon_perfil" />
           <p className="perfil_text">Perfil</p>
+          {showProfileOptions && (
+            <div className="profile-options">
+              
+              <button onClick={handleLogout}>Cerrar Sesión</button>
+            </div>
+          )}
         </div>
       </div>
       <hr></hr>

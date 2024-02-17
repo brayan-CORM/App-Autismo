@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { signInWithPopup, auth, provider } from './appAuth';  // Ajustar la ruta a appAuth.js
+import { useNavigate, useLocation } from 'react-router-dom'; // Agrega useLocation
+import { signInWithPopup, auth, provider } from './appAuth'; // Ajustar la ruta a appAuth.js
 
 //icons
 import { IoIosMail } from "react-icons/io";
@@ -11,8 +11,27 @@ import { RiLockPasswordFill } from "react-icons/ri";
 function App({ handleLogin }) {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error] = useState('');
   const navigate = useNavigate();
+  const location = useLocation(); // Obtener la ruta actual
+
+  useEffect(() => {
+  const allowedRoutes = ['/', '/register', '/recover-password', '/reset-password/:resetId'];
+  const currentRoute = location.pathname;
+
+  if (!allowedRoutes.includes(currentRoute)) {
+    // Si la ruta actual no está permitida, simplemente salimos del efecto
+    return;
+  }
+
+  // Cargar las partículas solo en las rutas permitidas
+  window.particlesJS.load('particles-js', 'particlesjs-config.json');
+
+  // Limpiar las partículas al desmontar el componente
+  return () => {
+    window.particlesJS && window.particlesJS('particles-js', {});
+  };
+}, [location.pathname]);
 
   const funcion_login = async (event) => {
     event.preventDefault();
