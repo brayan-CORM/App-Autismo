@@ -4,6 +4,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [selectedNames, setSelectedNames] = useState([{}, {}, {}]);
+  const [categories, setCategories] = useState([]);
   const [authToken, setAuthToken] = useState(() => {
     // Al iniciar la aplicación, intenta obtener el token del almacenamiento local
     const storedToken = localStorage.getItem("authToken");
@@ -13,6 +14,10 @@ export const AppProvider = ({ children }) => {
 
   const updateSelectedNames = (newSelectedNames) => {
     setSelectedNames(newSelectedNames);
+  };
+
+  const updateCategories = (newCategories) => {
+    setCategories(newCategories);
   };
 
   const setToken = (token) => {
@@ -30,7 +35,7 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ selectedNames, updateSelectedNames, authToken, setToken, removeToken }}>
+    <AppContext.Provider value={{ selectedNames, updateSelectedNames, authToken, setToken, removeToken, categories, updateCategories }}>
       {children}
     </AppContext.Provider>
   );
