@@ -448,10 +448,29 @@ body{
     background-color: #ffffff;
     z-index: -1;
     animation: animateBg 7.5s linear infinite;
-}
-  
+} 
 @keyframes animateBg {
     100% {
       filter: hue-rotate(360deg);
     }
 }  
+.pic-category-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+    gap: 20px; /* Espacio entre las imágenes */
+    justify-items: center; /* Centra horizontalmente */
+  }
+  .pic-category-container .contorno {
+    /* Estilos para las imágenes y texto dentro de cada categoría */
+    text-align: center;
+  }
+  .pic-category-container img {
+    width: 100px; /* Tamaño de las imágenes */
+    height: 100px;
+  }
+  /* Estilos para el botón "Agregar" */
+  .agregar {
+    grid-column: 1 / -1; /* Ocupa todas las columnas */
+    grid-row: auto; /* Se coloca automáticamente en la siguiente fila después de la última categoría */
+  }
+  
