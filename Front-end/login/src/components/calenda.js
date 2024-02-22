@@ -1,24 +1,24 @@
-/*import React from "react";
-import { TextField } from "@mui/material";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
+import React, { useState } from "react";
+import Calendar from "react-calendar";
 
-const Cal = () => {
+function Diary() {
 
-    const [value, setValue]  = React.useState(new Date());
+  const  [date, setDate] = useState(new Date());
 
-    return <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <StaticDatePicker 
-            orientation="landscape"
-            openTo="day"
-            value={value}
-            onChange={(newValue) =>{
-                setValue(newValue);
-            }}
-            renderInput={(params) => <TextField {...params} />}
-        />
-    </LocalizationProvider>
+  const onChange = date => {
+    setDate(date);
+  }
+
+  return (
+    <div>
+      <Calendar className="calendar"
+      showWeekNumbers 
+      onChange={onChange} 
+      value={date} />
+      {console.log(date)}
+      {date.toString()}
+    </div>
+  );
 }
 
-export default Cal;*/
+export default Diary;

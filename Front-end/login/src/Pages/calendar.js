@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import Calenda from  '../components/calenda';
+import Calendar from '../components/calenda';
 
 //icons
 import { TiHome } from "react-icons/ti";
 import { TiThMenu } from "react-icons/ti";
 
-function Calendar() {
+function Calendario() {
 
     const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ function Calendar() {
 
     return(
         <>
-            <div className="calendar">    
+            <div className="calendario">    
                 <TiHome className="icon_home" onClick={goto_home}/>
                 <h2>Calendario</h2>
                 <TiThMenu className="icon_menu"/>
@@ -24,9 +24,9 @@ function Calendar() {
             <hr/>
             <br/>
 
-            <Calenda />
+            <Calendar />
         </>
     );
 }
  
-export default Calendar;
+export default Calendario;

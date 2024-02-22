@@ -11,7 +11,7 @@ function People(){
     const { selectedNames, updateSelectedNames } = useAppContext();
 
     const [people, setNames] = useState([
-        { name: "Yo",img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg"},
+        { name: "Yo ",img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg"},
         { name: "Mamá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" },
         { name: "Papá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg" },
       ]);

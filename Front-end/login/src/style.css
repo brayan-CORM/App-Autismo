@@ -406,10 +406,10 @@ body{
     font-size:xx-large;
     color:gray;
 }
-.icon_chat{
+.add_icon{
     cursor: pointer;
 }
-.icon_chat:hover{
+.add_icon:hover{
     color: #32CD32;
 }
 .icon_home{
@@ -429,7 +429,7 @@ body{
 }
 
 /*Style de pagina calendar*/
-.calendar{
+.calendario{
     display: flex;
     justify-content: space-around;
 }
@@ -441,6 +441,10 @@ body{
 .icon_menu:hover{
     color: #32CD32;
 }
+.calendar{
+    color: #32CD32;
+}
+
 #particles-js {
     position: absolute;
     width: 100%;

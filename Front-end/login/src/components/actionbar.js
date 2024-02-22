@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 //icons
 import { TiHome } from "react-icons/ti";
-import { IoIosChatboxes } from "react-icons/io";
 import { FaCalendarAlt } from "react-icons/fa";
+import { BsPlusCircleFill } from "react-icons/bs";
 
 function Actionbar() {
 
@@ -16,7 +16,7 @@ function Actionbar() {
 
     return(
         <div className="menu_acciones">
-          <IoIosChatboxes className="icon_chat"/>
+          <BsPlusCircleFill className="add_icon"/>
           <TiHome className="icon_home" id="home_icon" onClick={()=>navigate('/home')}/>
           <FaCalendarAlt className="icon_calendar" onClick={goto_calendar}/>
       </div>
