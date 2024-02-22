@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
 import Comunicador from "../components/Comunicador";
 import { FaAngleLeft } from "react-icons/fa";
 import { useAppContext } from "../AppContext";
 import Actionbar from "../components/actionbar";
 
-function People(){
+function People() {
+  const navigate = useNavigate();
+  const { selectedNames, updateSelectedNames } = useAppContext();
 
-    const navigate = useNavigate();
-    const { selectedNames, updateSelectedNames } = useAppContext();
+  const people = [
+    { name: "Yo", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg" },
+    { name: "Mamá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" },
+    { name: "Papá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg" },
+    { name: "Compañero", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/compañeros.svg" },
+    { name: "Terapeuta", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/terapeuta.svg" },
+    { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mas.svg" },
+  ];
 
+<<<<<<< HEAD
     const [people, setNames] = useState([
         { name: "Yo ",img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg"},
         { name: "Mamá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" },
@@ -35,54 +44,54 @@ function People(){
         });
       };
     
+=======
+  const handleNameClick = (person) => {
+    updateSelectedNames((prevSelectedNames) => {
+      const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
+>>>>>>> b5d79df68f734204064b9d0e208be4504c23e76f
 
-    return(
-            <div className="Home">
-                <Comunicador selectedNames={selectedNames} />
-                
-                <br/>
-                <hr></hr>
-                <div className="icon_back_comunicador">
-                    <FaAngleLeft id="icon_back_action"
-                    onClick={()=>navigate('/home')}/>
-                    <p><b>Categorías</b></p>
-                </div>
-                <br/>
+      if (firstEmptyIndex !== -1) {
+        const updatedNames = [...prevSelectedNames];
+        updatedNames[firstEmptyIndex] = person;
+        return updatedNames;
+      }
 
-                <div className="pic-category-row1">
-                    {people.map((person,index) => (
-                        <div
-                        key={index}
-                        className="contorno"
-                        onClick ={ ()=> handleNameClick(person)}
-                        >
-                            <img src={person.img} width="120" height="100"/>
-                            {person.name}
-                        </div>
-                    ))}
-                </div>
-                <br/>
-                <br/>
-                <div className="pic-category-row2">
-                    {people2.map((person,index) => (
-                        <div
-                        key={index}
-                        className="contorno"
-                        onClick ={ ()=> handleNameClick(person)}
-                        >
-                            <img src={person.img} width="100" height="100"/>
-                            {person.name}
-                        </div>
-                    ))}
-                </div>
-                <br/>
-                
-                <div>    
-                  <hr/>
-                  <Actionbar />
-                </div>
+      return prevSelectedNames;
+    });
+  };
+
+  return (
+    <div className="Home">
+      <Comunicador selectedNames={selectedNames} />
+      
+      <br/>
+      <hr></hr>
+      <div className="icon_back_comunicador">
+        <FaAngleLeft id="icon_back_action" onClick={() => navigate('/home')} />
+        <p><b>Categorías</b></p>
       </div>
-    )
+      <br/>
+
+      <div className="pic-category-container">
+        {people.map((person, index) => (
+          <div
+            key={index}
+            className="contorno"
+            onClick={() => handleNameClick(person)}
+          >
+            <img src={person.img} width="120" height="100" alt={person.name} />
+            <p style={{ textAlign: "center" }}>{person.name}</p>
+          </div>
+        ))}
+      </div>
+      <br/>
+      
+      <div>    
+        <hr/>
+        <Actionbar />
+      </div>
+    </div>
+  )
 }
 
 export default People;

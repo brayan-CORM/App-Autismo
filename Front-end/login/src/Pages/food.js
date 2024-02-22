@@ -13,8 +13,6 @@ function Food() {
     { name: "Agua", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/agua.svg" },
     { name: "Carne", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/carne.svg" },
     { name: "Leche", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/leche.svg" },
-  ];
-  const people2 = [
     { name: "Sopa", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/sopa.svg" },
     { name: "Verduras", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/verduras.svg" },
     { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/alimentos/mas.svg" },
@@ -46,7 +44,7 @@ function Food() {
       </div>
       <br />
 
-      <div className="pic-category-row1">
+      <div className="pic-category-container">
         {people.map((person, index) => (
           <div
             key={index}
@@ -54,21 +52,7 @@ function Food() {
             onClick={() => handleNameClick(person)}
           >
             <img src={person.img} width="100" height="100" alt={person.name} />
-            {person.name}
-          </div>
-        ))}
-      </div>
-      <br />
-      <br />
-      <div className="pic-category-row2">
-        {people2.map((person, index) => (
-          <div
-            key={index}
-            className="contorno"
-            onClick={() => handleNameClick(person)}
-          >
-            <img src={person.img} width="100" height="100" alt={person.name} />
-            {person.name}
+            <p style={{ textAlign: "center" }}>{person.name}</p>
           </div>
         ))}
       </div>

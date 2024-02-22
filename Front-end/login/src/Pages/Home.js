@@ -64,13 +64,13 @@ function Home() {
     <>
       <div className="Home">
         <Comunicador selectedNames={selectedNames} />
-
+  
         <br />
         <hr />
         <p className="category"><b>Categorías</b></p>
         <br />
-
-        <div className="pic-category-row1">
+  
+        <div className="pic-category-container">
           <div className="contorno" onClick={goto_people}>
             <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Lugares y personas.svg" width="100" height="100" />
             <p className="lugares-y-personas">Personas</p>
@@ -83,11 +83,6 @@ function Home() {
             <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Alimentos.svg" width="100" height="100" />
             <p>Alimentos</p>
           </div>
-        </div>
-        <br />
-        <br />
-        <div className="pic-category-row2">
-          {/* Categorías obligatorias */}
           <div className="contorno" onClick={goto_feelings}>
             <img src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/Sentimientos.svg" width="100" height="100" />
             <p className="lugares-y-personas">Deseos y sentimientos</p>
@@ -96,7 +91,7 @@ function Home() {
             <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Higiene.svg" width="100" height="100" />
             <p>Higiene</p>
           </div>
-          {/* Mostrar categorías adicionales */}
+          {/* Aquí puedes agregar las categorías adicionales */}
           {categories.map((category, index) => (
             <div key={index} className="contorno" onClick={() => navigate(`/${category.name}`)}>
               <img src={category.image} alt={category.name} width="100" height="100" />
@@ -104,22 +99,21 @@ function Home() {
             </div>
           ))}
         </div>
-        {/* Renderizar el botón "Agregar" al final */}
-        <div className="pic-category-row2">
-          <div className="contorno" onClick={openPopup}>
+        <br />
+        <div className="pic-category-container">
+          {/* Renderizar el botón "Agregar" al final */}
+          <div className="contorno agregar" onClick={openPopup}>
             <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/mas.svg" width="100" height="100" />
             <p>Agregar</p>
           </div>
         </div>
-      </div>
-      <br />
-
-      <div>
-        <hr />
-        <Actionbar />
+        <div>
+          <hr />
+          <Actionbar />
+        </div>
       </div>
     </>
-  );
+  );  
 }
 
 export default Home;

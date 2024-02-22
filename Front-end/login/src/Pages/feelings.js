@@ -13,8 +13,6 @@ function Feelings() {
     { name: "Estoy bien", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y sentimientos/estoy bien.svg" },
     { name: "Necesito ayuda", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y sentimientos/necesito ayuda.svg" },
     { name: "No", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y sentimientos/no.svg" },
-  ];
-  const people2 = [
     { name: "Quiero", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y sentimientos/quiero.svg" },
     { name: "Si", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y sentimientos/si.svg" },
     { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y sentimientos/mas.svg" },
@@ -46,7 +44,7 @@ function Feelings() {
       </div>
       <br />
 
-      <div className="pic-category-row1">
+      <div className="pic-category-container">
         {people.map((person, index) => (
           <div
             key={index}
@@ -54,21 +52,7 @@ function Feelings() {
             onClick={() => handleNameClick(person)}
           >
             <img src={person.img} width="120" height="100" alt={person.name} />
-            {person.name}
-          </div>
-        ))}
-      </div>
-      <br/>
-      <br/>
-      <div className="pic-category-row2">
-        {people2.map((person, index) => (
-          <div
-            key={index}
-            className="contorno"
-            onClick={() => handleNameClick(person)}
-          >
-            <img src={person.img} width="120" height="100" alt={person.name} />
-            {person.name}
+            <p style={{ textAlign: "center" }}>{person.name}</p>
           </div>
         ))}
       </div>
