@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from "../AppContext";
-import NewCategory from "../components/NewCategory";
 import Comunicador from "../components/Comunicador";
 import Actionbar from "../components/actionbar";
 
 function Home() {
   const navigate = useNavigate();
-  const { selectedNames, categories, updateCategories } = useAppContext();
-  const [isPopupOpen, setPopupOpen] = useState(false);
+  const { selectedNames, categories } = useAppContext();
 
   function goto_actions() {
     navigate("/actions");
@@ -25,39 +22,6 @@ function Home() {
   }
   function goto_people() {
     navigate('/people');
-  }
-
-  const openPopup = () => {
-    setPopupOpen(true);
-    const newWindow = window.open("", "_blank", "width=300,height=300,left=200,top=200");
-    newWindow.document.body.innerHTML = `
-      <div style="padding: 20px;">
-        <span id="closeButton" style="cursor: pointer; float: right;">&times;</span>
-        <h2>Add New Category</h2>
-        <div id="newCategoryForm"></div>
-      </div>
-    `;
-    ReactDOM.render(<NewCategory onAddCategory={addCategory} closePopup={() => closePopup(newWindow)} />, newWindow.document.getElementById('newCategoryForm'));
-
-    // Agregar evento de clic al botón de cierre en la nueva ventana
-    const closeButton = newWindow.document.getElementById('closeButton');
-    closeButton.addEventListener('click', () => {
-      closePopup(newWindow);
-    });
-  };
-
-  function closePopup(newWindow) {
-    // Cerrar la ventana emergente si existe
-    if (newWindow) {
-      newWindow.close();
-    }
-    setPopupOpen(false);
-  }
-
-  function addCategory(formData) {
-    const updatedCategories = [...categories, formData];
-    updateCategories(updatedCategories);
-    setPopupOpen(false); // Cerrar el popup después de agregar la categoría
   }
 
   return (
@@ -100,13 +64,7 @@ function Home() {
           ))}
         </div>
         <br />
-        <div className="pic-category-container">
-          {/* Renderizar el botón "Agregar" al final */}
-          <div className="contorno agregar" onClick={openPopup}>
-            <img src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/mas.svg" width="100" height="100" />
-            <p>Agregar</p>
-          </div>
-        </div>
+        <br />
         <div>
           <hr />
           <Actionbar />
