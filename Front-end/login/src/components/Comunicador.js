@@ -100,7 +100,7 @@ const handleSpeakerClick = () => {
           {showProfileOptions && (
             <div className="profile-options">
               
-              <button onClick={handleLogout}>Cerrar Sesión</button>
+              <button className="Logut b_login b_tipo_login" onClick={handleLogout}>Cerrar Sesión</button>
             </div>
           )}
         </div>
