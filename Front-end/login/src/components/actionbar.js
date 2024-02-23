@@ -84,10 +84,10 @@ function Actionbar() {
         {showButtons && (
           <div className="buttons_container">
             {isHomePage && (
-              <button className="Agregar Categoría" onClick={() => openPopup("category")}>Agregar Categoría</button>
+              <button className={`Add Category b_login b_tipo_login`} onClick={() => openPopup("category")}>Agregar Categoría</button>
             )}
             {!isHomePage && (
-              <button className="Agregar Pictograma" onClick={() => openPopup("pictogram")}>Agregar Pictograma</button>
+              <button className={`Add Pictogram b_login b_tipo_login`} onClick={() => openPopup("pictogram")}>Agregar Pictograma</button>
             )}
           </div>
         )}
