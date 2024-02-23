@@ -7,30 +7,31 @@ import Actionbar from "../components/actionbar";
 
 function Actions() {
   const navigate = useNavigate();
-  const { selectedNames, updateSelectedNames } = useAppContext();
+  const { selectedNames, updateSelectedNames, pictograms } = useAppContext();
 
-  const people = [
-    { name: "Comer", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/comer.svg" },
-    { name: "Ir al baño", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/ir al baño.svg" },
-    { name: "Bañar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/bañar.svg" },
-    { name: "Jugar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/jugar.svg" },
-    { name: "Lavarse las manos", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/lavarse las manos.svg" },
-    { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/mas.svg" },
-  ];
-
-  const handleNameClick = (person) => {
+  const handleNameClick = (pictogram) => {
     updateSelectedNames((prevSelectedNames) => {
       const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
 
       if (firstEmptyIndex !== -1) {
         const updatedNames = [...prevSelectedNames];
-        updatedNames[firstEmptyIndex] = person;
+        updatedNames[firstEmptyIndex] = pictogram;
         return updatedNames;
       }
 
       return prevSelectedNames;
     });
   };
+
+  // Definir los pictogramas dentro de la constante 'people'
+  const people = [
+    { name: "Comer", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/comer.svg" },
+    { name: "Ir al baño", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/ir al baño.svg" },
+    { name: "Bañar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/bañar.svg" },
+    { name: "Jugar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/jugar.svg" },
+    { name: "Lavarse las manos", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/lavarse las manos.svg" },
+    ...pictograms.map((pictogram, index) => ({ name: pictogram.name, img: pictogram.img }))
+  ];
 
   return (
     <div className="Home">

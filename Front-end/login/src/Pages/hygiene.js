@@ -7,7 +7,21 @@ import Actionbar from "../components/actionbar";
 
 function Hygiene() {
   const navigate = useNavigate();
-  const { selectedNames, updateSelectedNames } = useAppContext();
+  const { selectedNames, updateSelectedNames, pictograms } = useAppContext();
+
+  const handleNameClick = (pictogram) => {
+    updateSelectedNames((prevSelectedNames) => {
+      const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
+
+      if (firstEmptyIndex !== -1) {
+        const updatedNames = [...prevSelectedNames];
+        updatedNames[firstEmptyIndex] = pictogram;
+        return updatedNames;
+      }
+
+      return prevSelectedNames;
+    });
+  };
 
   const people = [
     { name: "Baño", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/baño.svg" },
@@ -15,22 +29,8 @@ function Hygiene() {
     { name: "Papel de baño", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/papel de baño.svg" },
     { name: "Pasta de dientes", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/pasta de dientes.svg" },
     { name: "Jabon", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/jabon liquido.svg" },
-    { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/mas.svg" },
+    ...pictograms.map((pictogram, index) => ({ name: pictogram.name, img: pictogram.img }))
   ];
-
-  const handleNameClick = (person) => {
-    updateSelectedNames((prevSelectedNames) => {
-      const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
-
-      if (firstEmptyIndex !== -1) {
-        const updatedNames = [...prevSelectedNames];
-        updatedNames[firstEmptyIndex] = person;
-        return updatedNames;
-      }
-
-      return prevSelectedNames;
-    });
-  };
 
   return (
     <div className="Home">

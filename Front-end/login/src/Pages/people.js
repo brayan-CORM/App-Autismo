@@ -7,31 +7,31 @@ import Actionbar from "../components/actionbar";
 
 function People() {
   const navigate = useNavigate();
-  const { selectedNames, updateSelectedNames } = useAppContext();
+  const { selectedNames, updateSelectedNames, pictograms } = useAppContext();
 
+  const handleNameClick = (pictogram) => {
+    updateSelectedNames((prevSelectedNames) => {
+      const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
+
+      if (firstEmptyIndex !== -1) {
+        const updatedNames = [...prevSelectedNames];
+        updatedNames[firstEmptyIndex] = pictogram;
+        return updatedNames;
+      }
+
+      return prevSelectedNames;
+    });
+  };
+    
   const people = [
     { name: "Yo", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg" },
     { name: "Mamá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" },
     { name: "Papá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg" },
     { name: "Compañero", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/compañeros.svg" },
     { name: "Terapeuta", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/terapeuta.svg" },
-    { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mas.svg" },
-    ];
+    ...pictograms.map((pictogram, index) => ({ name: pictogram.name, img: pictogram.img }))
+  ];
 
-    const handleNameClick = (person) => {
-        updateSelectedNames((prevSelectedNames) => {
-          const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
-    
-          if (firstEmptyIndex !== -1) {
-            const updatedNames = [...prevSelectedNames];
-            updatedNames[firstEmptyIndex] = person;
-            return updatedNames;
-          }
-    
-          return prevSelectedNames;
-        });
-      };
-    
   return (
     <div className="Home">
       <Comunicador selectedNames={selectedNames} />
