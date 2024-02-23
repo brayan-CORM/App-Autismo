@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import App from "./App";
 import Home from "./Pages/Home";
@@ -12,12 +12,22 @@ import People from "./Pages/people";
 import ResetPassword from "./Pages/resetpassword";
 import Calendar from "./Pages/calendar";
 
-const AppRouter = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+const AppRouter = ({ location }) => {
+  const [isLoading, setIsLoading] = useState(false); // Estado de carga
+  const [sessionToken, setSessionToken] = useState(sessionStorage.getItem('sessionToken')); // Estado del token de sesión
+
+  useEffect(() => {
+    // Verificar si hay un token de sesión almacenado en sessionStorage
+    const storedToken = sessionStorage.getItem('sessionToken');
+    if (storedToken) {
+      // Si hay un token de sesión, establecer el estado del token
+      setSessionToken(storedToken);
+    }
+  }, []);
 
   const handleLogin = async ({ _identifier, _password }) => {
     try {
-      // Realizar una solicitud al servidor backend para iniciar sesión
+      setIsLoading(true);
       const response = await fetch('http://localhost:3001/api/login', {
         method: 'POST',
         headers: {
@@ -25,34 +35,48 @@ const AppRouter = () => {
         },
         body: JSON.stringify({ _identifier, _password }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        // Si la respuesta es exitosa, establecer isAuthenticated a true
-        setIsAuthenticated(true);
+        // Establecer el token de sesión en sessionStorage y el estado del token
+        sessionStorage.setItem('sessionToken', data.token);
+        setSessionToken(data.token);
+        console.log('Token guardado en sessionStorage:', data.token); // Agregar esta línea de registro
         return true;
       } else {
-        console.log(data.msg); // Manejar mensaje de error, por ejemplo, mostrar un mensaje al usuario
+        console.log(data.msg);
         return false;
       }
     } catch (error) {
       console.error('Error durante el inicio de sesión:', error);
       return false;
+    } finally {
+      setIsLoading(false);
     }
+  };
+  
+  const handleLogout = () => {
+    // Limpiar el token de sesión al hacer logout
+    sessionStorage.removeItem('sessionToken');
+    setIsAuthenticated(false);
   };
 
   return (
     <Router>
-      <Routes>
+      <Routes location={location}>
         <Route path="/" element={<App handleLogin={handleLogin} />} />
-        <Route path="/actions" element={isAuthenticated ? <Actions /> : <Navigate to="/" />} />
-        <Route path="/calendar" element={isAuthenticated ? <Calendar /> : <Navigate to="/" />} />
-        <Route path="/feelings" element={isAuthenticated ? <Feelings /> : <Navigate to="/" />} />
-        <Route path="/food" element={isAuthenticated ? <Food /> : <Navigate to="/" />} />
-        <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/" />} />
-        <Route path="/hygiene" element={isAuthenticated ? <Hygiene /> : <Navigate to="/" />} />
-        <Route path="/people" element={isAuthenticated ? <People /> : <Navigate to="/" />} />
+        {/* 
+          Usar isLoading para mostrar un indicador de carga mientras se autentica 
+          y isAuthenticated para redirigir una vez que la autenticación esté completa
+        */}
+        <Route path="/actions" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Actions /> : <Navigate to="/" />} />
+        <Route path="/calendar" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Calendar /> : <Navigate to="/" />} />
+        <Route path="/feelings" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Feelings /> : <Navigate to="/" />} />
+        <Route path="/food" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Food /> : <Navigate to="/" />} />
+        <Route path="/home" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Home /> : <Navigate to="/" />} />
+        <Route path="/hygiene" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Hygiene /> : <Navigate to="/" />} />
+        <Route path="/people" element={isLoading ? <p>Cargando...</p> : sessionToken ? <People /> : <Navigate to="/" />} />
         <Route path="/register" element={<Register />} />
         <Route path="/recover-password" element={<RecoverPassword />} />
         <Route path="/reset-password/:resetId" element={<ResetPassword />} />

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const { auth, googleProvider } = require('../../config/firebaseConfig');
 const User = require('../models/users');
+const SessionToken = require('../models/SessionToken');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -35,8 +36,15 @@ const login = async ({ _identifier, _password }) => {
           name: usuario_encontrado.fullName,
         };
         const token = jwt.sign(payload, jwtkey);
-        // Asociar el token con la sesión del usuario
-        activeSessions[token] = usuario_encontrado._id;
+
+        // Guardar el token en la base de datos
+        const sessionToken = new SessionToken({
+          token: token,
+          userId: usuario_encontrado._id
+        });
+        await sessionToken.save();
+
+        // Devolver el token como parte de la respuesta
         return { msg: 'Login exitoso', token, success: true };
       } else {
         return { msg: 'Contraseña incorrecta', success: false };
@@ -52,22 +60,17 @@ const logout = async (token) => {
   try {
     // Verificar si se proporcionó un token
     if (!token) {
-      return { success: false, message: 'No token provided' };
+      return { success: false, message: 'Token no proporcionado' };
     }
 
-    // Filtrar los tokens de sesión para eliminar el token actual
-    const newActiveSessions = Object.fromEntries(
-      Object.entries(activeSessions).filter(([key, value]) => key !== token)
-    );
-
-    // Actualizar el objeto de sesiones activas
-    activeSessions = newActiveSessions;
+    // Eliminar el token de la base de datos
+    await SessionToken.findOneAndDelete({ token: token });
 
     // Retorna una respuesta exitosa
-    return { success: true, message: 'Logout successful' };
+    return { success: true, message: 'Cierre de sesión exitoso' };
   } catch (error) {
     console.error(error);
-    return { success: false, message: 'Error during logout' };
+    return { success: false, message: 'Error durante el cierre de sesión' };
   }
 };
 

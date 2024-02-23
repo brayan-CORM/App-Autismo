@@ -17,23 +17,27 @@ function Comunicador({ selectedNames }) {
 
   const handleLogout = async () => {
     try {
-      const sessionToken = localStorage.getItem("sessionToken"); // Obtener el token de sesión del almacenamiento local
+      const sessionToken = sessionStorage.getItem("sessionToken"); 
       if (!sessionToken) {
         console.error("Token de sesión no encontrado en el almacenamiento local");
         return;
       }
-
+  
       await axios.post("http://localhost:3001/api/logout", {
         token: sessionToken
       });
-
-      // Redirige al usuario a la página principal después de cerrar sesión
-      navigate("/"); // Cambia "/" por la ruta de tu página principal
+  
+      // Eliminar el token de sesión del sessionStorage
+      sessionStorage.removeItem("sessionToken");
+  
+      // Redirigir al usuario a la página principal después de cerrar sesión
+      navigate("/"); 
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }
   };
-
+  
+  
   if (!selectedNames) {
     // Si selectedNames es undefined, retorna un mensaje o un indicador de carga
     return <p>Cargando...</p>;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from 'react-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppContext } from "../AppContext";
 import NewCategory from "./NewCategory";
 
@@ -12,6 +12,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 function Actionbar() {
 
     const navigate = useNavigate();
+    const location = useLocation(); // Obtener la ruta actual
     const { categories, updateCategories } = useAppContext();
     const [popupOpen, setPopupOpen] = useState(false);
     const [showButtons, setShowButtons] = useState(false);
@@ -23,6 +24,8 @@ function Actionbar() {
     function handleAddButtonClick() {
         setShowButtons(!showButtons);
     }
+
+    const isHomePage = location.pathname === '/home';
 
     const openPopup = () => {
         setPopupOpen(true);
@@ -59,17 +62,22 @@ function Actionbar() {
 
     return (
         <div className="menu_acciones">
+            <BsPlusCircleFill className="add_icon" onClick={handleAddButtonClick} />
+            <TiHome className="icon_home" id="home_icon" onClick={() => navigate('/home')} />
+            <FaCalendarAlt className="icon_calendar" onClick={goto_calendar} />
+            
             <div className="add_icon_container">
-                <BsPlusCircleFill className="add_icon" onClick={handleAddButtonClick} />
                 {showButtons && (
                     <div className="buttons_container">
-                        <button className="Agregar Categoría" onClick={openPopup}>Agregar Categoría</button>
-                        <button className="Agregar Pictograma" onClick={() => {}}>Agregar Pictograma</button>
+                        {isHomePage && (
+                            <button className="Agregar Categoría" onClick={openPopup}>Agregar Categoría</button>
+                        )}
+                        {!isHomePage && (
+                            <button className="Agregar Pictograma" onClick={() => {}}>Agregar Pictograma</button>
+                        )}
                     </div>
                 )}
             </div>
-            <TiHome className="icon_home" id="home_icon" onClick={() => navigate('/home')} />
-            <FaCalendarAlt className="icon_calendar" onClick={goto_calendar} />
         </div>
     );
 }

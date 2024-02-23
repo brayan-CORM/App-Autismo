@@ -19,10 +19,10 @@ function NewCategory({ onAddCategory, closePopup }) {
 
   return (
     <div>
-      <h2>Add New Category</h2>
+      <h2>Agregar nueva categoría</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Name:
+          Nombre de la categoría:
           <input
             type="text"
             value={name}
@@ -31,7 +31,7 @@ function NewCategory({ onAddCategory, closePopup }) {
         </label>
         <br />
         <label>
-          Image:
+          Imagen de la categoría:
           <input
             type="file"
             accept="image/*"
@@ -39,7 +39,7 @@ function NewCategory({ onAddCategory, closePopup }) {
           />
         </label>
         <br />
-        <button type="submit">Add Category</button>
+        <button type="submit">Agregar categoría</button>
       </form>
     </div>
   );

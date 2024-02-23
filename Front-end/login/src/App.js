@@ -31,14 +31,22 @@ function App({ handleLogin }) {
   return () => {
     window.particlesJS && window.particlesJS('particles-js', {});
   };
-}, [location.pathname]);
+  }, [location.pathname]);
 
   const funcion_login = async (event) => {
     event.preventDefault();
     try {
-      const success = await handleLogin({ _identifier: identifier, _password: password });
-
-      if (success) {
+      const response = await axios.post('http://localhost:3001/api/login', {
+        _identifier: identifier,
+        _password: password
+      });
+  
+      const { token } = response.data;
+  
+      sessionStorage.setItem('sessionToken', token);
+  
+      if (response.data.success) {
+        handleLogin({ _identifier: identifier, _password: password }); // Llama a handleLogin con los datos de inicio de sesión
         navigate("/home");
       } else {
         alert("Correo o contraseña incorrecta");
@@ -46,6 +54,17 @@ function App({ handleLogin }) {
     } catch (error) {
       console.error('Error durante el inicio de sesión:', error);
       alert("Correo o contraseña incorrecta");
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await axios.get('http://localhost:3001/api/logout'); // Realiza una solicitud GET al endpoint de logout
+      sessionStorage.removeItem('sessionToken'); // Elimina el token del sessionStorage
+      navigate('/'); // Redirige al usuario a la página de inicio de sesión
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+      // Maneja el error si la solicitud de cierre de sesión falla
     }
   };
 
