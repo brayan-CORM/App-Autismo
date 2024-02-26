@@ -37,13 +37,13 @@ function Actions() {
     <div className="Home">
       <Comunicador selectedNames={selectedNames} />
 
-      <br/>
-      <hr/>
+      <br />
+      <hr />
       <div className="icon_back_comunicador">
         <FaAngleLeft id="icon_back_action" onClick={() => navigate('/home')} />
         <p><b>Categorías</b></p>
       </div>
-      <br/>
+      <br />
 
       <div className="pic-category-container">
         {people.map((person, index) => (
@@ -58,12 +58,12 @@ function Actions() {
         ))}
       </div>
 
-      <br/>
+      <br />
       <div>
-        <hr/>
+        <hr />
         <Actionbar />
       </div>
-    </div>  
+    </div>
   );
 }
 

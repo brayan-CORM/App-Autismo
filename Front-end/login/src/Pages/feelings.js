@@ -36,7 +36,7 @@ function Feelings() {
     <div className="Home">
       <Comunicador selectedNames={selectedNames} />
 
-      <br/>
+      <br />
       <hr></hr>
       <div className="icon_back_comunicador">
         <FaAngleLeft id="icon_back_action" onClick={() => navigate('/home')} />
@@ -57,9 +57,9 @@ function Feelings() {
         ))}
       </div>
 
-      <br/>
-      <div>    
-        <hr/>
+      <br />
+      <div>
+        <hr />
         <Actionbar />
       </div>
     </div>

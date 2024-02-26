@@ -1,4 +1,4 @@
-body{
+body {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -10,52 +10,63 @@ body{
     background-color: #ffffff;
     margin: 0%;
 }
-.Correo{
+
+.Correo {
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     border-color: #7e7e7e;
 }
-.Correo:hover{
+
+.Correo:hover {
     border-color: #32CD32;
 }
-.icon_Mail{
-    font-size: x-large;
-    vertical-align: middle;
-    margin-top: -4px;
-    color:#5d5d5d;
-}
-.password{
-    font-size: medium;
-    border-radius: 15px;
-    height: 28px;
-    border-color: #7e7e7e;
-}
-.password:hover{
-    border-color: #32CD32;
-}
-.icon_password{
+
+.icon_Mail {
     font-size: x-large;
     vertical-align: middle;
     margin-top: -4px;
     color: #5d5d5d;
 }
-.error{
+
+.password {
+    font-size: medium;
+    border-radius: 15px;
+    height: 28px;
+    border-color: #7e7e7e;
+}
+
+.password:hover {
+    border-color: #32CD32;
+}
+
+.icon_password {
+    font-size: x-large;
+    vertical-align: middle;
+    margin-top: -4px;
+    color: #5d5d5d;
+}
+
+.error {
     color: red;
-    font-size:medium;
-    .Correo{
+    font-size: medium;
+
+    .Correo {
         border-color: red;
     }
-    .password{
+
+    .password {
         border-color: red;
     }
 }
-.olive_contraseña{
+
+.olive_contraseña {
     font-size: small;
     cursor: pointer;
     margin-left: 70px;
 }
-.b_login{
+
+.b_login {
     width: 180px;
     height: 40px;
     border-radius: 20px;
@@ -63,14 +74,17 @@ body{
     font-size: medium;
     background-color: #0088ff;
 }
-.b_login:hover{
-    background-color: 	#32CD32;
+
+.b_login:hover {
+    background-color: #32CD32;
 }
-.b_tipo_login{
+
+.b_tipo_login {
     display: flex;
     justify-content: center;
 }
-.b_google{
+
+.b_google {
     display: inline-block;
     margin: 0px 15px;
     width: 90px;
@@ -78,32 +92,41 @@ body{
     border-radius: 15px;
     cursor: pointer;
 }
-.b_google:hover{
+
+.b_google:hover {
     background-color: white;
-    .G{
+
+    .G {
         color: #4285f4;
     }
-    .O{
+
+    .O {
         color: #ea4335;
     }
-    .o{
+
+    .o {
         color: #fbbc05;
     }
-    .g{
+
+    .g {
         color: #4285f4;
     }
-    .l{
+
+    .l {
         color: #34a853;
     }
-    .e{
+
+    .e {
         color: #ea4335;
     }
 }
-.l_google{
+
+.l_google {
     display: inline-block;
     vertical-align: middle;
 }
-.b_faccebook{
+
+.b_faccebook {
     display: inline-block;
     margin: 0px 15px;
     width: 90px;
@@ -111,90 +134,104 @@ body{
     border-radius: 15px;
     cursor: pointer;
 }
-.b_faccebook:hover{
+
+.b_faccebook:hover {
     background-color: #4267B2;
     color: white;
 }
-.Registro{
+
+.Registro {
     font-size: small;
 }
-#registro{
+
+#registro {
     color: blue;
     cursor: pointer;
 }
 
 /*style register*/
-.Register{
+.Register {
     display: flex;
     justify-content: center;
     margin-top: -100px;
 }
-.icon_back{
+
+.icon_back {
     font-size: 25px;
     vertical-align: middle;
     margin-top: 8px;
     cursor: pointer;
 }
-.icon_user{
+
+.icon_user {
     font-size: 100px;
     color: #5d5d5d;
 }
-.regis_name{
+
+.regis_name {
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
-    border-color:  #5d5d5d;
+    border-color: #5d5d5d;
 }
-.icon_name{
+
+.icon_name {
     font-size: 25px;
     vertical-align: middle;
     margin-top: -4px;
     color: #5d5d5d;
 }
-.regis_username{
+
+.regis_username {
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
-    border-color:  #5d5d5d;
+    border-color: #5d5d5d;
 }
-.ComboBox{
+
+.ComboBox {
     font-size: medium;
     border-radius: 15px;
     border-width: 2px;
     height: 28px;
     width: 261px;
-    border-color:  #5d5d5d;
+    border-color: #5d5d5d;
 }
-.icon_role{
+
+.icon_role {
     font-size: 25px;
     vertical-align: middle;
     margin-top: -4px;
     color: #5d5d5d;
 }
-.regis_mail{
+
+.regis_mail {
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
-    border-color:  #5d5d5d;
+    border-color: #5d5d5d;
 }
-.regis_password{
+
+.regis_password {
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
-    border-color:  #5d5d5d;
+    border-color: #5d5d5d;
 }
-.confi_password{
+
+.confi_password {
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
-    border-color:  #5d5d5d;
+    border-color: #5d5d5d;
 }
-.b_reg_login{
+
+.b_reg_login {
     width: 180px;
     height: 40px;
     border-radius: 20px;
@@ -202,246 +239,295 @@ body{
     font-size: medium;
     background-color: #0088ff;
 }
-.b_reg_login:hover{
+
+.b_reg_login:hover {
     background-color: #32CD32;
 }
 
 /*style Recover password*/
-.RecoverPassword{
+.RecoverPassword {
     display: flex;
     justify-content: center;
     margin-top: -100px;
 }
-.Parrafo{
+
+.Parrafo {
     display: flex;
     justify-content: center;
     font-size: larger;
 }
-.parrafo{
+
+.parrafo {
     text-align: left;
 }
-.recuperar{
+
+.recuperar {
     display: flex;
     justify-content: center;
 }
-.recover_mail{
+
+.recover_mail {
     display: flex;
     justify-content: center;
     font-size: medium;
     border-radius: 15px;
     height: 28px;
     width: 250px;
-    border-color:  #5d5d5d;
+    border-color: #5d5d5d;
 }
-.icon_Mail_2{
+
+.icon_Mail_2 {
     font-size: x-large;
     vertical-align: middle;
     margin-top: 2px;
-    color:#5d5d5d;
+    color: #5d5d5d;
 }
+
 /*style Home*/
-.category{
+.category {
     display: flex;
     justify-content: center;
     font-size: large;
 }
-.icon_perfil{
-    font-size:larger;
+
+.icon_perfil {
+    font-size: larger;
     vertical-align: middle;
     margin-top: -30px;
-    margin-right: -80px; /* Ajusta el margen derecho para mover el ícono hacia la izquierda */
+    margin-right: -80px;
+    /* Ajusta el margen derecho para mover el ícono hacia la izquierda */
     cursor: pointer;
 }
-#icon_perfil{
-    font-size:larger;
+
+#icon_perfil {
+    font-size: larger;
     vertical-align: middle;
     margin-top: -35px;
     margin-right: -280px;
     cursor: pointer;
 }
-.contenedor-comunicador{
+
+.contenedor-comunicador {
     display: flex;
     justify-content: space-around;
 }
-.contorno1{
+
+.contorno1 {
     width: 130px;
     height: 150px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
     margin-left: 20px;
     margin-top: 10px;
-    background-color:#D9DADB;
+    background-color: #D9DADB;
 }
-.contorno2{
+
+.contorno2 {
     width: 130px;
     height: 150px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
     margin-left: 20px;
     margin-top: 10px;
-    background-color:#D9DADB;
+    background-color: #D9DADB;
 }
-.contorno3{
+
+.contorno3 {
     width: 130px;
     height: 150px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
     margin-left: 20px;
     margin-top: 10px;
-    background-color:#D9DADB;
+    background-color: #D9DADB;
 }
-.Row{
+
+.Row {
     display: flex;
     justify-content: space-around;
 }
-.Empty-item{
+
+.Empty-item {
     width: 120px;
     height: 145px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
     margin-left: 20px;
     margin-top: 10px;
-    background-color:#D9DADB;
+    background-color: #D9DADB;
 }
-.icons_contenedor{
+
+.icons_contenedor {
     margin-top: -25px;
 }
-.icon_speaker{
-    font-size:50px;
+
+.icon_speaker {
+    font-size: 50px;
     color: #0088ff;
     cursor: pointer;
 }
-.icon_speaker:hover{
+
+.icon_speaker:hover {
     color: #32CD32;
 }
-.icon_delete{
-    font-size:45px;
+
+.icon_delete {
+    font-size: 45px;
     color: red;
     cursor: pointer;
 }
-.icon_delete:hover{
+
+.icon_delete:hover {
     color: darkred;
 }
-.perfil_text{
-    font-size:small;
+
+.perfil_text {
+    font-size: small;
     vertical-align: middle;
     margin-top: -15px;
     margin-right: -280px;
     cursor: pointer;
 }
-.pic-category-row1{
+
+.pic-category-row1 {
     display: flex;
     justify-content: space-around;
 }
-.lugares-y-personas{
+
+.lugares-y-personas {
     vertical-align: middle;
     margin-top: -4px;
 }
-.pic-category-row2{
+
+.pic-category-row2 {
     display: flex;
     justify-content: space-around;
 }
-.pic-category-row3{
+
+.pic-category-row3 {
     display: flex;
     justify-content: space-around;
 }
-.contorno{
+
+.contorno {
     width: 120px;
     height: 145px;
     border: 2px solid #c5c6d0;
     border-radius: 5px;
     cursor: pointer;
 }
-.contorno:hover{
+
+.contorno:hover {
     box-shadow: 3px 2px 10px 5px #c5c6d0;
 }
 
 /*Comunicador*/
 /*Acciones*/
-.icon_back_comunicador{
+.icon_back_comunicador {
     display: flex;
     justify-content: center;
 
 }
-#icon_back_action{
+
+#icon_back_action {
     font-size: 20px;
-   margin-top: 2px;
+    margin-top: 2px;
     cursor: pointer;
-}
-/*Alimentos*/
-.pic_agua{
-    margin-top: 10px;
-}
-.pic_carne{
-    margin-top: 10px;
-}
-.pic_leche{
-    margin-top: 10px;
-}
-.pic_sopa{
-    margin-top: 10px;
-}
-.pic_verduras{
-    margin-top: 10px;
-}
-/*feeling*/
-.icon_back_action{
-    margin-top: 10px;
-}
-/*people*/
-.bajar_pic{
-    margin-top: 10px;
-}
-/*Hygiene*/
-.cepillo{
-    margin-top: -7px;
-}
-.pasta{
-    margin-top: -7px;
-}
-/*style de la barra de acciones*/
-.menu_acciones{
-    display: flex;
-    justify-content: space-around;
-    font-size:xx-large;
-    color:gray;
-}
-.add_icon{
-    cursor: pointer;
-}
-.add_icon:hover{
-    color: #32CD32;
-}
-.icon_home{
-    cursor: pointer;
-    font-size: xx-large;
-    color: #0088ff; /* Color inicial del icono */
 }
 
-.icon_home:hover{
-    color: #32CD32; /* Color cuando se coloca el cursor sobre el icono */
+/*Alimentos*/
+.pic_agua {
+    margin-top: 10px;
 }
-.icon_calendar{
+
+.pic_carne {
+    margin-top: 10px;
+}
+
+.pic_leche {
+    margin-top: 10px;
+}
+
+.pic_sopa {
+    margin-top: 10px;
+}
+
+.pic_verduras {
+    margin-top: 10px;
+}
+
+/*feeling*/
+.icon_back_action {
+    margin-top: 10px;
+}
+
+/*people*/
+.bajar_pic {
+    margin-top: 10px;
+}
+
+/*Hygiene*/
+.cepillo {
+    margin-top: -7px;
+}
+
+.pasta {
+    margin-top: -7px;
+}
+
+/*style de la barra de acciones*/
+.menu_acciones {
+    display: flex;
+    justify-content: space-around;
+    font-size: xx-large;
+    color: gray;
+}
+
+.add_icon {
     cursor: pointer;
 }
-.icon_calendar:hover{
+
+.add_icon:hover {
+    color: #32CD32;
+}
+
+.icon_home {
+    cursor: pointer;
+    font-size: xx-large;
+    color: #0088ff;
+    /* Color inicial del icono */
+}
+
+.icon_home:hover {
+    color: #32CD32;
+    /* Color cuando se coloca el cursor sobre el icono */
+}
+
+.icon_calendar {
+    cursor: pointer;
+}
+
+.icon_calendar:hover {
     color: #32CD32;
 }
 
 /*Style de pagina calendar*/
-.calendario{
+.calendario {
     display: flex;
     justify-content: space-around;
 }
-.icon_menu{
-    font-size:xx-large;
+
+.icon_menu {
+    font-size: xx-large;
     margin-top: 5px;
-    cursor:pointer;
+    cursor: pointer;
 }
-.icon_menu:hover{
+
+.icon_menu:hover {
     color: #32CD32;
 }
-.calendar{
+
+.calendar {
     color: #32CD32;
 }
 
@@ -452,29 +538,39 @@ body{
     background-color: #ffffff;
     z-index: -1;
     animation: animateBg 7.5s linear infinite;
-} 
+}
+
 @keyframes animateBg {
     100% {
-      filter: hue-rotate(360deg);
+        filter: hue-rotate(360deg);
     }
-}  
+}
+
 .pic-category-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Tres columnas */
-    gap: 20px; /* Espacio entre las imágenes */
-    justify-items: center; /* Centra horizontalmente */
-  }
-  .pic-category-container .contorno {
+    grid-template-columns: repeat(3, 1fr);
+    /* Tres columnas */
+    gap: 20px;
+    /* Espacio entre las imágenes */
+    justify-items: center;
+    /* Centra horizontalmente */
+}
+
+.pic-category-container .contorno {
     /* Estilos para las imágenes y texto dentro de cada categoría */
     text-align: center;
-  }
-  .pic-category-container img {
-    width: 100px; /* Tamaño de las imágenes */
+}
+
+.pic-category-container img {
+    width: 100px;
+    /* Tamaño de las imágenes */
     height: 100px;
-  }
-  /* Estilos para el botón "Agregar" */
-  .agregar {
-    grid-column: 1 / -1; /* Ocupa todas las columnas */
-    grid-row: auto; /* Se coloca automáticamente en la siguiente fila después de la última categoría */
-  }
-  
+}
+
+/* Estilos para el botón "Agregar" */
+.agregar {
+    grid-column: 1 / -1;
+    /* Ocupa todas las columnas */
+    grid-row: auto;
+    /* Se coloca automáticamente en la siguiente fila después de la última categoría */
+}

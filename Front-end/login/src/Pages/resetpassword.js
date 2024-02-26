@@ -13,10 +13,10 @@ function ResetPassword() {
     const [error, setError] = React.useState("");
     const navigate = useNavigate();
 
-    const funcion_recover = async (event) =>{
+    const funcion_recover = async (event) => {
         event.preventDefault();
-        try{
-            const response = await axios.post(`http://localhost:3001/api/reset-password/${resetId}`,{
+        try {
+            const response = await axios.post(`http://localhost:3001/api/reset-password/${resetId}`, {
                 newPassword: _newPassword,
                 confirmPassword: _confirmPassword
 
@@ -30,64 +30,64 @@ function ResetPassword() {
                 alert("Recuperación fallida");
             }
         }
-        catch (error){
+        catch (error) {
             setError("Error de recuperación");
         }
     }
 
-    return(
+    return (
         <>
             <div className="RecoverPassword">
-                <FaAngleLeft className="icon_back" 
-                onClick={() => navigate('/')}/>
+                <FaAngleLeft className="icon_back"
+                    onClick={() => navigate('/')} />
                 <h2>Recuperar contraseña</h2>
             </div>
-                <hr width="80%"></hr>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+            <hr width="80%"></hr>
+            <br />
+            <br />
+            <br />
+            <br />
 
             <form onSubmit={funcion_recover}>
-            <div className="Parrafo">
-                <p htmlFor="inputPassword">Ingrese la nueva contraseña<br/>
-                </p>
-            </div>
-            <br/>
-            <label htmlFor="inputConPassword">Nueva Contraseña</label>
-            <br/>
-            <RiLockPasswordFill className='icon_password'/>
-            <input
-                className="regis_password"
-                id="inputPassword"
-                type="password"
-                value={_newPassword}
-                onChange={(event) => setNewpassword(event.target.value)}
-                placeholder="Contraseña"
-            />
-            <br/>
-            <br/>
-            <br/>
-            <label htmlFor="inputConPassword">Confirme Nueva Contraseña</label>
-            <br/>
-            <RiLockPasswordFill className='icon_password'/>
-            <input
-                className="confi_password"
-                id="inputConPassword"
-                type="password"
-                value={_confirmPassword}
-                onChange={(event) => setconfirmPassword(event.target.value)}
-                placeholder="Confirmar contraseña"
-            />
-            <br/>
-            <br/>
-            <br/>
-            {error && <p className='error'>{error}</p>}
-            <div>
-                <button className='b_reg_login' type='submit'>Cambiar contraseña</button>
-            </div>
+                <div className="Parrafo">
+                    <p htmlFor="inputPassword">Ingrese la nueva contraseña<br />
+                    </p>
+                </div>
+                <br />
+                <label htmlFor="inputConPassword">Nueva Contraseña</label>
+                <br />
+                <RiLockPasswordFill className='icon_password' />
+                <input
+                    className="regis_password"
+                    id="inputPassword"
+                    type="password"
+                    value={_newPassword}
+                    onChange={(event) => setNewpassword(event.target.value)}
+                    placeholder="Contraseña"
+                />
+                <br />
+                <br />
+                <br />
+                <label htmlFor="inputConPassword">Confirme Nueva Contraseña</label>
+                <br />
+                <RiLockPasswordFill className='icon_password' />
+                <input
+                    className="confi_password"
+                    id="inputConPassword"
+                    type="password"
+                    value={_confirmPassword}
+                    onChange={(event) => setconfirmPassword(event.target.value)}
+                    placeholder="Confirmar contraseña"
+                />
+                <br />
+                <br />
+                <br />
+                {error && <p className='error'>{error}</p>}
+                <div>
+                    <button className='b_reg_login' type='submit'>Cambiar contraseña</button>
+                </div>
             </form>
-    </>
+        </>
     )
 }
 

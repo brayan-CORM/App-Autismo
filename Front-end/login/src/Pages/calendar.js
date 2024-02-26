@@ -10,23 +10,23 @@ function Calendario() {
 
     const navigate = useNavigate();
 
-    function goto_home(){
+    function goto_home() {
         navigate("/home");
     }
 
-    return(
+    return (
         <>
-            <div className="calendario">    
-                <TiHome className="icon_home" onClick={goto_home}/>
+            <div className="calendario">
+                <TiHome className="icon_home" onClick={goto_home} />
                 <h2>Calendario</h2>
-                <TiThMenu className="icon_menu"/>
+                <TiThMenu className="icon_menu" />
             </div>
-            <hr/>
-            <br/>
+            <hr />
+            <br />
 
             <Calendar />
         </>
     );
 }
- 
+
 export default Calendario;

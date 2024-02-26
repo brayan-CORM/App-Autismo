@@ -16,21 +16,21 @@ function App({ handleLogin }) {
   const location = useLocation(); // Obtener la ruta actual
 
   useEffect(() => {
-  const allowedRoutes = ['/', '/register', '/recover-password', '/reset-password/:resetId'];
-  const currentRoute = location.pathname;
+    const allowedRoutes = ['/', '/register', '/recover-password', '/reset-password/:resetId'];
+    const currentRoute = location.pathname;
 
-  if (!allowedRoutes.includes(currentRoute)) {
-    // Si la ruta actual no está permitida, simplemente salimos del efecto
-    return;
-  }
+    if (!allowedRoutes.includes(currentRoute)) {
+      // Si la ruta actual no está permitida, simplemente salimos del efecto
+      return;
+    }
 
-  // Cargar las partículas solo en las rutas permitidas
-  window.particlesJS.load('particles-js', 'particlesjs-config.json');
+    // Cargar las partículas solo en las rutas permitidas
+    window.particlesJS.load('particles-js', 'particlesjs-config.json');
 
-  // Limpiar las partículas al desmontar el componente
-  return () => {
-    window.particlesJS && window.particlesJS('particles-js', {});
-  };
+    // Limpiar las partículas al desmontar el componente
+    return () => {
+      window.particlesJS && window.particlesJS('particles-js', {});
+    };
   }, [location.pathname]);
 
   const funcion_login = async (event) => {
@@ -40,11 +40,11 @@ function App({ handleLogin }) {
         _identifier: identifier,
         _password: password
       });
-  
+
       const { token } = response.data;
-  
+
       sessionStorage.setItem('sessionToken', token);
-  
+
       if (response.data.success) {
         handleLogin({ _identifier: identifier, _password: password }); // Llama a handleLogin con los datos de inicio de sesión
         navigate("/home");

@@ -57,9 +57,9 @@ function Food() {
         ))}
       </div>
 
-      <br/>
-      <div>    
-        <hr/>
+      <br />
+      <div>
+        <hr />
         <Actionbar />
       </div>
     </div>

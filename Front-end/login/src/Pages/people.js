@@ -22,7 +22,7 @@ function People() {
       return prevSelectedNames;
     });
   };
-    
+
   const people = [
     { name: "Yo", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg" },
     { name: "Mamá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" },
@@ -35,14 +35,14 @@ function People() {
   return (
     <div className="Home">
       <Comunicador selectedNames={selectedNames} />
-      
-      <br/>
+
+      <br />
       <hr></hr>
       <div className="icon_back_comunicador">
         <FaAngleLeft id="icon_back_action" onClick={() => navigate('/home')} />
         <p><b>Categorías</b></p>
       </div>
-      <br/>
+      <br />
 
       <div className="pic-category-container">
         {people.map((person, index) => (
@@ -56,10 +56,10 @@ function People() {
           </div>
         ))}
       </div>
-      <br/>
-      
-      <div>    
-        <hr/>
+      <br />
+
+      <div>
+        <hr />
         <Actionbar />
       </div>
     </div>

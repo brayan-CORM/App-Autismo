@@ -11,6 +11,7 @@ import Hygiene from "./Pages/hygiene";
 import People from "./Pages/people";
 import ResetPassword from "./Pages/resetpassword";
 import Calendar from "./Pages/calendar";
+import NewPage from './components/NewPage';
 
 const AppRouter = ({ location }) => {
   const [isLoading, setIsLoading] = useState(false); // Estado de carga
@@ -35,9 +36,9 @@ const AppRouter = ({ location }) => {
         },
         body: JSON.stringify({ _identifier, _password }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         // Establecer el token de sesión en sessionStorage y el estado del token
         sessionStorage.setItem('sessionToken', data.token);
@@ -55,7 +56,7 @@ const AppRouter = ({ location }) => {
       setIsLoading(false);
     }
   };
-  
+
   const handleLogout = () => {
     // Limpiar el token de sesión al hacer logout
     sessionStorage.removeItem('sessionToken');
@@ -72,6 +73,7 @@ const AppRouter = ({ location }) => {
         */}
         <Route path="/actions" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Actions /> : <Navigate to="/" />} />
         <Route path="/calendar" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Calendar /> : <Navigate to="/" />} />
+        <Route path="/:categoryName" element={isLoading ? <p>Cargando...</p> : sessionToken ? <NewPage /> : <Navigate to="/" />} />
         <Route path="/feelings" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Feelings /> : <Navigate to="/" />} />
         <Route path="/food" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Food /> : <Navigate to="/" />} />
         <Route path="/home" element={isLoading ? <p>Cargando...</p> : sessionToken ? <Home /> : <Navigate to="/" />} />
