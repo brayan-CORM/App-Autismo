@@ -1,32 +1,35 @@
-import React, { useState } from "react";
+import * as React from 'react'
+import { useState } from 'react';
+import Calendar from 'react-calendar'
 import { useNavigate } from 'react-router-dom';
-import Calendar from '../components/calenda';
 
 //icons
 import { TiHome } from "react-icons/ti";
 import { TiThMenu } from "react-icons/ti";
 
-function Calendario() {
 
+export default function Calendario() {
     const navigate = useNavigate();
 
+    const [value, setValue] = useState(new Date());
+
+    function onChange(nextValue) {
+        setValue(nextValue);
+    }
     function goto_home() {
         navigate("/home");
     }
 
     return (
-        <>
-            <div className="calendario">
-                <TiHome className="icon_home" onClick={goto_home} />
-                <h2>Calendario</h2>
-                <TiThMenu className="icon_menu" />
+        <div>
+            <div>
+                <Calendar
+                    onChange={onChange}
+                    value={value}
+                />
             </div>
-            <hr />
-            <br />
-
-            <Calendar />
-        </>
+            <TiHome className="icon_home" onClick={goto_home} />
+            <TiThMenu className="icon_menu" />
+        </div>
     );
-}
-
-export default Calendario;
+};
