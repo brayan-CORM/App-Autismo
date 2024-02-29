@@ -19,12 +19,14 @@ function Comunicador({ selectedNames }) {
     try {
       const sessionToken = sessionStorage.getItem("sessionToken");
       if (!sessionToken) {
-        console.error("Token de sesión no encontrado en el almacenamiento local");
+        console.error(
+          "Token de sesión no encontrado en el almacenamiento local"
+        );
         return;
       }
 
       await axios.post("http://localhost:3001/api/logout", {
-        token: sessionToken
+        token: sessionToken,
       });
 
       // Eliminar el token de sesión del sessionStorage
@@ -36,7 +38,6 @@ function Comunicador({ selectedNames }) {
       console.error("Error al cerrar sesión:", error);
     }
   };
-
 
   if (!selectedNames) {
     // Si selectedNames es undefined, retorna un mensaje o un indicador de carga
@@ -55,7 +56,9 @@ function Comunicador({ selectedNames }) {
       if (indexToDelete === -1) return prevSelectedNames;
 
       // Eliminar el elemento con información
-      const updatedNames = prevSelectedNames.filter((_, index) => index !== indexToDelete);
+      const updatedNames = prevSelectedNames.filter(
+        (_, index) => index !== indexToDelete
+      );
 
       // Agregar un nuevo elemento vacío al final de la lista
       const newSelectedNames = [...updatedNames, {}];
@@ -69,7 +72,10 @@ function Comunicador({ selectedNames }) {
   };
 
   const handleSpeakerClick = () => {
-    const namesToSpeak = selectedNames.map((person) => person?.name).filter(Boolean).join(' ');
+    const namesToSpeak = selectedNames
+      .map((person) => person?.name)
+      .filter(Boolean)
+      .join(" ");
 
     if (!namesToSpeak) return;
 
@@ -85,7 +91,7 @@ function Comunicador({ selectedNames }) {
     utterance.rate = 0.6; // Velocidad moderada
     utterance.pitch = 1.2; // Tono normal
     utterance.volume = 1; // Volumen completo
-    utterance.lang = 'es-ES'; // Idioma
+    utterance.lang = "es-ES"; // Idioma
 
     speechSynthesis.speak(utterance);
   };
@@ -99,8 +105,12 @@ function Comunicador({ selectedNames }) {
           <p className="perfil_text">Perfil</p>
           {showProfileOptions && (
             <div className="profile-options">
-
-              <button className="Logut b_login b_tipo_login" onClick={handleLogout}>Cerrar Sesión</button>
+              <button
+                className="Logut b_login b_tipo_login"
+                onClick={handleLogout}
+              >
+                Cerrar Sesión
+              </button>
             </div>
           )}
         </div>
@@ -131,7 +141,17 @@ function Comunicador({ selectedNames }) {
             <div key={index} className="Empty-item"></div>
           ))}
           <div className="icons_contenedor">
-            <div className="icon_speaker" onClick={() => { const lastName = selectedNames.find(person => person.img)?.name; if (lastName) { handleSpeakerClick(lastName); } }}>
+            <div
+              className="icon_speaker"
+              onClick={() => {
+                const lastName = selectedNames.find(
+                  (person) => person.img
+                )?.name;
+                if (lastName) {
+                  handleSpeakerClick(lastName);
+                }
+              }}
+            >
               <HiSpeakerWave />
             </div>
             <br />

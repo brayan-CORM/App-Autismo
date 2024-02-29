@@ -1,20 +1,20 @@
 // AuthService.js
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
-const { auth, googleProvider } = require('../../config/firebaseConfig');
-const User = require('../models/users');
-const SessionToken = require('../models/SessionToken');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
+const { auth, googleProvider } = require("../../config/firebaseConfig");
+const User = require("../models/users");
+const SessionToken = require("../models/SessionToken");
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
-    user: 'villevalleemm@gmail.com',
-    pass: 'leht bnvb wazr wjoy',
+    user: "villevalleemm@gmail.com",
+    pass: "leht bnvb wazr wjoy",
   },
 });
 
-const jwtkey = 'ao4m$o919des2e1';
+const jwtkey = "ao4m$o919des2e1";
 
 // Objeto para almacenar los tokens de sesión activos
 const activeSessions = {};
@@ -26,9 +26,12 @@ const login = async ({ _identifier, _password }) => {
     });
 
     if (!usuario_encontrado) {
-      return { msg: 'Usuario no encontrado', success: false };
+      return { msg: "Usuario no encontrado", success: false };
     } else {
-      const match = await bcrypt.compare(_password, usuario_encontrado.password);
+      const match = await bcrypt.compare(
+        _password,
+        usuario_encontrado.password
+      );
 
       if (match) {
         const payload = {
@@ -40,19 +43,19 @@ const login = async ({ _identifier, _password }) => {
         // Guardar el token en la base de datos
         const sessionToken = new SessionToken({
           token: token,
-          userId: usuario_encontrado._id
+          userId: usuario_encontrado._id,
         });
         await sessionToken.save();
 
         // Devolver el token como parte de la respuesta
-        return { msg: 'Login exitoso', token, success: true };
+        return { msg: "Login exitoso", token, success: true };
       } else {
-        return { msg: 'Contraseña incorrecta', success: false };
+        return { msg: "Contraseña incorrecta", success: false };
       }
     }
   } catch (error) {
     console.error(error);
-    return { msg: 'Error en el inicio de sesión', success: false };
+    return { msg: "Error en el inicio de sesión", success: false };
   }
 };
 
@@ -60,23 +63,25 @@ const logout = async (token) => {
   try {
     // Verificar si se proporcionó un token
     if (!token) {
-      return { success: false, message: 'Token no proporcionado' };
+      return { success: false, message: "Token no proporcionado" };
     }
 
     // Eliminar el token de la base de datos
     await SessionToken.findOneAndDelete({ token: token });
 
     // Retorna una respuesta exitosa
-    return { success: true, message: 'Cierre de sesión exitoso' };
+    return { success: true, message: "Cierre de sesión exitoso" };
   } catch (error) {
     console.error(error);
-    return { success: false, message: 'Error durante el cierre de sesión' };
+    return { success: false, message: "Error durante el cierre de sesión" };
   }
 };
 
 const loginWithGoogle = async (_googleIdToken) => {
   try {
-    const googleUserCredential = await auth.signInWithCredential(googleProvider.credential(_googleIdToken));
+    const googleUserCredential = await auth.signInWithCredential(
+      googleProvider.credential(_googleIdToken)
+    );
     const user = googleUserCredential.user;
 
     const payload = {
@@ -88,18 +93,24 @@ const loginWithGoogle = async (_googleIdToken) => {
     // Asociar el token con la sesión del usuario
     activeSessions[token] = user.uid;
 
-    return { msg: 'Login exitoso con Google', token, success: true };
+    return { msg: "Login exitoso con Google", token, success: true };
   } catch (error) {
     console.error(error);
-    return { msg: 'Error en el inicio de sesión con Google', success: false };
+    return { msg: "Error en el inicio de sesión con Google", success: false };
   }
 };
 
-const register = async ({ regFullName, regUsername, regRole, regMail, regPassword }) => {
+const register = async ({
+  regFullName,
+  regUsername,
+  regRole,
+  regMail,
+  regPassword,
+}) => {
   try {
     const mailexists = await User.exists({ mail: regMail });
     if (mailexists) {
-      return { msg: 'El correo ya existe', success: false };
+      return { msg: "El correo ya existe", success: false };
     } else {
       const password_cifrado = await bcrypt.hash(regPassword, 10);
       const newUser = new User({
@@ -112,17 +123,19 @@ const register = async ({ regFullName, regUsername, regRole, regMail, regPasswor
 
       const createUser = await newUser.save();
 
-      return { msg: 'Usuario creado', user: createUser._id, success: true };
+      return { msg: "Usuario creado", user: createUser._id, success: true };
     }
   } catch (error) {
     console.error(error);
-    return { msg: 'Error interno del servidor', success: false };
+    return { msg: "Error interno del servidor", success: false };
   }
 };
 
 const registerWithGoogle = async (_googleIdToken) => {
   try {
-    const googleUserCredential = await auth.signInWithCredential(googleProvider.credential(_googleIdToken));
+    const googleUserCredential = await auth.signInWithCredential(
+      googleProvider.credential(_googleIdToken)
+    );
     const user = googleUserCredential.user;
 
     const payload = {
@@ -134,10 +147,10 @@ const registerWithGoogle = async (_googleIdToken) => {
     // Asociar el token con la sesión del usuario
     activeSessions[token] = user.uid;
 
-    return { msg: 'Usuario creado con Google', token, success: true };
+    return { msg: "Usuario creado con Google", token, success: true };
   } catch (error) {
     console.error(error);
-    return { msg: 'Error en el registro con Google', success: false };
+    return { msg: "Error en el registro con Google", success: false };
   }
 };
 
@@ -148,46 +161,52 @@ const resetPassword = async (_identifier) => {
     });
 
     if (!usuario_encontrado) {
-      return { msg: 'Usuario no encontrado', success: false };
+      return { msg: "Usuario no encontrado", success: false };
     }
 
     const resetId = usuario_encontrado._id.toString();
-    const resetLink = `http://localhost:3000/reset-password/${resetId}`; //redireccion provisional 
-    
+    const resetLink = `http://localhost:3000/reset-password/${resetId}`; //redireccion provisional
+
     const mailOptions = {
-      from: 'villevalleemm@gmail.com',
+      from: "villevalleemm@gmail.com",
       to: usuario_encontrado.mail,
-      subject: 'Recuperación de Contraseña',
+      subject: "Recuperación de Contraseña",
       text: `Haga clic en el siguiente enlace para restablecer su contraseña: ${resetLink}`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
-        return { msg: 'Error al enviar el correo electrónico', success: false };
+        return { msg: "Error al enviar el correo electrónico", success: false };
       } else {
-        console.log('Correo electrónico enviado: ' + info.response);
-        return { msg: 'Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña', success: true }; // O ajusta según sea necesario
+        console.log("Correo electrónico enviado: " + info.response);
+        return {
+          msg: "Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña",
+          success: true,
+        }; // O ajusta según sea necesario
       }
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
-    return { msg: 'Error interno del servidor', success: false };
+    return { msg: "Error interno del servidor", success: false };
   }
 };
 
-const resetPasswordWithToken = async (_resetId, _newPassword, _confirmPassword) => {
+const resetPasswordWithToken = async (
+  _resetId,
+  _newPassword,
+  _confirmPassword
+) => {
   try {
-    console.log('ID recibido:', _resetId);
+    console.log("ID recibido:", _resetId);
     const usuario_encontrado = await User.findById(_resetId);
 
     if (!usuario_encontrado) {
-      return { msg: 'Usuario no encontrado', success: false };
+      return { msg: "Usuario no encontrado", success: false };
     }
 
     if (_newPassword !== _confirmPassword) {
-      return { msg: 'Las contraseñas no coinciden', success: false };
+      return { msg: "Las contraseñas no coinciden", success: false };
     }
 
     const hashedPassword = await bcrypt.hash(_newPassword, 10);
@@ -197,11 +216,14 @@ const resetPasswordWithToken = async (_resetId, _newPassword, _confirmPassword) 
 
     await usuario_encontrado.save();
 
-    return { msg: 'Contraseña restablecida exitosamente', success: true };
+    return { msg: "Contraseña restablecida exitosamente", success: true };
   } catch (error) {
     console.log(error);
     // Manejar errores según sea necesario
-    return { msg: 'Error en el restablecimiento de contraseña', success: false };
+    return {
+      msg: "Error en el restablecimiento de contraseña",
+      success: false,
+    };
   }
 };
 

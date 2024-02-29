@@ -20,7 +20,16 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ selectedNames, updateSelectedNames, categories, updateCategories, pictograms, updatePictograms }}>
+    <AppContext.Provider
+      value={{
+        selectedNames,
+        updateSelectedNames,
+        categories,
+        updateCategories,
+        pictograms,
+        updatePictograms,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
