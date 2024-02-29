@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
@@ -17,18 +17,23 @@ function Comunicador({ selectedNames }) {
 
   const handleLogout = async () => {
     try {
-      const sessionToken = localStorage.getItem("sessionToken"); // Obtener el token de sesión del almacenamiento local
+      const sessionToken = sessionStorage.getItem("sessionToken");
       if (!sessionToken) {
-        console.error("Token de sesión no encontrado en el almacenamiento local");
+        console.error(
+          "Token de sesión no encontrado en el almacenamiento local"
+        );
         return;
       }
 
       await axios.post("http://localhost:3001/api/logout", {
-        token: sessionToken
+        token: sessionToken,
       });
 
-      // Redirige al usuario a la página principal después de cerrar sesión
-      navigate("/"); // Cambia "/" por la ruta de tu página principal
+      // Eliminar el token de sesión del sessionStorage
+      sessionStorage.removeItem("sessionToken");
+
+      // Redirigir al usuario a la página principal después de cerrar sesión
+      navigate("/");
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }
@@ -46,45 +51,50 @@ function Comunicador({ selectedNames }) {
       while (indexToDelete >= 0 && !prevSelectedNames[indexToDelete].img) {
         indexToDelete--;
       }
-  
+
       // Si no hay elementos con información, no hacer nada
       if (indexToDelete === -1) return prevSelectedNames;
-  
+
       // Eliminar el elemento con información
-      const updatedNames = prevSelectedNames.filter((_, index) => index !== indexToDelete);
-  
+      const updatedNames = prevSelectedNames.filter(
+        (_, index) => index !== indexToDelete
+      );
+
       // Agregar un nuevo elemento vacío al final de la lista
       const newSelectedNames = [...updatedNames, {}];
-      
+
       return newSelectedNames;
     });
   };
 
   speechSynthesis.onvoiceschanged = () => {
     // No hagas nada aquí, solo define el evento
-};
+  };
 
-const handleSpeakerClick = () => {
-  const namesToSpeak = selectedNames.map((person) => person?.name).filter(Boolean).join(' ');
-  
-  if (!namesToSpeak) return;
-  
-  const voices = window.speechSynthesis.getVoices();
-  
-  const selectedVoice = voices[0];
-  
-  const utterance = new SpeechSynthesisUtterance(namesToSpeak);
-  
-  utterance.voice = selectedVoice;
-  
-  // Ajustes para la voz seleccionada
-  utterance.rate = 0.6; // Velocidad moderada
-  utterance.pitch = 1.2; // Tono normal
-  utterance.volume = 1; // Volumen completo
-  utterance.lang = 'es-ES'; // Idioma
-  
-  speechSynthesis.speak(utterance);
-};
+  const handleSpeakerClick = () => {
+    const namesToSpeak = selectedNames
+      .map((person) => person?.name)
+      .filter(Boolean)
+      .join(" ");
+
+    if (!namesToSpeak) return;
+
+    const voices = window.speechSynthesis.getVoices();
+
+    const selectedVoice = voices[0];
+
+    const utterance = new SpeechSynthesisUtterance(namesToSpeak);
+
+    utterance.voice = selectedVoice;
+
+    // Ajustes para la voz seleccionada
+    utterance.rate = 0.6; // Velocidad moderada
+    utterance.pitch = 1.2; // Tono normal
+    utterance.volume = 1; // Volumen completo
+    utterance.lang = "es-ES"; // Idioma
+
+    speechSynthesis.speak(utterance);
+  };
 
   return (
     <div>
@@ -95,8 +105,12 @@ const handleSpeakerClick = () => {
           <p className="perfil_text">Perfil</p>
           {showProfileOptions && (
             <div className="profile-options">
-              
-              <button onClick={handleLogout}>Cerrar Sesión</button>
+              <button
+                className="Logut b_login b_tipo_login"
+                onClick={handleLogout}
+              >
+                Cerrar Sesión
+              </button>
             </div>
           )}
         </div>
@@ -127,7 +141,17 @@ const handleSpeakerClick = () => {
             <div key={index} className="Empty-item"></div>
           ))}
           <div className="icons_contenedor">
-          <div className="icon_speaker" onClick={() => {const lastName = selectedNames.find(person => person.img)?.name;if (lastName) {handleSpeakerClick(lastName);}}}>
+            <div
+              className="icon_speaker"
+              onClick={() => {
+                const lastName = selectedNames.find(
+                  (person) => person.img
+                )?.name;
+                if (lastName) {
+                  handleSpeakerClick(lastName);
+                }
+              }}
+            >
               <HiSpeakerWave />
             </div>
             <br />

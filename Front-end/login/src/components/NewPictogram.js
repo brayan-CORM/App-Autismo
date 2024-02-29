@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NewCategory({ onAddCategory, closePopup }) {
+function NewPictogram({ onAddPictogram, closePopup }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
@@ -20,23 +20,23 @@ function NewCategory({ onAddCategory, closePopup }) {
     }
 
     // Crear un objeto formData con los datos del formulario
-    const formData = {
+    const newPictogram = {
       name: name,
-      image: image,
+      img: image,
     };
 
-    // Llama a la función onAddCategory con formData
-    onAddCategory(formData);
-    // Cierra el popup después de agregar la categoría
+    // Llama a la función onAddPictogram con el nuevo pictograma
+    onAddPictogram(newPictogram);
+    // Cierra el popup después de agregar el pictograma
     closePopup();
   };
 
   return (
     <div>
-      <h2>Agregar nueva categoría</h2>
+      <h2>Agregar nuevo pictograma</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Nombre de la categoría:
+          Nombre del pictograma:
           <input
             type="text"
             value={name}
@@ -45,7 +45,7 @@ function NewCategory({ onAddCategory, closePopup }) {
         </label>
         <br />
         <label>
-          Imagen de la categoría:
+          Imagen del pictograma:
           <input
             type="file"
             accept="image/*"
@@ -53,11 +53,11 @@ function NewCategory({ onAddCategory, closePopup }) {
           />
         </label>
         <br />
-        <button type="submit">Agregar categoría</button>
+        <button type="submit">Agregar pictograma</button>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>
   );
 }
 
-export default NewCategory;
+export default NewPictogram;

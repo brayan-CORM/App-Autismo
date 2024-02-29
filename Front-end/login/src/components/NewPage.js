@@ -5,30 +5,15 @@ import { FaAngleLeft } from "react-icons/fa";
 import { useAppContext } from "../AppContext";
 import Actionbar from "../components/actionbar";
 
-function People() {
+function NewPage() {
   const navigate = useNavigate();
   const { selectedNames, updateSelectedNames, pictograms } = useAppContext();
 
-<<<<<<< HEAD
-  const people = [
-    { name: "Yo", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg" },
-    { name: "Mamá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" },
-    { name: "Papá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg" },
-    { name: "Compañero", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/compañeros.svg" },
-    { name: "Terapeuta", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/terapeuta.svg" },
-    { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mas.svg" },
-  ];
-
-  const handleNameClick = (person) => {
-    updateSelectedNames((prevSelectedNames) => {
-      const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
-=======
   const handleNameClick = (pictogram) => {
     updateSelectedNames((prevSelectedNames) => {
       const firstEmptyIndex = prevSelectedNames.findIndex(
         (obj) => Object.keys(obj).length === 0
       );
->>>>>>> 851f32edd36df7f5f4ee070b9cfa0c0071d7a5fa
 
       if (firstEmptyIndex !== -1) {
         const updatedNames = [...prevSelectedNames];
@@ -40,27 +25,8 @@ function People() {
     });
   };
 
+  // Definir los pictogramas dentro de la constante 'people'
   const people = [
-    {
-      name: "Yo",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg",
-    },
-    {
-      name: "Mamá",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg",
-    },
-    {
-      name: "Papá",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg",
-    },
-    {
-      name: "Compañeros",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/compañeros.svg",
-    },
-    {
-      name: "Terapeuta",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/terapeuta.svg",
-    },
     ...pictograms.map((pictogram, index) => ({
       name: pictogram.name,
       img: pictogram.img,
@@ -72,7 +38,7 @@ function People() {
       <Comunicador selectedNames={selectedNames} />
 
       <br />
-      <hr></hr>
+      <hr />
       <div className="icon_back_comunicador">
         <FaAngleLeft id="icon_back_action" onClick={() => navigate("/home")} />
         <p>
@@ -93,8 +59,8 @@ function People() {
           </div>
         ))}
       </div>
-      <br />
 
+      <br />
       <div>
         <hr />
         <Actionbar />
@@ -103,4 +69,4 @@ function People() {
   );
 }
 
-export default People;
+export default NewPage;
