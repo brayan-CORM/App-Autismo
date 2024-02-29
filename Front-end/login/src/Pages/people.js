@@ -18,37 +18,9 @@ function People() {
     { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mas.svg" },
   ];
 
-<<<<<<< HEAD
-    const [people, setNames] = useState([
-        { name: "Yo ",img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg"},
-        { name: "Mamá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" },
-        { name: "Papá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg" },
-      ]);
-      const [people2, setNames2] = useState([
-        { name: "Compañero",img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/compañeros.svg"},
-        { name: "Terapeuta", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/terapeuta.svg" },
-        { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mas.svg" },
-      ]);
-    
-    const handleNameClick = (person) => {
-        updateSelectedNames((prevSelectedNames) => {
-          const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
-    
-          if (firstEmptyIndex !== -1) {
-            const updatedNames = [...prevSelectedNames];
-            updatedNames[firstEmptyIndex] = person;
-            return updatedNames;
-          }
-    
-          return prevSelectedNames;
-        });
-      };
-    
-=======
   const handleNameClick = (person) => {
     updateSelectedNames((prevSelectedNames) => {
       const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
->>>>>>> b5d79df68f734204064b9d0e208be4504c23e76f
 
       if (firstEmptyIndex !== -1) {
         const updatedNames = [...prevSelectedNames];
