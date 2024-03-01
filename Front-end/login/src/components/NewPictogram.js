@@ -1,34 +1,47 @@
 import React, { useState } from "react";
 
 function NewPictogram({ onAddPictogram, closePopup }) {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  const [pictogramName, setPictogramName] = useState("");
+  const [pictogramImage, setFile] = useState(null);
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validar que se haya ingresado un nombre y una imagen
-    if (!name.trim()) {
-      setError("Por favor ingresa un nombre para la categoría.");
+    if (!pictogramName.trim()) {
+      setError("Por favor ingresa un nombre para el pictograma.");
       return;
     }
 
-    if (!image) {
-      setError("Por favor selecciona una imagen para la categoría.");
+    if (!pictogramImage) {
+      setError("Por favor selecciona una imagen para el pictograma.");
       return;
     }
 
-    // Crear un objeto formData con los datos del formulario
-    const newPictogram = {
-      name: name,
-      img: image,
-    };
+    const formData = new FormData();
+    formData.append("pictogramName", pictogramName); // Corregido el nombre del campo
+    formData.append("pictogramImage", pictogramImage); // Corregido el nombre del campo
 
-    // Llama a la función onAddPictogram con el nuevo pictograma
-    onAddPictogram(newPictogram);
-    // Cierra el popup después de agregar el pictograma
-    closePopup();
+    try {
+      // Ajusta la URL según la configuración de tu API
+      const response = await fetch(
+        "http://localhost:3001/api/category/uploadPictograms",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      onAddPictogram(result);
+      closePopup();
+    } catch (error) {
+      setError("Error al guardar pictograma: " + error.message);
+    }
   };
 
   return (
@@ -39,8 +52,8 @@ function NewPictogram({ onAddPictogram, closePopup }) {
           Nombre del pictograma:
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={pictogramName}
+            onChange={(e) => setPictogramName(e.target.value)}
           />
         </label>
         <br />
@@ -48,8 +61,10 @@ function NewPictogram({ onAddPictogram, closePopup }) {
           Imagen del pictograma:
           <input
             type="file"
-            accept="image/*"
-            onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
+            accept="image/*" // Corregido el tipo de archivo aceptado
+            onChange={(e) => {
+              setFile(e.target.files[0]);
+            }}
           />
         </label>
         <br />

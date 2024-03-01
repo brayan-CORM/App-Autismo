@@ -9,26 +9,11 @@ function People() {
   const navigate = useNavigate();
   const { selectedNames, updateSelectedNames, pictograms } = useAppContext();
 
-<<<<<<< HEAD
-  const people = [
-    { name: "Yo", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/yo.svg" },
-    { name: "Mamá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg" },
-    { name: "Papá", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg" },
-    { name: "Compañero", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/compañeros.svg" },
-    { name: "Terapeuta", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/terapeuta.svg" },
-    { name: "Agregar", img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mas.svg" },
-  ];
-
-  const handleNameClick = (person) => {
-    updateSelectedNames((prevSelectedNames) => {
-      const firstEmptyIndex = prevSelectedNames.findIndex(obj => Object.keys(obj).length === 0);
-=======
   const handleNameClick = (pictogram) => {
     updateSelectedNames((prevSelectedNames) => {
       const firstEmptyIndex = prevSelectedNames.findIndex(
         (obj) => Object.keys(obj).length === 0
       );
->>>>>>> 851f32edd36df7f5f4ee070b9cfa0c0071d7a5fa
 
       if (firstEmptyIndex !== -1) {
         const updatedNames = [...prevSelectedNames];
@@ -47,11 +32,11 @@ function People() {
     },
     {
       name: "Mamá",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mama.svg",
+      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/mamá.svg",
     },
     {
       name: "Papá",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papa.svg",
+      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Personas/papá.svg",
     },
     {
       name: "Compañeros",

@@ -1,34 +1,46 @@
 import React, { useState } from "react";
 
 function NewCategory({ onAddCategory, closePopup }) {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  const [categoryName, setcategoryName] = useState("");
+  const [categoryImage, setFile] = useState(null);
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validar que se haya ingresado un nombre y una imagen
-    if (!name.trim()) {
+    if (!categoryName.trim()) {
       setError("Por favor ingresa un nombre para la categoría.");
       return;
     }
 
-    if (!image) {
+    if (!categoryImage) {
       setError("Por favor selecciona una imagen para la categoría.");
       return;
     }
 
-    // Crear un objeto formData con los datos del formulario
-    const formData = {
-      name: name,
-      image: image,
-    };
+    const formData = new FormData();
+    formData.append("categoryName", categoryName);
+    formData.append("categoryImage", categoryImage);
 
-    // Llama a la función onAddCategory con formData
-    onAddCategory(formData);
-    // Cierra el popup después de agregar la categoría
-    closePopup();
+    try {
+      const response = await fetch(
+        "http://localhost:3001/api/category/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      onAddCategory(result);
+      closePopup();
+    } catch (error) {
+      setError("Error al guardar la categoría: " + error.message);
+    }
   };
 
   return (
@@ -39,8 +51,8 @@ function NewCategory({ onAddCategory, closePopup }) {
           Nombre de la categoría:
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={categoryName}
+            onChange={(e) => setcategoryName(e.target.value)}
           />
         </label>
         <br />
@@ -49,7 +61,9 @@ function NewCategory({ onAddCategory, closePopup }) {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
+            onChange={(e) => {
+              setFile(e.target.files[0]);
+            }}
           />
         </label>
         <br />

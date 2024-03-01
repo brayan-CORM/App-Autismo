@@ -28,8 +28,8 @@ function NewPage() {
   // Definir los pictogramas dentro de la constante 'people'
   const people = [
     ...pictograms.map((pictogram, index) => ({
-      name: pictogram.name,
-      img: pictogram.img,
+      name: pictogram.pictogramName,
+      img: pictogram.pictogramImage,
     })),
   ];
 

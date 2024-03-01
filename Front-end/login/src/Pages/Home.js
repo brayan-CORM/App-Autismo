@@ -96,15 +96,15 @@ function Home() {
             <div
               key={index}
               className="contorno"
-              onClick={() => gotoCategory(category.name)}
+              onClick={() => gotoCategory(category.categoryName)}
             >
               <img
-                src={category.image}
-                alt={category.name}
+                src={`http://localhost:3001/uploads/${category.categoryImage}`}
+                alt={category.categoryName}
                 width="100"
                 height="100"
               />
-              <p>{category.name}</p>
+              <p>{category.categoryName}</p>
             </div>
           ))}
         </div>

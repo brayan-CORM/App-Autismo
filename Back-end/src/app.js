@@ -3,6 +3,7 @@ const cors = require("cors");
 const AuthController = require("./controllers/AuthController");
 const CategoryController = require("./controllers/CategoryController");
 const { connect } = require("../config/mongooseConfig");
+const path = require("path");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use(cors());
 
 connect();
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api", AuthController);
 app.use("/api/category", CategoryController);
