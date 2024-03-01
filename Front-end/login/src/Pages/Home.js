@@ -99,7 +99,7 @@ function Home() {
               onClick={() => gotoCategory(category.categoryName)}
             >
               <img
-                src={`http://localhost:3001/uploads/${category.categoryImage}`}
+                src={`http://localhost:3001/${category.categoryImage}`}
                 alt={category.categoryName}
                 width="100"
                 height="100"

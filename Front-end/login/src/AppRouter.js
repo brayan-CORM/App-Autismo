@@ -23,6 +23,7 @@ const AppRouter = ({ location }) => {
   const [sessionToken, setSessionToken] = useState(
     sessionStorage.getItem("sessionToken")
   ); // Estado del token de sesión
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado de autenticación
 
   useEffect(() => {
     // Verificar si hay un token de sesión almacenado en sessionStorage

@@ -1,24 +1,52 @@
+// CategoryController.js
 const express = require("express");
 const router = express.Router();
-const Category = require("../models/Category");
-const CategoryService = require("../services/CategoryService");
-
-// Importa el middleware de Multer para la carga de archivos
+const Category = require("../models/Category"); // Make sure the path is correct
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const path = require('path');
+const fs = require('fs');
 
-// Ruta para agregar una o varias categorías
+// Multer configuration for file uploads
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function(req, file, cb) {
+    // Use Date.now() to get a unique filename
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
+
+router.get('/categories', async (req, res, next) => {
+  try {
+    const categories = await Category.find({});
+    res.json(categories);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post("/upload", upload.single("categoryImage"), async (req, res) => {
   try {
     const { categoryName } = req.body;
-    const originalImageName = req.file.originalname; // Obtener el nombre original de la imagen
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded." });
+    }
+    const categoryImage = req.file.path; // The path where the image is stored
 
-    // Llama al servicio para crear la categoría
-    const newCategory = await CategoryService.createCategory(
-      categoryName,
-      req.file // Pasa el objeto de la imagen completo
-    );
+    // Create a new category instance using the Category model
+    const newCategory = new Category({
+      categoryName: categoryName,
+      categoryImage: categoryImage,
+      pictograms: [] // Initialize as an empty array if no pictograms are added yet
+    });
 
+    // Save the new category to the database
+    await newCategory.save();
+
+    // You may want to return the new category object
     res.status(201).json(newCategory);
   } catch (error) {
     console.error(error);
@@ -26,42 +54,6 @@ router.post("/upload", upload.single("categoryImage"), async (req, res) => {
   }
 });
 
-router.post(
-  "/uploadPictograms",
-  upload.single("pictogramImage"),
-  async (req, res) => {
-    try {
-      const { categoryId, pictogramName } = req.body;
-      const originalImageName = req.file.originalname; // Obtener el nombre original de la imagen
-
-      // Llama al servicio para agregar un pictograma a la categoría
-      const newPictogram = await CategoryService.addPictogram(
-        categoryId,
-        pictogramName,
-        req.file // Pasa el objeto de la imagen completo
-      );
-
-      res.status(201).json(newPictogram);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  }
-);
-
-router.get("/categories", async (req, res) => {
-  try {
-    // Busca todas las categorías en la base de datos
-    const categories = await Category.find({});
-
-    // Envía las categorías como respuesta
-    res.json(categories);
-  } catch (error) {
-    // Maneja cualquier error que ocurra durante la búsqueda de categorías
-    res
-      .status(500)
-      .json({ message: "Error al obtener las categorías", error: error });
-  }
-});
+// The rest of your router code...
 
 module.exports = router;

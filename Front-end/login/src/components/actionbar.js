@@ -41,7 +41,7 @@ function Actionbar() {
       <div style="padding: 20px;">
         <span id="closeButton" style="cursor: pointer; float: right;">&times;</span>
         <h2>${
-          type === "category" ? "Add New Category" : "Add New Pictogram"
+          type === "category" ? "Agregar nueva categoria" : "Agregar nuevo pictograma"
         }</h2>
         <div id="newItemForm"></div>
       </div>
