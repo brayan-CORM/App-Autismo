@@ -80,7 +80,7 @@ const AppRouter = ({ location }) => {
           y isAuthenticated para redirigir una vez que la autenticación esté completa
         */}
         <Route
-          path="/actions"
+          path="/acciones"
           element={
             isLoading ? (
               <p>Cargando...</p>
@@ -116,7 +116,7 @@ const AppRouter = ({ location }) => {
           }
         />
         <Route
-          path="/feelings"
+          path="/Deseos y sentimientos"
           element={
             isLoading ? (
               <p>Cargando...</p>
@@ -128,7 +128,7 @@ const AppRouter = ({ location }) => {
           }
         />
         <Route
-          path="/food"
+          path="/Alimentos"
           element={
             isLoading ? (
               <p>Cargando...</p>
@@ -152,7 +152,7 @@ const AppRouter = ({ location }) => {
           }
         />
         <Route
-          path="/hygiene"
+          path="/Higiene"
           element={
             isLoading ? (
               <p>Cargando...</p>
@@ -164,7 +164,7 @@ const AppRouter = ({ location }) => {
           }
         />
         <Route
-          path="/people"
+          path="/Personas"
           element={
             isLoading ? (
               <p>Cargando...</p>

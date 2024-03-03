@@ -47,8 +47,8 @@ function Hygiene() {
       img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/jabon liquido.svg",
     },
     ...pictograms.map((pictogram, index) => ({
-      name: pictogram.name,
-      img: pictogram.img,
+      name: pictogram.pictogramName,
+      img: pictogram.pictogramImage,
     })),
   ];
 

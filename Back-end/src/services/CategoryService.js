@@ -62,6 +62,16 @@ const CategoryService = {
       throw error;
     }
   },
+
+  getCategoryByName: async function (categoryName) {
+    try {
+      // Busca la categoría por su nombre en la base de datos
+      const category = await Category.findOne({ categoryName: categoryName });
+      return category ? [category] : [];
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 module.exports = CategoryService;

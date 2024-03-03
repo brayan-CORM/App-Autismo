@@ -14,23 +14,23 @@ function Home() {
   }, [categories]);
 
   function goto_actions() {
-    navigate("/actions");
+    navigate("/Acciones");
   }
 
   function goto_food() {
-    navigate("/food");
+    navigate("/Alimentos");
   }
 
   function goto_feelings() {
-    navigate("/feelings");
+    navigate("/Deseos y sentimientos");
   }
 
   function goto_Hygiene() {
-    navigate("/hygiene");
+    navigate("/Higiene");
   }
 
   function goto_people() {
-    navigate("/people");
+    navigate("/Personas");
   }
 
   // Función para ir a la página de una categoría seleccionada
@@ -99,7 +99,7 @@ function Home() {
               onClick={() => gotoCategory(category.categoryName)}
             >
               <img
-                src={`http://localhost:3001/${category.categoryImage}`}
+                src={`http://localhost:3001/uploads/${category.categoryImage}`}
                 alt={category.categoryName}
                 width="100"
                 height="100"

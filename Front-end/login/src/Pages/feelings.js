@@ -47,8 +47,8 @@ function Feelings() {
       img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y sentimientos/no.svg",
     },
     ...pictograms.map((pictogram, index) => ({
-      name: pictogram.name,
-      img: pictogram.img,
+      name: pictogram.pictogramName,
+      img: pictogram.pictogramImage,
     })),
   ];
 
