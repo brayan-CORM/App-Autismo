@@ -1,4 +1,3 @@
-// AuthService.js
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
@@ -15,9 +14,6 @@ const transporter = nodemailer.createTransport({
 });
 
 const jwtkey = "ao4m$o919des2e1";
-
-// Objeto para almacenar los tokens de sesión activos
-const activeSessions = {};
 
 const login = async ({ _identifier, _password }) => {
   try {
@@ -40,14 +36,12 @@ const login = async ({ _identifier, _password }) => {
         };
         const token = jwt.sign(payload, jwtkey);
 
-        // Guardar el token en la base de datos
         const sessionToken = new SessionToken({
           token: token,
           userId: usuario_encontrado._id,
         });
         await sessionToken.save();
 
-        // Devolver el token como parte de la respuesta
         return { msg: "Login exitoso", token, success: true };
       } else {
         return { msg: "Contraseña incorrecta", success: false };
@@ -61,15 +55,12 @@ const login = async ({ _identifier, _password }) => {
 
 const logout = async (token) => {
   try {
-    // Verificar si se proporcionó un token
     if (!token) {
       return { success: false, message: "Token no proporcionado" };
     }
 
-    // Eliminar el token de la base de datos
     await SessionToken.findOneAndDelete({ token: token });
 
-    // Retorna una respuesta exitosa
     return { success: true, message: "Cierre de sesión exitoso" };
   } catch (error) {
     console.error(error);
@@ -89,9 +80,6 @@ const loginWithGoogle = async (_googleIdToken) => {
       name: user.displayName,
     };
     const token = jwt.sign(payload, jwtkey);
-
-    // Asociar el token con la sesión del usuario
-    activeSessions[token] = user.uid;
 
     return { msg: "Login exitoso con Google", token, success: true };
   } catch (error) {
@@ -144,9 +132,6 @@ const registerWithGoogle = async (_googleIdToken) => {
     };
     const token = jwt.sign(payload, jwtkey);
 
-    // Asociar el token con la sesión del usuario
-    activeSessions[token] = user.uid;
-
     return { msg: "Usuario creado con Google", token, success: true };
   } catch (error) {
     console.error(error);
@@ -165,7 +150,10 @@ const resetPassword = async (_identifier) => {
     }
 
     const resetId = usuario_encontrado._id.toString();
-    const resetLink = `http://localhost:3000/reset-password/${resetId}`; //redireccion provisional
+    const resetToken = jwt.sign({ userId: resetId }, jwtkey, {
+      expiresIn: "5m",
+    }); // Token expira en 5 minutos
+    const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
 
     const mailOptions = {
       from: "villevalleemm@gmail.com",
@@ -174,18 +162,22 @@ const resetPassword = async (_identifier) => {
       text: `Haga clic en el siguiente enlace para restablecer su contraseña: ${resetLink}`,
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-        return { msg: "Error al enviar el correo electrónico", success: false };
-      } else {
-        console.log("Correo electrónico enviado: " + info.response);
-        return {
-          msg: "Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña",
-          success: true,
-        }; // O ajusta según sea necesario
-      }
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {
+          console.log("Correo electrónico enviado: " + info.response);
+          resolve();
+        }
+      });
     });
+
+    return {
+      msg: "Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña",
+      success: true,
+    };
   } catch (error) {
     console.log(error);
     return { msg: "Error interno del servidor", success: false };
@@ -193,13 +185,14 @@ const resetPassword = async (_identifier) => {
 };
 
 const resetPasswordWithToken = async (
-  _resetId,
+  _resetToken,
   _newPassword,
   _confirmPassword
 ) => {
   try {
-    console.log("ID recibido:", _resetId);
-    const usuario_encontrado = await User.findById(_resetId);
+    const decodedToken = jwt.verify(_resetToken, jwtkey);
+
+    const usuario_encontrado = await User.findById(decodedToken.userId);
 
     if (!usuario_encontrado) {
       return { msg: "Usuario no encontrado", success: false };
@@ -211,17 +204,13 @@ const resetPasswordWithToken = async (
 
     const hashedPassword = await bcrypt.hash(_newPassword, 10);
     usuario_encontrado.password = hashedPassword;
-    // Puedes limpiar el campo de resetToken o hacer cualquier otra tarea necesaria aquí
-    usuario_encontrado.resetToken = undefined;
-
     await usuario_encontrado.save();
 
     return { msg: "Contraseña restablecida exitosamente", success: true };
   } catch (error) {
     console.log(error);
-    // Manejar errores según sea necesario
     return {
-      msg: "Error en el restablecimiento de contraseña",
+      msg: "El enlace para restablecer la contraseña no es válido o ha expirado",
       success: false,
     };
   }
