@@ -69,7 +69,6 @@ function NewPictogram({ onAddPictogram, closePopup }) {
 
   return (
     <div>
-      <h2>Agregar nuevo pictograma</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Nombre de la categoría:

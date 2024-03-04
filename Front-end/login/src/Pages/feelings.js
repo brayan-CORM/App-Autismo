@@ -27,15 +27,21 @@ function Feelings() {
       });
   };
 
-  const handleNameClick = (pictogram) => {
+  const handlePictogramClick = (pictogram) => {
+    // Envía el pictograma al comunicador
     updateSelectedNames((prevSelectedNames) => {
+      // Busca el primer índice vacío en selectedNames
       const firstEmptyIndex = prevSelectedNames.findIndex(
         (obj) => Object.keys(obj).length === 0
       );
 
       if (firstEmptyIndex !== -1) {
+        // Si hay un índice vacío, agrega el pictograma seleccionado
         const updatedNames = [...prevSelectedNames];
-        updatedNames[firstEmptyIndex] = pictogram;
+        updatedNames[firstEmptyIndex] = {
+          name: pictogram.pictogramName,
+          img: `http://localhost:3001/uploads/${pictogram.pictogramImage}`,
+        };
         return updatedNames;
       }
 
@@ -69,7 +75,7 @@ function Feelings() {
           <div
             key={index}
             className="contorno"
-            onClick={() => handleNameClick(pictogram)}
+            onClick={() => handlePictogramClick(pictogram)}
           >
             <img
               src={`http://localhost:3001/uploads/${pictogram.pictogramImage}`}
@@ -77,7 +83,6 @@ function Feelings() {
               height="100"
               alt={pictogram.pictogramName}
             />
-
             <p style={{ textAlign: "center" }}>{pictogram.pictogramName}</p>
           </div>
         ))}

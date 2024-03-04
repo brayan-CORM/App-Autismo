@@ -45,7 +45,6 @@ function NewCategory({ onAddCategory, closePopup }) {
 
   return (
     <div>
-      <h2>Agregar nueva categoría</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Nombre de la categoría:

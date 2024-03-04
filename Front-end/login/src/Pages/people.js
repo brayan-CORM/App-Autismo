@@ -37,7 +37,10 @@ function People() {
 
       if (firstEmptyIndex !== -1) {
         const updatedNames = [...prevSelectedNames];
-        updatedNames[firstEmptyIndex] = pictogram;
+        updatedNames[firstEmptyIndex] = {
+          name: pictogram.pictogramName,
+          img: `http://localhost:3001/uploads/${pictogram.pictogramImage}`,
+        };
         return updatedNames;
       }
 
@@ -78,7 +81,6 @@ function People() {
               height="100"
               alt={pictogram.pictogramName}
             />
-
             <p style={{ textAlign: "center" }}>{pictogram.pictogramName}</p>
           </div>
         ))}

@@ -43,7 +43,10 @@ function NewPage() {
 
       if (firstEmptyIndex !== -1) {
         const updatedNames = [...prevSelectedNames];
-        updatedNames[firstEmptyIndex] = pictogram;
+        updatedNames[firstEmptyIndex] = {
+          name: pictogram.pictogramName,
+          img: `http://localhost:3001/uploads/${pictogram.pictogramImage}`,
+        };
         return updatedNames;
       }
 
@@ -84,7 +87,6 @@ function NewPage() {
               height="100"
               alt={pictogram.pictogramName}
             />
-
             <p style={{ textAlign: "center" }}>{pictogram.pictogramName}</p>
           </div>
         ))}
