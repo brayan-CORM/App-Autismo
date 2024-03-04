@@ -6,37 +6,32 @@ import Actionbar from "../components/actionbar";
 
 function Home() {
   const navigate = useNavigate();
-  const { selectedNames, categories } = useAppContext();
+  const { selectedNames } = useAppContext();
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // Guardar las categorías en el localStorage al cargar la página
-    localStorage.setItem("categories", JSON.stringify(categories));
-  }, [categories]);
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3001/api/category/categories"
+        );
+        if (!response.ok) {
+          throw new Error("Error fetching categories");
+        }
+        const categoriesData = await response.json();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error(error);
+        // Manejar errores de la solicitud, por ejemplo, mostrar un mensaje de error al usuario
+      }
+    };
 
-  function goto_actions() {
-    navigate("/Acciones");
-  }
+    fetchCategories();
+  }, []);
 
-  function goto_food() {
-    navigate("/Alimentos");
-  }
-
-  function goto_feelings() {
-    navigate("/Deseos y sentimientos");
-  }
-
-  function goto_Hygiene() {
-    navigate("/Higiene");
-  }
-
-  function goto_people() {
-    navigate("/Personas");
-  }
-
-  // Función para ir a la página de una categoría seleccionada
-  const gotoCategory = (categoryName) => {
+  function gotoCategory(categoryName) {
     navigate(`/${categoryName}`);
-  };
+  }
 
   return (
     <>
@@ -51,46 +46,6 @@ function Home() {
         <br />
 
         <div className="pic-category-container">
-          <div className="contorno" onClick={goto_actions}>
-            <img
-              src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Acciones.svg"
-              width="100"
-              height="100"
-            />
-            <p>Acciones</p>
-          </div>
-          <div className="contorno" onClick={goto_food}>
-            <img
-              src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Alimentos.svg"
-              width="100"
-              height="100"
-            />
-            <p>Alimentos</p>
-          </div>
-          <div className="contorno" onClick={goto_feelings}>
-            <img
-              src="../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Deseos y Sentimientos/Sentimientos.svg"
-              width="100"
-              height="100"
-            />
-            <p className="lugares-y-personas">Deseos y sentimientos</p>
-          </div>
-          <div className="contorno" onClick={goto_Hygiene}>
-            <img
-              src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Higiene.svg"
-              width="100"
-              height="100"
-            />
-            <p>Higiene</p>
-          </div>
-          <div className="contorno" onClick={goto_people}>
-            <img
-              src="../pictogramas_KeetNah-20240110T205802Z-001/Categorías/Lugares y personas.svg"
-              width="100"
-              height="100"
-            />
-            <p className="lugares-y-personas">Personas</p>
-          </div>
           {/* Aquí puedes agregar las categorías adicionales */}
           {categories.map((category, index) => (
             <div
