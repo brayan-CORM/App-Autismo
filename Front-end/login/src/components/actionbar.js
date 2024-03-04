@@ -10,14 +10,14 @@ import { TiHome } from "react-icons/ti";
 import { FaCalendarAlt } from "react-icons/fa";
 import { BsPlusCircleFill } from "react-icons/bs";
 
-function Actionbar() {
+function Actionbar({ onCategoryAdded, onPictogramAdded }) {
   const navigate = useNavigate();
-  const location = useLocation(); // Obtener la ruta actual
+  const location = useLocation();
   const { categories, updateCategories } = useAppContext();
   const { pictograms, updatePictograms } = useAppContext();
   const [popupOpen, setPopupOpen] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
-  const [popupType, setPopupType] = useState(""); // Para distinguir entre agregar categoría o pictograma
+  const [popupType, setPopupType] = useState("");
 
   function goto_calendar() {
     navigate("/calendar");
@@ -41,7 +41,9 @@ function Actionbar() {
       <div style="padding: 20px;">
         <span id="closeButton" style="cursor: pointer; float: right;">&times;</span>
         <h2>${
-          type === "category" ? "Agregar nueva categoria" : "Agregar nuevo pictograma"
+          type === "category"
+            ? "Agregar nueva categoria"
+            : "Agregar nuevo pictograma"
         }</h2>
         <div id="newItemForm"></div>
       </div>
@@ -50,22 +52,29 @@ function Actionbar() {
     if (type === "category") {
       ReactDOM.render(
         <NewCategory
-          onAddCategory={addCategory}
-          closePopup={() => closePopup(newWindow)}
+          onAddCategory={async (formData) => {
+            await addCategory(formData);
+            onCategoryAdded();
+          }}
+          closePopup={() => {
+            closePopup(newWindow);
+          }}
         />,
         newWindow.document.getElementById("newItemForm")
       );
     } else {
       ReactDOM.render(
         <NewPictogram
-          onAddPictogram={addPictogram}
+          onAddPictogram={async (formData) => {
+            await addPictogram(formData);
+            onPictogramAdded();
+          }}
           closePopup={() => closePopup(newWindow)}
         />,
         newWindow.document.getElementById("newItemForm")
       );
     }
 
-    // Agregar evento de clic al botón de cierre en la nueva ventana
     const closeButton = newWindow.document.getElementById("closeButton");
     closeButton.addEventListener("click", () => {
       closePopup(newWindow);
@@ -73,7 +82,6 @@ function Actionbar() {
   };
 
   function closePopup(newWindow) {
-    // Cerrar la ventana emergente si existe
     if (newWindow) {
       newWindow.close();
     }
@@ -83,13 +91,13 @@ function Actionbar() {
   function addCategory(formData) {
     const updatedCategories = [...categories, formData];
     updateCategories(updatedCategories);
-    setPopupOpen(false); // Cerrar el popup después de agregar la categoría
+    setPopupOpen(false);
   }
 
-  function addPictogram(formData) {
+  async function addPictogram(formData) {
     const updatedPictograms = [...pictograms, formData];
     updatePictograms(updatedPictograms);
-    setPopupOpen(false); // Cerrar el popup después de agregar el pictograma
+    setPopupOpen(false);
   }
 
   return (

@@ -72,6 +72,20 @@ const CategoryService = {
       throw error;
     }
   },
+
+  getPictogramsByCategoryName: async function (categoryName) {
+    try {
+      const category = await Category.findOne({ categoryName: categoryName });
+      if (!category) {
+        throw new Error("Category not found");
+      }
+      return category.pictograms;
+    } catch (error) {
+      throw new Error(
+        "Error fetching pictograms by category name: " + error.message
+      );
+    }
+  },
 };
 
 module.exports = CategoryService;

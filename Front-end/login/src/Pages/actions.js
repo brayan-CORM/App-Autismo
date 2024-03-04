@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../AppContext";
 import Comunicador from "../components/Comunicador";
 import { FaAngleLeft } from "react-icons/fa";
-import { useAppContext } from "../AppContext";
 import Actionbar from "../components/actionbar";
 
 function Actions() {
   const navigate = useNavigate();
-  const { selectedNames, updateSelectedNames, pictograms } = useAppContext();
+  const [pictograms, setPictograms] = useState([]);
+  const { selectedNames, updateSelectedNames } = useAppContext();
+
+  useEffect(() => {
+    fetchPictograms();
+  }, []); // Load pictograms on initial render
+
+  const fetchPictograms = () => {
+    fetch("http://localhost:3001/api/category/pictograms?categoryName=Acciones")
+      .then((response) => response.json())
+      .then((pictogramsData) => {
+        setPictograms(pictogramsData);
+      })
+      .catch((error) => {
+        console.error("Error fetching pictograms:", error);
+      });
+  };
 
   const handleNameClick = (pictogram) => {
     updateSelectedNames((prevSelectedNames) => {
@@ -25,38 +41,17 @@ function Actions() {
     });
   };
 
-  // Definir los pictogramas dentro de la constante 'people'
-  const people = [
-    {
-      name: "Comer",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/comer.svg",
-    },
-    {
-      name: "Ir al baño",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/ir al baño.svg",
-    },
-    {
-      name: "Bañar",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/bañar.svg",
-    },
-    {
-      name: "Jugar",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/jugar.svg",
-    },
-    {
-      name: "Lavarse las manos",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Acciones/lavarse las manos.svg",
-    },
-    ...pictograms.map((pictogram, index) => ({
-      name: pictogram.pictogramName,
-      img: pictogram.pictogramImage,
-    })),
-  ];
+  // Function to handle pictogram added
+  const handlePictogramAdded = async () => {
+    await fetchPictograms(); // Reload pictograms after adding a new one
+  };
 
   return (
     <div className="Home">
+      <br />
+      <br />
       <Comunicador selectedNames={selectedNames} />
-
+      <br />
       <br />
       <hr />
       <div className="icon_back_comunicador">
@@ -66,24 +61,30 @@ function Actions() {
         </p>
       </div>
       <br />
-
+      <br />
       <div className="pic-category-container">
-        {people.map((person, index) => (
+        {pictograms.map((pictogram, index) => (
           <div
             key={index}
             className="contorno"
-            onClick={() => handleNameClick(person)}
+            onClick={() => handleNameClick(pictogram)}
           >
-            <img src={person.img} width="120" height="100" alt={person.name} />
-            <p style={{ textAlign: "center" }}>{person.name}</p>
+            <img
+              src={`http://localhost:3001/uploads/${pictogram.pictogramImage}`}
+              width="120"
+              height="100"
+              alt={pictogram.pictogramName}
+            />
+
+            <p style={{ textAlign: "center" }}>{pictogram.pictogramName}</p>
           </div>
         ))}
       </div>
-
+      <br />
       <br />
       <div>
         <hr />
-        <Actionbar />
+        <Actionbar onPictogramAdded={handlePictogramAdded} />
       </div>
     </div>
   );

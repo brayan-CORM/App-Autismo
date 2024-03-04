@@ -10,28 +10,34 @@ function Home() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3001/api/category/categories"
-        );
-        if (!response.ok) {
-          throw new Error("Error fetching categories");
-        }
-        const categoriesData = await response.json();
-        setCategories(categoriesData);
-      } catch (error) {
-        console.error(error);
-        // Manejar errores de la solicitud, por ejemplo, mostrar un mensaje de error al usuario
-      }
-    };
-
     fetchCategories();
   }, []);
 
-  function gotoCategory(categoryName) {
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3001/api/category/categories"
+      );
+      if (!response.ok) {
+        throw new Error("Error fetching categories");
+      }
+      const categoriesData = await response.json();
+      setCategories(categoriesData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCategoryAdded = async () => {
+    await fetchCategories();
+  };
+
+  const gotoCategory = (categoryName) => {
+    // Guardar el nombre de la categoría en localStorage
+    localStorage.setItem("selectedCategory", categoryName);
+    // Navegar a la página de la categoría correspondiente
     navigate(`/${categoryName}`);
-  }
+  };
 
   return (
     <>
@@ -67,7 +73,7 @@ function Home() {
         <br />
         <div>
           <hr />
-          <Actionbar />
+          <Actionbar onCategoryAdded={handleCategoryAdded} />
         </div>
       </div>
     </>

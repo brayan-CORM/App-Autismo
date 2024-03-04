@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../AppContext";
 import Comunicador from "../components/Comunicador";
 import { FaAngleLeft } from "react-icons/fa";
-import { useAppContext } from "../AppContext";
 import Actionbar from "../components/actionbar";
 
 function NewPage() {
   const navigate = useNavigate();
-  const { selectedNames, updateSelectedNames, pictograms } = useAppContext();
+  const [pictograms, setPictograms] = useState([]);
+  const { selectedNames, updateSelectedNames } = useAppContext();
+
+  useEffect(() => {
+    fetchPictograms();
+  }, []);
+
+  const fetchPictograms = async () => {
+    try {
+      // Obtener el categoryName del localStorage
+      const categoryName = localStorage.getItem("selectedCategory");
+      if (!categoryName) {
+        throw new Error("No categoryName found in localStorage");
+      }
+
+      const response = await fetch(
+        `http://localhost:3001/api/category/pictograms?categoryName=${categoryName}`
+      );
+      if (!response.ok) {
+        throw new Error("Error fetching pictograms");
+      }
+      const pictogramsData = await response.json();
+      setPictograms(pictogramsData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleNameClick = (pictogram) => {
     updateSelectedNames((prevSelectedNames) => {
@@ -25,18 +51,16 @@ function NewPage() {
     });
   };
 
-  // Definir los pictogramas dentro de la constante 'people'
-  const people = [
-    ...pictograms.map((pictogram, index) => ({
-      name: pictogram.pictogramName,
-      img: pictogram.pictogramImage,
-    })),
-  ];
+  const handlePictogramAdded = async () => {
+    await fetchPictograms();
+  };
 
   return (
     <div className="Home">
+      <br />
+      <br />
       <Comunicador selectedNames={selectedNames} />
-
+      <br />
       <br />
       <hr />
       <div className="icon_back_comunicador">
@@ -46,24 +70,30 @@ function NewPage() {
         </p>
       </div>
       <br />
-
+      <br />
       <div className="pic-category-container">
-        {people.map((person, index) => (
+        {pictograms.map((pictogram, index) => (
           <div
             key={index}
             className="contorno"
-            onClick={() => handleNameClick(person)}
+            onClick={() => handleNameClick(pictogram)}
           >
-            <img src={person.img} width="120" height="100" alt={person.name} />
-            <p style={{ textAlign: "center" }}>{person.name}</p>
+            <img
+              src={`http://localhost:3001/uploads/${pictogram.pictogramImage}`}
+              width="120"
+              height="100"
+              alt={pictogram.pictogramName}
+            />
+
+            <p style={{ textAlign: "center" }}>{pictogram.pictogramName}</p>
           </div>
         ))}
       </div>
-
+      <br />
       <br />
       <div>
         <hr />
-        <Actionbar />
+        <Actionbar onPictogramAdded={handlePictogramAdded} />
       </div>
     </div>
   );

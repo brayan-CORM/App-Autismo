@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../AppContext";
 import Comunicador from "../components/Comunicador";
 import { FaAngleLeft } from "react-icons/fa";
-import { useAppContext } from "../AppContext";
 import Actionbar from "../components/actionbar";
 
 function Hygiene() {
   const navigate = useNavigate();
-  const { selectedNames, updateSelectedNames, pictograms } = useAppContext();
+  const [pictograms, setPictograms] = useState([]);
+  const { selectedNames, updateSelectedNames } = useAppContext();
+
+  useEffect(() => {
+    fetchPictograms();
+  }, []); // Load pictograms on initial render
+
+  const fetchPictograms = () => {
+    fetch("http://localhost:3001/api/category/pictograms?categoryName=Higiene")
+      .then((response) => response.json())
+      .then((pictogramsData) => {
+        setPictograms(pictogramsData);
+      })
+      .catch((error) => {
+        console.error("Error fetching pictograms:", error);
+      });
+  };
 
   const handleNameClick = (pictogram) => {
     updateSelectedNames((prevSelectedNames) => {
@@ -25,39 +41,19 @@ function Hygiene() {
     });
   };
 
-  const people = [
-    {
-      name: "Baño",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/baño.svg",
-    },
-    {
-      name: "Cepillo de dientes",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/cepillo de dientes.svg",
-    },
-    {
-      name: "Papel de baño",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/papel de baño.svg",
-    },
-    {
-      name: "Pasta de dientes",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/pasta de dientes.svg",
-    },
-    {
-      name: "Jabon",
-      img: "../pictogramas_KeetNah-20240110T205802Z-001/pictogramas_KeetNah/Higiene/jabon liquido.svg",
-    },
-    ...pictograms.map((pictogram, index) => ({
-      name: pictogram.pictogramName,
-      img: pictogram.pictogramImage,
-    })),
-  ];
+  // Function to handle pictogram added
+  const handlePictogramAdded = async () => {
+    await fetchPictograms(); // Reload pictograms after adding a new one
+  };
 
   return (
     <div className="Home">
-      <Comunicador selectedNames={selectedNames} />
-
       <br />
-      <hr></hr>
+      <br />
+      <Comunicador selectedNames={selectedNames} />
+      <br />
+      <br />
+      <hr />
       <div className="icon_back_comunicador">
         <FaAngleLeft id="icon_back_action" onClick={() => navigate("/home")} />
         <p>
@@ -65,24 +61,30 @@ function Hygiene() {
         </p>
       </div>
       <br />
-
+      <br />
       <div className="pic-category-container">
-        {people.map((person, index) => (
+        {pictograms.map((pictogram, index) => (
           <div
             key={index}
             className="contorno"
-            onClick={() => handleNameClick(person)}
+            onClick={() => handleNameClick(pictogram)}
           >
-            <img src={person.img} width="120" height="100" alt={person.name} />
-            <p style={{ textAlign: "center" }}>{person.name}</p>
+            <img
+              src={`http://localhost:3001/uploads/${pictogram.pictogramImage}`}
+              width="120"
+              height="100"
+              alt={pictogram.pictogramName}
+            />
+
+            <p style={{ textAlign: "center" }}>{pictogram.pictogramName}</p>
           </div>
         ))}
       </div>
-
+      <br />
       <br />
       <div>
         <hr />
-        <Actionbar />
+        <Actionbar onPictogramAdded={handlePictogramAdded} />
       </div>
     </div>
   );

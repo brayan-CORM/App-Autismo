@@ -1,0 +1,27 @@
+.diary-container {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.npm-calendar {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #fff;
+}
+
+.calendar {
+  width: 100%;
+}
+
+p {
+  margin-top: 20px;
+}

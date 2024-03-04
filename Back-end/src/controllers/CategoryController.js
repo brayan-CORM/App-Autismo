@@ -68,4 +68,17 @@ router.get("/categories", async (req, res) => {
   }
 });
 
+router.get("/pictograms", async (req, res) => {
+  try {
+    const { categoryName } = req.query;
+    const pictograms = await CategoryService.getPictogramsByCategoryName(
+      categoryName
+    );
+    res.json(pictograms);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
